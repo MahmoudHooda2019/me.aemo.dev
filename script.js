@@ -1,20 +1,34 @@
-var ParticleEngine = (function() {
-    // ParticleEngine class code
-}());
+/**
+ * @author Alex Andrix <alex@alexandrix.com>
+ * @since 2018-12-02
+ */
 
-// Utility functions
+var App = {};
+App.setup = function() {
+    // JavaScript logic from your provided code
+};
 
-var particles;
-(function(){
-    particles = new ParticleEngine('projector');
-    createjs.Ticker.addEventListener("tick", updateCanvas);
-    window.addEventListener('resize', resizeCanvas, false);
+App.evolve = function() {
+    // JavaScript logic from your provided code
+};
 
-    function updateCanvas(){
-        particles.render();
-    }
+App.birth = function() {
+    // JavaScript logic from your provided code
+};
 
-    function resizeCanvas(){
-        particles.resize();
-    }
-}());
+App.kill = function(particleName) {
+    // JavaScript logic from your provided code
+};
+
+// More functions from your provided code
+
+document.addEventListener('DOMContentLoaded', function() {
+    App.setup();
+    App.draw();
+
+    var frame = function() {
+        App.evolve();
+        requestAnimationFrame(frame);
+    };
+    frame();
+});
