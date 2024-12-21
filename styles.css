@@ -47,10 +47,6 @@
     animation: glow 1s ease-in-out infinite alternate;
 }
 
-.logo:hover {
-    animation: glow 0.3s ease-in-out infinite alternate;
-}
-
 .tagline {
     font-size: 1.2rem;
     color: white;
@@ -73,7 +69,6 @@
     text-align: center;
     animation: bounce 2s infinite;
     color: white;
-    cursor: pointer;
 }
 
 .scroll-indicator span {
