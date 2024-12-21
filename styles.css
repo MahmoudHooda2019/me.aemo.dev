@@ -178,7 +178,7 @@
     border-radius: 25px;
     color: #1a1a1a;
     font-weight: bold;
-    cursor: pointer;
+    cursor: none;
     transition: transform 0.2s ease;
     margin-top: auto;
 }
