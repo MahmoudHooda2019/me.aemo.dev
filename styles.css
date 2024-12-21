@@ -9,8 +9,8 @@
 .cursor {
     width: 20px;
     height: 20px;
-    border: 2px solid #00ffcc;
-    border-radius: 50%;
+    background-color: #00ffcc; /* Change to your preferred color */
+    border-radius: 50%; /* Change this for a different shape, e.g., use 0 for square */
     position: fixed;
     pointer-events: none;
     z-index: 9999;
@@ -120,7 +120,7 @@
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+    cursor: none;
     position: relative;
     padding: 2rem;
     min-height: 250px;
