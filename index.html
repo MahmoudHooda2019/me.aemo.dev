@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AemoDev</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,77 +24,38 @@
     <section class="extensions-section">
         <h2 class="section-title" data-aos="fade-up">Extensions</h2>
         <div class="card-container">
-            <div class="card" data-aos="fade-up" data-filter="all free">
+            <!-- Each card now has data-href attribute for navigation -->
+            <div class="card" data-aos="fade-up" data-filter="all free" 
+                 data-href="extensions/code_generator/index.html">
                 <div class="price-tag free">Free</div>
-                <div class="card-inner">
-                    <img src="/api/placeholder/400/300" alt="Extension 1" class="card-image">
-                    <div class="card-content">
-                        <h3 class="card-title">Code Generator Pro</h3>
-                        <p class="card-subtitle">Automate your coding workflow with AI-powered suggestions</p>
-                        <button class="card-button">Learn More</button>
-                    </div>
+                <div class="card-content">
+                    <h3 class="card-title">Code Generator Pro</h3>
+                    <p class="card-subtitle">Automate your coding workflow with AI-powered suggestions</p>
+                    <button class="card-button">Learn More</button>
                 </div>
             </div>
 
-            <div class="card" data-aos="fade-up" data-filter="all paid">
+            <div class="card" data-aos="fade-up" data-filter="all paid"
+                 data-href="extensions/theme_manager/index.html">
                 <div class="price-tag paid">$9.99</div>
-                <div class="card-inner">
-                    <img src="/api/placeholder/400/300" alt="Extension 2" class="card-image">
-                    <div class="card-content">
-                        <h3 class="card-title">Theme Manager</h3>
-                        <p class="card-subtitle">Customize your IDE with beautiful, responsive themes</p>
-                        <button class="card-button">Learn More</button>
-                    </div>
+                <div class="card-content">
+                    <h3 class="card-title">Theme Manager</h3>
+                    <p class="card-subtitle">Customize your IDE with beautiful, responsive themes</p>
+                    <button class="card-button">Learn More</button>
                 </div>
             </div>
 
-            <div class="card" data-aos="fade-up" data-filter="all paid">
+            <div class="card" data-aos="fade-up" data-filter="all paid"
+                 data-href="extensions/smart_debugger/index.html">
                 <div class="price-tag paid">$14.99</div>
-                <div class="card-inner">
-                    <img src="/api/placeholder/400/300" alt="Extension 3" class="card-image">
-                    <div class="card-content">
-                        <h3 class="card-title">Smart Debugger</h3>
-                        <p class="card-subtitle">Advanced debugging tools for modern development</p>
-                        <button class="card-button">Learn More</button>
-                    </div>
+                <div class="card-content">
+                    <h3 class="card-title">Smart Debugger</h3>
+                    <p class="card-subtitle">Advanced debugging tools for modern development</p>
+                    <button class="card-button">Learn More</button>
                 </div>
             </div>
 
-            <div class="card" data-aos="fade-up" data-filter="all free">
-                <div class="price-tag free">Free</div>
-                <div class="card-inner">
-                    <img src="/api/placeholder/400/300" alt="Extension 4" class="card-image">
-                    <div class="card-content">
-                        <h3 class="card-title">Git Integration Plus</h3>
-                        <p class="card-subtitle">Enhanced git workflow with advanced merge tools</p>
-                        <button class="card-button">Learn More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" data-aos="fade-up" data-filter="all paid">
-                <div class="price-tag paid">$19.99</div>
-                <div class="card-inner">
-                    <img src="/api/placeholder/400/300" alt="Extension 5" class="card-image">
-                    <div class="card-content">
-                        <h3 class="card-title">Code Formatter Deluxe</h3>
-                        <p class="card-subtitle">Advanced code formatting with multiple language support</p>
-                        <button class="card-button">Learn More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" data-aos="fade-up" data-filter="all free">
-                <div class="price-tag free">Free</div>
-                <div class="card-inner">
-                    <img src="/api/placeholder/400/300" alt="Extension 6" class="card-image">
-                    <div class="card-content">
-                        <h3 class="card-title">Cloud Sync Pro</h3>
-                        <p class="card-subtitle">Seamless synchronization across all your devices</p>
-                        <button class="card-button">Learn More</button>
-                    </div>
-                </div>
-            </div>
+            <!-- Add more cards following the same pattern -->
         </div>
         
         <div class="filter-buttons" data-aos="fade-up">
