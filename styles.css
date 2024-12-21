@@ -260,6 +260,25 @@
     margin-top: 1rem;
 }
 
+/* Footer */
+footer {
+    background-color: #0e0e0e;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin: 0;
+    color: #aaa;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
