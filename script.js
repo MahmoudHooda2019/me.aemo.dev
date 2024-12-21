@@ -5,7 +5,7 @@ AOS.init({
     offset: 100
 });
 
-// Custom cursor
+// cursor
 const cursor = document.querySelector('.cursor');
 const links = document.querySelectorAll('a, button, .card');
 
