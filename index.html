@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aemo Developer - MIT App Inventor Extensions and Tools. Enhance your App Inventor experience with custom utilities.">
-    <meta name="author" content="Aemo Developer">
-    <meta property="og:title" content="Aemo Developer">
-    <meta property="og:description" content="AemoDev - MIT App Inventor extensions and tools.">
-    <meta property="og:image" content="images/icon.png">
-    <title>Aemo Developer</title>
-    <link rel="icon" type="image/png" href="images/icon.png">
-    <link rel="preload" href="images/icon.png" as="image">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
-</head>
-
-<body>
-    <!-- Custom Cursor -->
-    <div class="cursor" role="presentation"></div>
-
-    <header>
-        <!-- Splash Section -->
-        <section class="splash-section">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Aemo Developer - MIT App Inventor Extensions and Tools. Enhance your App Inventor experience with custom utilities.">
+      <meta name="author" content="Aemo Developer">
+      <meta property="og:title" content="Aemo Developer">
+      <meta property="og:description" content="AemoDev - MIT App Inventor extensions and tools.">
+      <meta property="og:image" content="images/icon.png">
+      <title>Aemo Developer</title>
+      <link rel="icon" type="image/png" href="images/icon.png">
+      <link rel="preload" href="images/icon.png" as="image">
+      <link rel="stylesheet" href="styles.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
+   </head>
+   <body>
+       
+      <!-- Custom Cursor -->
+      <div class="cursor" role="presentation"></div>
+       
+      <header>
+         <!-- Splash Section -->
+         <section class="splash-section">
             <div class="particles"></div>
             <div class="splash-container">
-                <div class="logo" role="banner" aria-label="Aemo Developer Logo">Aemo Developer</div>
-                <div class="tagline" aria-live="polite">
-                    <pre>
+                
+               <div class="logo" role="banner" aria-label="Aemo Developer Logo">Aemo Developer</div>
+                
+               <div class="tagline" aria-live="polite">
+                  <pre>
 ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
  ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
  ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
@@ -40,961 +41,896 @@
  ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁
                     </pre>
-                </div>
-
-                <div class="scroll-indicator" aria-label="Scroll down to view more content">
-                    <span>Scroll Down</span>
-                    <div class="arrow" aria-hidden="true"></div>
-                </div>
+               </div>
+               <div class="scroll-indicator" aria-label="Scroll down to view more content">
+                  <span>Scroll Down</span>
+                  <div class="arrow" aria-hidden="true"></div>
+               </div>
             </div>
-        </section>
-    </header>
-
-    <main>
-        <!-- Extensions Section -->
-        <section class="extensions-section">
+         </section>
+      </header>
+       
+      <main>
+          
+         <!-- Extensions Section -->
+         <section class="extensions-section">
             <h2 class="section-title" data-aos="fade-up">Extensions</h2>
-
-               <!-- Filter Buttons -->
+             
+            <!-- Filter Buttons -->
             <div class="filter-buttons" data-aos="fade-up">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="free">Free</button>
-                <button class="filter-btn" data-filter="paid">Paid</button>
+               <button class="filter-btn active" data-filter="all">All</button>
+               <button class="filter-btn" data-filter="free">Free</button>
+               <button class="filter-btn" data-filter="paid">Paid</button>
             </div>
-            
+             <!-- Extensions Content -->
             <div class="card-container">
-                
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/number_checker/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Number Checker</h3>
-                        <p class="card-subtitle">Check if a number is prime, even, or odd</p>
-                        <a href="extensions/number_checker/index.html" class="card-button" aria-label="Learn more about Number Checker">Learn More</a>
-                    </div>
-                </article>
-
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/islamic_history/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Islamic History</h3>
-                        <p class="card-subtitle">Hijri date for Muslims and Islamic history utilities</p>
-                        <a href="extensions/islamic_history/index.html" class="card-button" aria-label="Learn more about Islamic History">Learn More</a>
-                    </div>
-                </article>
-
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/device_info/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Device Info</h3>
-                        <p class="card-subtitle">Retrieve essential information about the device</p>
-                        <a href="extensions/device_info/index.html" class="card-button" aria-label="Learn more about Device Info">Learn More</a>
-                    </div>
-                </article>
-
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/string_validate/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">String Validate</h3>
-                        <p class="card-subtitle">Validate strings with various custom rules</p>
-                        <a href="extensions/string_validate/index.html" class="card-button" aria-label="Learn more about String Validate">Learn More</a>
-                    </div>
-                </article>
-
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/year_of_device/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Year Of Device</h3>
-                        <p class="card-subtitle">Get the manufacturing year of the device</p>
-                        <a href="extensions/year_of_device/index.html" class="card-button" aria-label="Learn more about Year Of Device">Learn More</a>
-                    </div>
-                </article>
-
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/viemo/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Viemo</h3>
-                        <p class="card-subtitle">Custom video utilities and playback enhancements</p>
-                        <a href="extensions/viemo/index.html" class="card-button" aria-label="Learn more about Viemo">Learn More</a>
-                    </div>
-                </article>
-
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/dindate/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Dindate</h3>
-                        <p class="card-subtitle">Handle dates as easily as integers</p>
-                        <a href="extensions/dindate/index.html" class="card-button" aria-label="Learn more about Dindate">Learn More</a>
-                    </div>
-                </article>
-
-                <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/similarity/index.html">
-                    <div class="price-tag free">Free</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Similarity</h3>
-                        <p class="card-subtitle">Calculate similarity scores between two strings</p>
-                        <a href="extensions/similarity/index.html" class="card-button" aria-label="Learn more about Similarity">Learn More</a>
-                    </div>
-                </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/morse_code/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Morse Code</h3>
-                <p class="card-subtitle">Encode and decode Morse code effortlessly</p>
-                <a href="extensions/morse_code/index.html" class="card-button" aria-label="Learn more about Morse Code">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/android_volume/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Android Volume</h3>
-                <p class="card-subtitle">Custom control of the device's volume</p>
-                <a href="extensions/android_volume/index.html" class="card-button" aria-label="Learn more about Android Volume">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/ruler_picker/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Ruler Picker</h3>
-                <p class="card-subtitle">Implement a stylish ruler picker for your app</p>
-                <a href="extensions/ruler_picker/index.html" class="card-button" aria-label="Learn more about Ruler Picker">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/ripple_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Ripple View</h3>
-                <p class="card-subtitle">Add ripple effect to any component in your app</p>
-                <a href="extensions/ripple_view/index.html" class="card-button" aria-label="Learn more about Ripple View">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/canimation/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">CAnimation</h3>
-                <p class="card-subtitle">Custom animations for your app components</p>
-                <a href="extensions/canimation/index.html" class="card-button" aria-label="Learn more about CAnimation">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/phone_tools/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">PhoneTools</h3>
-                <p class="card-subtitle">Useful utilities for phone management</p>
-                <a href="extensions/phone_tools/index.html" class="card-button" aria-label="Learn more about PhoneTools">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/url_metadata/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">UrlMetadata</h3>
-                <p class="card-subtitle">Retrieve meta data for websites</p>
-                <a href="extensions/url_metadata/index.html" class="card-button" aria-label="Learn more about UrlMetadata">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/jelly_switch_button/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">JellySwitchButton</h3>
-                <p class="card-subtitle">Create awesome switch buttons with a jelly effect</p>
-                <a href="extensions/jelly_switch_button/index.html" class="card-button" aria-label="Learn more about JellySwitchButton">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/speech_recognition_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">SpeechRecognitionView</h3>
-                <p class="card-subtitle">Make stylish view-style animations for speech recording</p>
-                <a href="extensions/speech_recognition_view/index.html" class="card-button" aria-label="Learn more about SpeechRecognitionView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_shadow/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">CustomShadow</h3>
-                <p class="card-subtitle">Create awesome neon-style shadows for components</p>
-                <a href="extensions/custom_shadow/index.html" class="card-button" aria-label="Learn more about CustomShadow">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/view_charging/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">ViewCharging</h3>
-                <p class="card-subtitle">Show a custom charging view for your app</p>
-                <a href="extensions/view_charging/index.html" class="card-button" aria-label="Learn more about ViewCharging">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/slide_color_picker/index.html">
-            <div class="price-tag paid">$5.00</div>
-            <div class="card-content">
-                <h3 class="card-title">Slide Color Picker</h3>
-                <p class="card-subtitle">Create a custom slider bar for color selection</p>
-                <a href="extensions/slide_color_picker/index.html" class="card-button" aria-label="Learn more about Slide Color Picker">Learn More</a>
-            </div>
-        </article>
-
-                
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_vimeo/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">CustomVimeo</h3>
-                <p class="card-subtitle">Download video thumbnail with quality from Vimeo by JSON</p>
-                <a href="extensions/custom_vimeo/index.html" class="card-button" aria-label="Learn more about CustomVimeo">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/cube_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">CubeView</h3>
-                <p class="card-subtitle">Create a cube loading view for splash screens</p>
-                <a href="extensions/cube_view/index.html" class="card-button" aria-label="Learn more about CubeView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/slack_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Slack View</h3>
-                <p class="card-subtitle">Create Slack-style loading view</p>
-                <a href="extensions/slack_view/index.html" class="card-button" aria-label="Learn more about Slack View">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/painter/index.html">
-            <div class="price-tag paid">$8.00</div>
-            <div class="card-content">
-                <h3 class="card-title">Painter</h3>
-                <p class="card-subtitle">Create custom drawings with awesome functions</p>
-                <a href="extensions/painter/index.html" class="card-button" aria-label="Learn more about Painter">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/buzzle_game/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Buzzle Game</h3>
-                <p class="card-subtitle">Create a 2048-style puzzle game</p>
-                <a href="extensions/buzzle_game/index.html" class="card-button" aria-label="Learn more about Buzzle Game">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/powerview/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">PowerView</h3>
-                <p class="card-subtitle">A beautiful charging view with horizontal and vertical options</p>
-                <a href="extensions/powerview/index.html" class="card-button" aria-label="Learn more about PowerView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/snake_line/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Snake Line</h3>
-                <p class="card-subtitle">Create animated linear charts with ease</p>
-                <a href="extensions/snake_line/index.html" class="card-button" aria-label="Learn more about Snake Line">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/discoverimageview/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">DiscoverImageView</h3>
-                <p class="card-subtitle">Create a beautiful scratch effect for image views</p>
-                <a href="extensions/discoverimageview/index.html" class="card-button" aria-label="Learn more about DiscoverImageView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/fit_textview/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">FitTextView</h3>
-                <p class="card-subtitle">Automatically resize text to fit within its bounds</p>
-                <a href="extensions/fit_textview/index.html" class="card-button" aria-label="Learn more about FitTextView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/screen_off_time/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Screen Off Time</h3>
-                <p class="card-subtitle">Change screen sleep time with ease</p>
-                <a href="extensions/screen_off_time/index.html" class="card-button" aria-label="Learn more about Screen Off Time">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/captcha_img/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Captcha Img</h3>
-                <p class="card-subtitle">Generate CAPTCHA images for verification</p>
-                <a href="extensions/captcha_img/index.html" class="card-button" aria-label="Learn more about Captcha Img">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/draw_loading/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Draw Loading</h3>
-                <p class="card-subtitle">Draw animations with 11 shape colorings</p>
-                <a href="extensions/draw_loading/index.html" class="card-button" aria-label="Learn more about Draw Loading">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/blur_loading_img/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Blur Loading Img</h3>
-                <p class="card-subtitle">Load images with progress and blur cache automatically</p>
-                <a href="extensions/blur_loading_img/index.html" class="card-button" aria-label="Learn more about Blur Loading Img">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/fallingview/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">FallingView</h3>
-                <p class="card-subtitle">Create a simple falling shapes effect</p>
-                <a href="extensions/fallingview/index.html" class="card-button" aria-label="Learn more about FallingView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/user_location_checker/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">User Location Checker</h3>
-                <p class="card-subtitle">Get user country and check if the app is installed from Google Play</p>
-                <a href="extensions/user_location_checker/index.html" class="card-button" aria-label="Learn more about User Location Checker">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/location_info/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Location Info</h3>
-                <p class="card-subtitle">Simple extension to get location information</p>
-                <a href="extensions/location_info/index.html" class="card-button" aria-label="Learn more about Location Info">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/timer_ui/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Timer UI</h3>
-                <p class="card-subtitle">Create amazing dynamic time UI (flat clock, countdown timer, hourglass)</p>
-                <a href="extensions/timer_ui/index.html" class="card-button" aria-label="Learn more about Timer UI">Learn More</a>
-            </div>
-        </article>
-
-                
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/arc_animation/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Arc Animation</h3>
-                <p class="card-subtitle">Create arc transition animations easily</p>
-                <a href="extensions/arc_animation/index.html" class="card-button" aria-label="Learn more about Arc Animation">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/mask_format/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Mask Format</h3>
-                <p class="card-subtitle">Control the text format in a text box</p>
-                <a href="extensions/mask_format/index.html" class="card-button" aria-label="Learn more about Mask Format">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/auto_type/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">AutoType</h3>
-                <p class="card-subtitle">Type your text with encryption, decryption, and animation. 4 types of animations available:</p>
-                <ul>
-                    <li>Auto typing with mistakes</li>
-                    <li>Auto typing without mistakes</li>
-                    <li>Encryption animation</li>
-                    <li>Decryption animation</li>
-                </ul>
-                <a href="extensions/auto_type/index.html" class="card-button" aria-label="Learn more about AutoType">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/webcodeview/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">WebCodeView</h3>
-                <p class="card-subtitle">Preview code in WebView with awesome styles</p>
-                <a href="extensions/webcodeview/index.html" class="card-button" aria-label="Learn more about WebCodeView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/facerate/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">FaceRate</h3>
-                <p class="card-subtitle">Drag up and down to rate</p>
-                <a href="extensions/facerate/index.html" class="card-button" aria-label="Learn more about FaceRate">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/activityslideback/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">ActivitySlideBack</h3>
-                <p class="card-subtitle">Allows your page to support sliding back</p>
-                <a href="extensions/activityslideback/index.html" class="card-button" aria-label="Learn more about ActivitySlideBack">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/lamp/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Lamp</h3>
-                <p class="card-subtitle">Set the flash and brightness of your device</p>
-                <a href="extensions/lamp/index.html" class="card-button" aria-label="Learn more about Lamp">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/flash/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Flash</h3>
-                <p class="card-subtitle">Turn on/off your device front/rear flash without any permissions</p>
-                <a href="extensions/flash/index.html" class="card-button" aria-label="Learn more about Flash">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_screenshot/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Custom Screenshot</h3>
-                <p class="card-subtitle">Take screenshots of any layout view or root view (activity view, full screen)</p>
-                <a href="extensions/custom_screenshot/index.html" class="card-button" aria-label="Learn more about Custom Screenshot">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/image_compressor/index.html">
-            <div class="price-tag paid">$5.00</div>
-            <div class="card-content">
-                <h3 class="card-title">Image Compressor</h3>
-                <p class="card-subtitle">Compress images efficiently</p>
-                <a href="extensions/image_compressor/index.html" class="card-button" aria-label="Learn more about Image Compressor">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/video_compressor/index.html">
-            <div class="price-tag paid">$5.00</div>
-            <div class="card-content">
-                <h3 class="card-title">Video Compressor</h3>
-                <p class="card-subtitle">Compress video files with ease</p>
-                <a href="extensions/video_compressor/index.html" class="card-button" aria-label="Learn more about Video Compressor">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/painter_pro/index.html">
-            <div class="price-tag paid">$8.00</div>
-            <div class="card-content">
-                <h3 class="card-title">Painter Pro</h3>
-                <p class="card-subtitle">Advanced features for custom drawings with even more functionality</p>
-                <a href="extensions/painter_pro/index.html" class="card-button" aria-label="Learn more about Painter Pro">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/roller/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Roller</h3>
-                <p class="card-subtitle">Create an awesome circular seekbar</p>
-                <a href="extensions/roller/index.html" class="card-button" aria-label="Learn more about Roller">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/tempview/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Tempview</h3>
-                <p class="card-subtitle">Create a thermometer view</p>
-                <a href="extensions/tempview/index.html" class="card-button" aria-label="Learn more about Tempview">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/sensory/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Sensory</h3>
-                <p class="card-subtitle">Work with sensor events and detect gestures</p>
-                <a href="extensions/sensory/index.html" class="card-button" aria-label="Learn more about Sensory">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/broken_heart/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Broken Heart</h3>
-                <p class="card-subtitle">Create an awesome heart with a broken animation effect</p>
-                <a href="extensions/broken_heart/index.html" class="card-button" aria-label="Learn more about Broken Heart">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/rpi_animation/index.html">
-            <div class="price-tag paid">$2.00</div>
-            <div class="card-content">
-                <h3 class="card-title">RPI Animation</h3>
-                <p class="card-subtitle">Create RPI-like animation effects</p>
-                <a href="extensions/rpi_animation/index.html" class="card-button" aria-label="Learn more about RPI Animation">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/uncover_layers/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Uncover Layers</h3>
-                <p class="card-subtitle">Uncover layers under your app and display them like 3D models</p>
-                <a href="extensions/uncover_layers/index.html" class="card-button" aria-label="Learn more about Uncover Layers">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/vibration/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Vibration</h3>
-                <p class="card-subtitle">Vibrate your device</p>
-                <a href="extensions/vibration/index.html" class="card-button" aria-label="Learn more about Vibration">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/paper_shredder/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Paper Shredder</h3>
-                <p class="card-subtitle">Create a paper shredder animation effect</p>
-                <a href="extensions/paper_shredder/index.html" class="card-button" aria-label="Learn more about Paper Shredder">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/chart_pro/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Chart Pro</h3>
-                <p class="card-subtitle">Create stunning charts with advanced features</p>
-                <a href="extensions/chart_pro/index.html" class="card-button" aria-label="Learn more about Chart Pro">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/lock_pro/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Lock Pro</h3>
-                <p class="card-subtitle">Add locking functionality to your app</p>
-                <a href="extensions/lock_pro/index.html" class="card-button" aria-label="Learn more about Lock Pro">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/candles_animation/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Candles Animation</h3>
-                <p class="card-subtitle">Create a candle animation effect</p>
-                <a href="extensions/candles_animation/index.html" class="card-button" aria-label="Learn more about Candles Animation">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/calibrator_view_sensor/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Calibrator View Sensor</h3>
-                <p class="card-subtitle">Work with sensor calibration view</p>
-                <a href="extensions/calibrator_view_sensor/index.html" class="card-button" aria-label="Learn more about Calibrator View Sensor">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/photo_filter_pro/index.html">
-            <div class="price-tag paid">$5.00</div>
-            <div class="card-content">
-                <h3 class="card-title">Photo Filter Pro</h3>
-                <p class="card-subtitle">Filter your images with custom filters</p>
-                <a href="extensions/photo_filter_pro/index.html" class="card-button" aria-label="Learn more about Photo Filter Pro">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/coolrefreshview/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">CoolRefreshView</h3>
-                <p class="card-subtitle">Add cool refresh for ListView, VerticalArrangement, and ScrollArrangement components</p>
-                <a href="extensions/coolrefreshview/index.html" class="card-button" aria-label="Learn more about CoolRefreshView">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_store/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Custom Store</h3>
-                <p class="card-subtitle">Play and check functions for Google Play Store, Amazon AppStore, OneStore</p>
-                <a href="extensions/custom_store/index.html" class="card-button" aria-label="Learn more about Custom Store">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/glitch/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Glitch</h3>
-                <p class="card-subtitle">Make glitch effects on Full Screen, Text, and Image</p>
-                <a href="extensions/glitch/index.html" class="card-button" aria-label="Learn more about Glitch">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/line_seekbar/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Line Seekbar</h3>
-                <p class="card-subtitle">Create linear seekbars</p>
-                <a href="extensions/line_seekbar/index.html" class="card-button" aria-label="Learn more about Line Seekbar">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/circle_shape/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Circle Shape</h3>
-                <p class="card-subtitle">Create custom circular shapes</p>
-                <a href="extensions/circle_shape/index.html" class="card-button" aria-label="Learn more about Circle Shape">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/hearts_tree/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Hearts Tree</h3>
-                <p class="card-subtitle">Create hearts display animation on trees</p>
-                <a href="extensions/hearts_tree/index.html" class="card-button" aria-label="Learn more about Hearts Tree">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/cool_loading_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Cool Loading View</h3>
-                <p class="card-subtitle">Add cool loading effects to your views</p>
-                <a href="extensions/cool_loading_view/index.html" class="card-button" aria-label="Learn more about Cool Loading View">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/game_refresh_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Game Refresh View</h3>
-                <p class="card-subtitle">Use with ListView or Vertical Scroll Arrangement</p>
-                <a href="extensions/game_refresh_view/index.html" class="card-button" aria-label="Learn more about Game Refresh View">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/cover_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Cover View</h3>
-                <p class="card-subtitle">Use with the music player</p>
-                <a href="extensions/cover_view/index.html" class="card-button" aria-label="Learn more about Cover View">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/panning_anim_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Panning Anim View</h3>
-                <p class="card-subtitle">Create horizontal and vertical panning animations</p>
-                <a href="extensions/panning_anim_view/index.html" class="card-button" aria-label="Learn more about Panning Anim View">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/expand_touch_region/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Expand Touch Region</h3>
-                <p class="card-subtitle">Increase the touch click area of your views</p>
-                <a href="extensions/expand_touch_region/index.html" class="card-button" aria-label="Learn more about Expand Touch Region">Learn More</a>
-            </div>
-        </article>
-
-                  <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/seekbar_rate/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Seekbar Rate</h3>
-                <p class="card-subtitle">Rate functionality for SeekBar</p>
-                <a href="extensions/seekbar_rate/index.html" class="card-button" aria-label="Learn more about Seekbar Rate">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/notify_effect/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Notify Effect</h3>
-                <p class="card-subtitle">Effects for Android Notifications</p>
-                <a href="extensions/notify_effect/index.html" class="card-button" aria-label="Learn more about Notify Effect">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/photo_view_pro/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Photo View Pro</h3>
-                <p class="card-subtitle">Advanced image view features</p>
-                <a href="extensions/photo_view_pro/index.html" class="card-button" aria-label="Learn more about Photo View Pro">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/pdf_bitmap_renderer/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">PDF Bitmap Renderer</h3>
-                <p class="card-subtitle">Convert PDF files to images</p>
-                <a href="extensions/pdf_bitmap_renderer/index.html" class="card-button" aria-label="Learn more about PDF Bitmap Renderer">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/shaker/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Shaker</h3>
-                <p class="card-subtitle">Shake animations and effects</p>
-                <a href="extensions/shaker/index.html" class="card-button" aria-label="Learn more about Shaker">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/search_view_animation/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Search View Animation</h3>
-                <p class="card-subtitle">Animated search view for your app</p>
-                <a href="extensions/search_view_animation/index.html" class="card-button" aria-label="Learn more about Search View Animation">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/read_more/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Read More</h3>
-                <p class="card-subtitle">Add "Read More" functionality to labels</p>
-                <a href="extensions/read_more/index.html" class="card-button" aria-label="Learn more about Read More">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_animations_with_fragments/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Custom Animations With Fragments</h3>
-                <p class="card-subtitle">Create custom animations using fragments</p>
-                <a href="extensions/custom_animations_with_fragments/index.html" class="card-button" aria-label="Learn more about Custom Animations With Fragments">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/gif_card_view/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Gif Card View</h3>
-                <p class="card-subtitle">Create card views with GIF images</p>
-                <a href="extensions/gif_card_view/index.html" class="card-button" aria-label="Learn more about Gif Card View">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/popup_window/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Popup Window</h3>
-                <p class="card-subtitle">Create and manage customizable popup windows</p>
-                <a href="extensions/popup_window/index.html" class="card-button" aria-label="Learn more about Popup Window">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/zip_archiver/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Zip Archiver</h3>
-                <p class="card-subtitle">Manage zip archives and compression</p>
-                <a href="extensions/zip_archiver/index.html" class="card-button" aria-label="Learn more about Zip Archiver">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/text_to_image/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Text To Image</h3>
-                <p class="card-subtitle">Generate images using AI from text</p>
-                <a href="extensions/text_to_image/index.html" class="card-button" aria-label="Learn more about Text To Image">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/frames_animation/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Frames Animation</h3>
-                <p class="card-subtitle">Create frame-based animations</p>
-                <a href="extensions/frames_animation/index.html" class="card-button" aria-label="Learn more about Frames Animation">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/fruitask/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Fruitask</h3>
-                <p class="card-subtitle">Database spreadsheet alternative (e.g., Airtable, Google Sheets)</p>
-                <a href="extensions/fruitask/index.html" class="card-button" aria-label="Learn more about Fruitask">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/simple_excel/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Simple Excel</h3>
-                <p class="card-subtitle">Manage Excel-like data within your app</p>
-                <a href="extensions/simple_excel/index.html" class="card-button" aria-label="Learn more about Simple Excel">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/csv/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">CSV</h3>
-                <p class="card-subtitle">Handle CSV file processing</p>
-                <a href="extensions/csv/index.html" class="card-button" aria-label="Learn more about CSV">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/muslimsalat/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">MuslimSalat</h3>
-                <p class="card-subtitle">Prayer times extension</p>
-                <a href="extensions/muslimsalat/index.html" class="card-button" aria-label="Learn more about MuslimSalat">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/palette_color_extension/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Palette Color Extension</h3>
-                <p class="card-subtitle">Extract colors from images</p>
-                <a href="extensions/palette_color_extension/index.html" class="card-button" aria-label="Learn more about Palette Color Extension">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/android_palette_color_api/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Android Palette Color API</h3>
-                <p class="card-subtitle">Extract colors from images using Android's Palette API</p>
-                <a href="extensions/android_palette_color_api/index.html" class="card-button" aria-label="Learn more about Android Palette Color API">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/htxml/index.html">
-            <div class="price-tag paid">$8</div>
-            <div class="card-content">
-                <h3 class="card-title">HTXML</h3>
-                <p class="card-subtitle">Advanced HTML/XML functionalities</p>
-                <a href="extensions/htxml/index.html" class="card-button" aria-label="Learn more about HTXML">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/music_bar/index.html">
-            <div class="price-tag paid">$5</div>
-            <div class="card-content">
-                <h3 class="card-title">Music Bar</h3>
-                <p class="card-subtitle">Create custom music bars</p>
-                <a href="extensions/music_bar/index.html" class="card-button" aria-label="Learn more about Music Bar">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/sms_pro/index.html">
-            <div class="price-tag paid">$8</div>
-            <div class="card-content">
-                <h3 class="card-title">SMS Pro</h3>
-                <p class="card-subtitle">Advanced SMS features</p>
-                <a href="extensions/sms_pro/index.html" class="card-button" aria-label="Learn more about SMS Pro">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/in_app_update/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">In App Update</h3>
-                <p class="card-subtitle">In-app update functionality for your app</p>
-                <a href="extensions/in_app_update/index.html" class="card-button" aria-label="Learn more about In App Update">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/meta_llama/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Meta Llama</h3>
-                <p class="card-subtitle">AI model-based chat extension</p>
-                <a href="extensions/meta_llama/index.html" class="card-button" aria-label="Learn more about Meta Llama">Learn More</a>
-            </div>
-        </article>
-
-        <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/isometric_drawing/index.html">
-            <div class="price-tag free">Free</div>
-            <div class="card-content">
-                <h3 class="card-title">Isometric Drawing</h3>
-                <p class="card-subtitle">Create isometric drawings (shapes, cylinder, knot, prism, etc.)</p>
-                <a href="extensions/isometric_drawing/index.html" class="card-button" aria-label="Learn more about Isometric Drawing">Learn More</a>
-            </div>
-        </article>
-                
-    </div>
-
-         
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section">
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/number_checker/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Number Checker</h3>
+                     <p class="card-subtitle">Check if a number is prime, even, or odd</p>
+                     <a href="extensions/number_checker/index.html" class="card-button" aria-label="Learn more about Number Checker">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/islamic_history/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Islamic History</h3>
+                     <p class="card-subtitle">Hijri date for Muslims and Islamic history utilities</p>
+                     <a href="extensions/islamic_history/index.html" class="card-button" aria-label="Learn more about Islamic History">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/device_info/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Device Info</h3>
+                     <p class="card-subtitle">Retrieve essential information about the device</p>
+                     <a href="extensions/device_info/index.html" class="card-button" aria-label="Learn more about Device Info">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/string_validate/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">String Validate</h3>
+                     <p class="card-subtitle">Validate strings with various custom rules</p>
+                     <a href="extensions/string_validate/index.html" class="card-button" aria-label="Learn more about String Validate">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/year_of_device/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Year Of Device</h3>
+                     <p class="card-subtitle">Get the manufacturing year of the device</p>
+                     <a href="extensions/year_of_device/index.html" class="card-button" aria-label="Learn more about Year Of Device">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/viemo/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Viemo</h3>
+                     <p class="card-subtitle">Custom video utilities and playback enhancements</p>
+                     <a href="extensions/viemo/index.html" class="card-button" aria-label="Learn more about Viemo">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/dindate/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Dindate</h3>
+                     <p class="card-subtitle">Handle dates as easily as integers</p>
+                     <a href="extensions/dindate/index.html" class="card-button" aria-label="Learn more about Dindate">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/similarity/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Similarity</h3>
+                     <p class="card-subtitle">Calculate similarity scores between two strings</p>
+                     <a href="extensions/similarity/index.html" class="card-button" aria-label="Learn more about Similarity">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/morse_code/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Morse Code</h3>
+                     <p class="card-subtitle">Encode and decode Morse code effortlessly</p>
+                     <a href="extensions/morse_code/index.html" class="card-button" aria-label="Learn more about Morse Code">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/android_volume/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Android Volume</h3>
+                     <p class="card-subtitle">Custom control of the device's volume</p>
+                     <a href="extensions/android_volume/index.html" class="card-button" aria-label="Learn more about Android Volume">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/ruler_picker/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Ruler Picker</h3>
+                     <p class="card-subtitle">Implement a stylish ruler picker for your app</p>
+                     <a href="extensions/ruler_picker/index.html" class="card-button" aria-label="Learn more about Ruler Picker">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/ripple_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Ripple View</h3>
+                     <p class="card-subtitle">Add ripple effect to any component in your app</p>
+                     <a href="extensions/ripple_view/index.html" class="card-button" aria-label="Learn more about Ripple View">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/canimation/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">CAnimation</h3>
+                     <p class="card-subtitle">Custom animations for your app components</p>
+                     <a href="extensions/canimation/index.html" class="card-button" aria-label="Learn more about CAnimation">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/phone_tools/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">PhoneTools</h3>
+                     <p class="card-subtitle">Useful utilities for phone management</p>
+                     <a href="extensions/phone_tools/index.html" class="card-button" aria-label="Learn more about PhoneTools">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/url_metadata/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">UrlMetadata</h3>
+                     <p class="card-subtitle">Retrieve meta data for websites</p>
+                     <a href="extensions/url_metadata/index.html" class="card-button" aria-label="Learn more about UrlMetadata">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/jelly_switch_button/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">JellySwitchButton</h3>
+                     <p class="card-subtitle">Create awesome switch buttons with a jelly effect</p>
+                     <a href="extensions/jelly_switch_button/index.html" class="card-button" aria-label="Learn more about JellySwitchButton">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/speech_recognition_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">SpeechRecognitionView</h3>
+                     <p class="card-subtitle">Make stylish view-style animations for speech recording</p>
+                     <a href="extensions/speech_recognition_view/index.html" class="card-button" aria-label="Learn more about SpeechRecognitionView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_shadow/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">CustomShadow</h3>
+                     <p class="card-subtitle">Create awesome neon-style shadows for components</p>
+                     <a href="extensions/custom_shadow/index.html" class="card-button" aria-label="Learn more about CustomShadow">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/view_charging/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">ViewCharging</h3>
+                     <p class="card-subtitle">Show a custom charging view for your app</p>
+                     <a href="extensions/view_charging/index.html" class="card-button" aria-label="Learn more about ViewCharging">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/slide_color_picker/index.html">
+                  <div class="price-tag paid">$5.00</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Slide Color Picker</h3>
+                     <p class="card-subtitle">Create a custom slider bar for color selection</p>
+                     <a href="extensions/slide_color_picker/index.html" class="card-button" aria-label="Learn more about Slide Color Picker">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_vimeo/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">CustomVimeo</h3>
+                     <p class="card-subtitle">Download video thumbnail with quality from Vimeo by JSON</p>
+                     <a href="extensions/custom_vimeo/index.html" class="card-button" aria-label="Learn more about CustomVimeo">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/cube_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">CubeView</h3>
+                     <p class="card-subtitle">Create a cube loading view for splash screens</p>
+                     <a href="extensions/cube_view/index.html" class="card-button" aria-label="Learn more about CubeView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/slack_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Slack View</h3>
+                     <p class="card-subtitle">Create Slack-style loading view</p>
+                     <a href="extensions/slack_view/index.html" class="card-button" aria-label="Learn more about Slack View">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/painter/index.html">
+                  <div class="price-tag paid">$8.00</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Painter</h3>
+                     <p class="card-subtitle">Create custom drawings with awesome functions</p>
+                     <a href="extensions/painter/index.html" class="card-button" aria-label="Learn more about Painter">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/buzzle_game/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Buzzle Game</h3>
+                     <p class="card-subtitle">Create a 2048-style puzzle game</p>
+                     <a href="extensions/buzzle_game/index.html" class="card-button" aria-label="Learn more about Buzzle Game">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/powerview/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">PowerView</h3>
+                     <p class="card-subtitle">A beautiful charging view with horizontal and vertical options</p>
+                     <a href="extensions/powerview/index.html" class="card-button" aria-label="Learn more about PowerView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/snake_line/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Snake Line</h3>
+                     <p class="card-subtitle">Create animated linear charts with ease</p>
+                     <a href="extensions/snake_line/index.html" class="card-button" aria-label="Learn more about Snake Line">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/discoverimageview/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">DiscoverImageView</h3>
+                     <p class="card-subtitle">Create a beautiful scratch effect for image views</p>
+                     <a href="extensions/discoverimageview/index.html" class="card-button" aria-label="Learn more about DiscoverImageView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/fit_textview/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">FitTextView</h3>
+                     <p class="card-subtitle">Automatically resize text to fit within its bounds</p>
+                     <a href="extensions/fit_textview/index.html" class="card-button" aria-label="Learn more about FitTextView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/screen_off_time/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Screen Off Time</h3>
+                     <p class="card-subtitle">Change screen sleep time with ease</p>
+                     <a href="extensions/screen_off_time/index.html" class="card-button" aria-label="Learn more about Screen Off Time">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/captcha_img/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Captcha Img</h3>
+                     <p class="card-subtitle">Generate CAPTCHA images for verification</p>
+                     <a href="extensions/captcha_img/index.html" class="card-button" aria-label="Learn more about Captcha Img">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/draw_loading/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Draw Loading</h3>
+                     <p class="card-subtitle">Draw animations with 11 shape colorings</p>
+                     <a href="extensions/draw_loading/index.html" class="card-button" aria-label="Learn more about Draw Loading">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/blur_loading_img/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Blur Loading Img</h3>
+                     <p class="card-subtitle">Load images with progress and blur cache automatically</p>
+                     <a href="extensions/blur_loading_img/index.html" class="card-button" aria-label="Learn more about Blur Loading Img">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/fallingview/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">FallingView</h3>
+                     <p class="card-subtitle">Create a simple falling shapes effect</p>
+                     <a href="extensions/fallingview/index.html" class="card-button" aria-label="Learn more about FallingView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/user_location_checker/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">User Location Checker</h3>
+                     <p class="card-subtitle">Get user country and check if the app is installed from Google Play</p>
+                     <a href="extensions/user_location_checker/index.html" class="card-button" aria-label="Learn more about User Location Checker">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/location_info/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Location Info</h3>
+                     <p class="card-subtitle">Simple extension to get location information</p>
+                     <a href="extensions/location_info/index.html" class="card-button" aria-label="Learn more about Location Info">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/timer_ui/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Timer UI</h3>
+                     <p class="card-subtitle">Create amazing dynamic time UI (flat clock, countdown timer, hourglass)</p>
+                     <a href="extensions/timer_ui/index.html" class="card-button" aria-label="Learn more about Timer UI">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/arc_animation/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Arc Animation</h3>
+                     <p class="card-subtitle">Create arc transition animations easily</p>
+                     <a href="extensions/arc_animation/index.html" class="card-button" aria-label="Learn more about Arc Animation">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/mask_format/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Mask Format</h3>
+                     <p class="card-subtitle">Control the text format in a text box</p>
+                     <a href="extensions/mask_format/index.html" class="card-button" aria-label="Learn more about Mask Format">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/auto_type/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">AutoType</h3>
+                     <p class="card-subtitle">Type your text with encryption, decryption, and animation. 4 types of animations available:</p>
+                     <ul>
+                        <li>Auto typing with mistakes</li>
+                        <li>Auto typing without mistakes</li>
+                        <li>Encryption animation</li>
+                        <li>Decryption animation</li>
+                     </ul>
+                     <a href="extensions/auto_type/index.html" class="card-button" aria-label="Learn more about AutoType">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/webcodeview/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">WebCodeView</h3>
+                     <p class="card-subtitle">Preview code in WebView with awesome styles</p>
+                     <a href="extensions/webcodeview/index.html" class="card-button" aria-label="Learn more about WebCodeView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/facerate/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">FaceRate</h3>
+                     <p class="card-subtitle">Drag up and down to rate</p>
+                     <a href="extensions/facerate/index.html" class="card-button" aria-label="Learn more about FaceRate">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/activityslideback/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">ActivitySlideBack</h3>
+                     <p class="card-subtitle">Allows your page to support sliding back</p>
+                     <a href="extensions/activityslideback/index.html" class="card-button" aria-label="Learn more about ActivitySlideBack">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/lamp/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Lamp</h3>
+                     <p class="card-subtitle">Set the flash and brightness of your device</p>
+                     <a href="extensions/lamp/index.html" class="card-button" aria-label="Learn more about Lamp">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/flash/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Flash</h3>
+                     <p class="card-subtitle">Turn on/off your device front/rear flash without any permissions</p>
+                     <a href="extensions/flash/index.html" class="card-button" aria-label="Learn more about Flash">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_screenshot/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Custom Screenshot</h3>
+                     <p class="card-subtitle">Take screenshots of any layout view or root view (activity view, full screen)</p>
+                     <a href="extensions/custom_screenshot/index.html" class="card-button" aria-label="Learn more about Custom Screenshot">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/image_compressor/index.html">
+                  <div class="price-tag paid">$5.00</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Image Compressor</h3>
+                     <p class="card-subtitle">Compress images efficiently</p>
+                     <a href="extensions/image_compressor/index.html" class="card-button" aria-label="Learn more about Image Compressor">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/video_compressor/index.html">
+                  <div class="price-tag paid">$5.00</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Video Compressor</h3>
+                     <p class="card-subtitle">Compress video files with ease</p>
+                     <a href="extensions/video_compressor/index.html" class="card-button" aria-label="Learn more about Video Compressor">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/painter_pro/index.html">
+                  <div class="price-tag paid">$8.00</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Painter Pro</h3>
+                     <p class="card-subtitle">Advanced features for custom drawings with even more functionality</p>
+                     <a href="extensions/painter_pro/index.html" class="card-button" aria-label="Learn more about Painter Pro">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/roller/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Roller</h3>
+                     <p class="card-subtitle">Create an awesome circular seekbar</p>
+                     <a href="extensions/roller/index.html" class="card-button" aria-label="Learn more about Roller">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/tempview/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Tempview</h3>
+                     <p class="card-subtitle">Create a thermometer view</p>
+                     <a href="extensions/tempview/index.html" class="card-button" aria-label="Learn more about Tempview">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/sensory/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Sensory</h3>
+                     <p class="card-subtitle">Work with sensor events and detect gestures</p>
+                     <a href="extensions/sensory/index.html" class="card-button" aria-label="Learn more about Sensory">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/broken_heart/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Broken Heart</h3>
+                     <p class="card-subtitle">Create an awesome heart with a broken animation effect</p>
+                     <a href="extensions/broken_heart/index.html" class="card-button" aria-label="Learn more about Broken Heart">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/rpi_animation/index.html">
+                  <div class="price-tag paid">$2.00</div>
+                  <div class="card-content">
+                     <h3 class="card-title">RPI Animation</h3>
+                     <p class="card-subtitle">Create RPI-like animation effects</p>
+                     <a href="extensions/rpi_animation/index.html" class="card-button" aria-label="Learn more about RPI Animation">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/uncover_layers/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Uncover Layers</h3>
+                     <p class="card-subtitle">Uncover layers under your app and display them like 3D models</p>
+                     <a href="extensions/uncover_layers/index.html" class="card-button" aria-label="Learn more about Uncover Layers">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/vibration/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Vibration</h3>
+                     <p class="card-subtitle">Vibrate your device</p>
+                     <a href="extensions/vibration/index.html" class="card-button" aria-label="Learn more about Vibration">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/paper_shredder/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Paper Shredder</h3>
+                     <p class="card-subtitle">Create a paper shredder animation effect</p>
+                     <a href="extensions/paper_shredder/index.html" class="card-button" aria-label="Learn more about Paper Shredder">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/chart_pro/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Chart Pro</h3>
+                     <p class="card-subtitle">Create stunning charts with advanced features</p>
+                     <a href="extensions/chart_pro/index.html" class="card-button" aria-label="Learn more about Chart Pro">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/lock_pro/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Lock Pro</h3>
+                     <p class="card-subtitle">Add locking functionality to your app</p>
+                     <a href="extensions/lock_pro/index.html" class="card-button" aria-label="Learn more about Lock Pro">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/candles_animation/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Candles Animation</h3>
+                     <p class="card-subtitle">Create a candle animation effect</p>
+                     <a href="extensions/candles_animation/index.html" class="card-button" aria-label="Learn more about Candles Animation">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/calibrator_view_sensor/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Calibrator View Sensor</h3>
+                     <p class="card-subtitle">Work with sensor calibration view</p>
+                     <a href="extensions/calibrator_view_sensor/index.html" class="card-button" aria-label="Learn more about Calibrator View Sensor">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/photo_filter_pro/index.html">
+                  <div class="price-tag paid">$5.00</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Photo Filter Pro</h3>
+                     <p class="card-subtitle">Filter your images with custom filters</p>
+                     <a href="extensions/photo_filter_pro/index.html" class="card-button" aria-label="Learn more about Photo Filter Pro">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/coolrefreshview/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">CoolRefreshView</h3>
+                     <p class="card-subtitle">Add cool refresh for ListView, VerticalArrangement, and ScrollArrangement components</p>
+                     <a href="extensions/coolrefreshview/index.html" class="card-button" aria-label="Learn more about CoolRefreshView">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_store/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Custom Store</h3>
+                     <p class="card-subtitle">Play and check functions for Google Play Store, Amazon AppStore, OneStore</p>
+                     <a href="extensions/custom_store/index.html" class="card-button" aria-label="Learn more about Custom Store">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/glitch/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Glitch</h3>
+                     <p class="card-subtitle">Make glitch effects on Full Screen, Text, and Image</p>
+                     <a href="extensions/glitch/index.html" class="card-button" aria-label="Learn more about Glitch">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/line_seekbar/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Line Seekbar</h3>
+                     <p class="card-subtitle">Create linear seekbars</p>
+                     <a href="extensions/line_seekbar/index.html" class="card-button" aria-label="Learn more about Line Seekbar">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/circle_shape/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Circle Shape</h3>
+                     <p class="card-subtitle">Create custom circular shapes</p>
+                     <a href="extensions/circle_shape/index.html" class="card-button" aria-label="Learn more about Circle Shape">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/hearts_tree/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Hearts Tree</h3>
+                     <p class="card-subtitle">Create hearts display animation on trees</p>
+                     <a href="extensions/hearts_tree/index.html" class="card-button" aria-label="Learn more about Hearts Tree">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/cool_loading_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Cool Loading View</h3>
+                     <p class="card-subtitle">Add cool loading effects to your views</p>
+                     <a href="extensions/cool_loading_view/index.html" class="card-button" aria-label="Learn more about Cool Loading View">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/game_refresh_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Game Refresh View</h3>
+                     <p class="card-subtitle">Use with ListView or Vertical Scroll Arrangement</p>
+                     <a href="extensions/game_refresh_view/index.html" class="card-button" aria-label="Learn more about Game Refresh View">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/cover_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Cover View</h3>
+                     <p class="card-subtitle">Use with the music player</p>
+                     <a href="extensions/cover_view/index.html" class="card-button" aria-label="Learn more about Cover View">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/panning_anim_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Panning Anim View</h3>
+                     <p class="card-subtitle">Create horizontal and vertical panning animations</p>
+                     <a href="extensions/panning_anim_view/index.html" class="card-button" aria-label="Learn more about Panning Anim View">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/expand_touch_region/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Expand Touch Region</h3>
+                     <p class="card-subtitle">Increase the touch click area of your views</p>
+                     <a href="extensions/expand_touch_region/index.html" class="card-button" aria-label="Learn more about Expand Touch Region">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/seekbar_rate/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Seekbar Rate</h3>
+                     <p class="card-subtitle">Rate functionality for SeekBar</p>
+                     <a href="extensions/seekbar_rate/index.html" class="card-button" aria-label="Learn more about Seekbar Rate">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/notify_effect/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Notify Effect</h3>
+                     <p class="card-subtitle">Effects for Android Notifications</p>
+                     <a href="extensions/notify_effect/index.html" class="card-button" aria-label="Learn more about Notify Effect">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/photo_view_pro/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Photo View Pro</h3>
+                     <p class="card-subtitle">Advanced image view features</p>
+                     <a href="extensions/photo_view_pro/index.html" class="card-button" aria-label="Learn more about Photo View Pro">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/pdf_bitmap_renderer/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">PDF Bitmap Renderer</h3>
+                     <p class="card-subtitle">Convert PDF files to images</p>
+                     <a href="extensions/pdf_bitmap_renderer/index.html" class="card-button" aria-label="Learn more about PDF Bitmap Renderer">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/shaker/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Shaker</h3>
+                     <p class="card-subtitle">Shake animations and effects</p>
+                     <a href="extensions/shaker/index.html" class="card-button" aria-label="Learn more about Shaker">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/search_view_animation/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Search View Animation</h3>
+                     <p class="card-subtitle">Animated search view for your app</p>
+                     <a href="extensions/search_view_animation/index.html" class="card-button" aria-label="Learn more about Search View Animation">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/read_more/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Read More</h3>
+                     <p class="card-subtitle">Add "Read More" functionality to labels</p>
+                     <a href="extensions/read_more/index.html" class="card-button" aria-label="Learn more about Read More">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/custom_animations_with_fragments/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Custom Animations With Fragments</h3>
+                     <p class="card-subtitle">Create custom animations using fragments</p>
+                     <a href="extensions/custom_animations_with_fragments/index.html" class="card-button" aria-label="Learn more about Custom Animations With Fragments">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/gif_card_view/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Gif Card View</h3>
+                     <p class="card-subtitle">Create card views with GIF images</p>
+                     <a href="extensions/gif_card_view/index.html" class="card-button" aria-label="Learn more about Gif Card View">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/popup_window/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Popup Window</h3>
+                     <p class="card-subtitle">Create and manage customizable popup windows</p>
+                     <a href="extensions/popup_window/index.html" class="card-button" aria-label="Learn more about Popup Window">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/zip_archiver/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Zip Archiver</h3>
+                     <p class="card-subtitle">Manage zip archives and compression</p>
+                     <a href="extensions/zip_archiver/index.html" class="card-button" aria-label="Learn more about Zip Archiver">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/text_to_image/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Text To Image</h3>
+                     <p class="card-subtitle">Generate images using AI from text</p>
+                     <a href="extensions/text_to_image/index.html" class="card-button" aria-label="Learn more about Text To Image">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/frames_animation/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Frames Animation</h3>
+                     <p class="card-subtitle">Create frame-based animations</p>
+                     <a href="extensions/frames_animation/index.html" class="card-button" aria-label="Learn more about Frames Animation">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/fruitask/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Fruitask</h3>
+                     <p class="card-subtitle">Database spreadsheet alternative (e.g., Airtable, Google Sheets)</p>
+                     <a href="extensions/fruitask/index.html" class="card-button" aria-label="Learn more about Fruitask">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/simple_excel/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Simple Excel</h3>
+                     <p class="card-subtitle">Manage Excel-like data within your app</p>
+                     <a href="extensions/simple_excel/index.html" class="card-button" aria-label="Learn more about Simple Excel">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/csv/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">CSV</h3>
+                     <p class="card-subtitle">Handle CSV file processing</p>
+                     <a href="extensions/csv/index.html" class="card-button" aria-label="Learn more about CSV">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/muslimsalat/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">MuslimSalat</h3>
+                     <p class="card-subtitle">Prayer times extension</p>
+                     <a href="extensions/muslimsalat/index.html" class="card-button" aria-label="Learn more about MuslimSalat">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/palette_color_extension/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Palette Color Extension</h3>
+                     <p class="card-subtitle">Extract colors from images</p>
+                     <a href="extensions/palette_color_extension/index.html" class="card-button" aria-label="Learn more about Palette Color Extension">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/android_palette_color_api/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Android Palette Color API</h3>
+                     <p class="card-subtitle">Extract colors from images using Android's Palette API</p>
+                     <a href="extensions/android_palette_color_api/index.html" class="card-button" aria-label="Learn more about Android Palette Color API">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/htxml/index.html">
+                  <div class="price-tag paid">$8</div>
+                  <div class="card-content">
+                     <h3 class="card-title">HTXML</h3>
+                     <p class="card-subtitle">Advanced HTML/XML functionalities</p>
+                     <a href="extensions/htxml/index.html" class="card-button" aria-label="Learn more about HTXML">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/music_bar/index.html">
+                  <div class="price-tag paid">$5</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Music Bar</h3>
+                     <p class="card-subtitle">Create custom music bars</p>
+                     <a href="extensions/music_bar/index.html" class="card-button" aria-label="Learn more about Music Bar">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/sms_pro/index.html">
+                  <div class="price-tag paid">$8</div>
+                  <div class="card-content">
+                     <h3 class="card-title">SMS Pro</h3>
+                     <p class="card-subtitle">Advanced SMS features</p>
+                     <a href="extensions/sms_pro/index.html" class="card-button" aria-label="Learn more about SMS Pro">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/in_app_update/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">In App Update</h3>
+                     <p class="card-subtitle">In-app update functionality for your app</p>
+                     <a href="extensions/in_app_update/index.html" class="card-button" aria-label="Learn more about In App Update">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/meta_llama/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Meta Llama</h3>
+                     <p class="card-subtitle">AI model-based chat extension</p>
+                     <a href="extensions/meta_llama/index.html" class="card-button" aria-label="Learn more about Meta Llama">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/isometric_drawing/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Isometric Drawing</h3>
+                     <p class="card-subtitle">Create isometric drawings (shapes, cylinder, knot, prism, etc.)</p>
+                     <a href="extensions/isometric_drawing/index.html" class="card-button" aria-label="Learn more about Isometric Drawing">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/floating_ball/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Floating Ball</h3>
+                     <p class="card-subtitle">Add floating ball to your app for enhanced user interaction</p>
+                     <a href="extensions/floating_ball/index.html" class="card-button" aria-label="Learn more about Floating Ball">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/easy_paths/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Easy Paths</h3>
+                     <p class="card-subtitle">Simplify file path handling for both internal and external storage</p>
+                     <a href="extensions/easy_paths/index.html" class="card-button" aria-label="Learn more about Easy Paths">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/art_toutcher/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Art Toucher</h3>
+                     <p class="card-subtitle">Interactive art-based touch experiences for your app</p>
+                     <a href="extensions/art_toutcher/index.html" class="card-button" aria-label="Learn more about Art Toucher">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/youtube_downloader/index.html">
+                  <div class="price-tag paid">$10</div>
+                  <div class="card-content">
+                     <h3 class="card-title">YouTube Downloader</h3>
+                     <p class="card-subtitle">Download videos from YouTube with ease</p>
+                     <a href="extensions/youtube_downloader/index.html" class="card-button" aria-label="Learn more about YouTube Downloader">Learn More</a>
+                  </div>
+               </article>
+               <article class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/paper_pager/index.html">
+                  <div class="price-tag free">Free</div>
+                  <div class="card-content">
+                     <h3 class="card-title">Paper Pager</h3>
+                     <p class="card-subtitle">Create beautiful paper-style pagination effects</p>
+                     <a href="extensions/paper_pager/index.html" class="card-button" aria-label="Learn more about Paper Pager">Learn More</a>
+                  </div>
+               </article>
+            </div>
+         </section>
+          
+         <!-- Contact Section -->
+         <section class="contact-section">
             <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
             <div class="contact-options">
-                <div class="contact-card" role="link" aria-label="Go to MIT AI2 Community" onclick="window.location.href='https://community.appinventor.mit.edu/'">
-                    <div class="contact-icon">
-                        <img src="images/ai2-logo.png" alt="MIT App Inventor Logo" class="icon-img">
-                    </div>
-                    <span class="contact-title">MIT AI2</span>
-                </div>
-
-                <div class="contact-card" role="link" aria-label="Go to Kodular Community" onclick="window.location.href='https://community.kodular.io/'">
-                    <div class="contact-icon">
-                        <img src="images/kodular-logo.png" alt="Kodular Community Logo" class="icon-img">
-                    </div>
-                    <span class="contact-title">Kodular Community</span>
-                </div>
-
-                <div class="contact-card" role="link" aria-label="Contact us via Telegram" onclick="window.location.href='https://t.me/+rc4zQLhKg_Y0MmE0'">
-                    <div class="contact-icon">
-                        <img src="images/telegram-logo.webp" alt="Telegram Logo" class="icon-img">
-                    </div>
-                    <span class="contact-title">Telegram</span>
-                </div>
+               <div class="contact-card" role="link" aria-label="Go to MIT AI2 Community" onclick="window.location.href='https://community.appinventor.mit.edu/'">
+                  <div class="contact-icon">
+                     <img src="images/ai2-logo.png" alt="MIT App Inventor Logo" class="icon-img">
+                  </div>
+                  <span class="contact-title">MIT AI2</span>
+               </div>
+               <div class="contact-card" role="link" aria-label="Go to Kodular Community" onclick="window.location.href='https://community.kodular.io/'">
+                  <div class="contact-icon">
+                     <img src="images/kodular-logo.png" alt="Kodular Community Logo" class="icon-img">
+                  </div>
+                  <span class="contact-title">Kodular Community</span>
+               </div>
+               <div class="contact-card" role="link" aria-label="Contact us via Telegram" onclick="window.location.href='https://t.me/+rc4zQLhKg_Y0MmE0'">
+                  <div class="contact-icon">
+                     <img src="images/telegram-logo.webp" alt="Telegram Logo" class="icon-img">
+                  </div>
+                  <span class="contact-title">Telegram</span>
+               </div>
             </div>
-        </section>
-    </main>
-
-    <!-- Footer Section -->
-    <footer>
-        <div class="footer-content">
+         </section>
+      </main>
+       
+      <!-- Footer Section -->
+      <footer>
+         <div class="footer-content">
             <p>&copy; 2024 AemoDev. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js" defer></script>
-</body>
-
+         </div>
+      </footer>
+       
+      <script src="script.js" defer></script>
+       
+   </body>
 </html>
