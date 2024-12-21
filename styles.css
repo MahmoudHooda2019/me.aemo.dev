@@ -1,16 +1,24 @@
-* {
+/* Resetting margin and padding */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none;
+}
+
+/* Body */
+body {
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Custom Cursor */
 .cursor {
     width: 20px;
     height: 20px;
-    background-color: #00ffcc; /* Change to your preferred color */
-    border-radius: 50%; /* Change this for a different shape, e.g., use 0 for square */
+    background-color: #00ffcc; /* Custom color */
+    border-radius: 50%; /* Circle cursor */
     position: fixed;
     pointer-events: none;
     z-index: 9999;
@@ -120,7 +128,7 @@
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    cursor: none;
+    cursor: pointer;
     position: relative;
     padding: 2rem;
     min-height: 250px;
@@ -178,7 +186,7 @@
     border-radius: 25px;
     color: #1a1a1a;
     font-weight: bold;
-    cursor: none;
+    cursor: pointer;
     transition: transform 0.2s ease;
     margin-top: auto;
 }
@@ -196,7 +204,7 @@
     margin: 0 0.5rem;
     border-radius: 25px;
     color: white;
-    cursor: none;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
@@ -206,8 +214,7 @@
     color: #1a1a1a;
 }
 
-
-/* Contact */
+/* Contact Section */
 .contact-section {
     background: #1a1a1a;
     padding: 4rem 2rem;
@@ -234,7 +241,7 @@
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: none;
+    cursor: pointer;
 }
 
 .contact-card:hover {
@@ -273,10 +280,6 @@ footer {
 footer p {
     margin: 0;
     color: #aaa;
-}
-
-html, body {
-    overflow-x: hidden;
 }
 
 /* Animations */
@@ -324,5 +327,9 @@ html, body {
     
     .card-container {
         grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        width: 160px;
     }
 }
