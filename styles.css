@@ -1,4 +1,4 @@
-/* CSS Variables for Colors and Reusability */
+/* Variables for Colors and Reusability */
 :root {
     --primary-color: #00ffcc;
     --secondary-color: #00ccff;
@@ -23,20 +23,20 @@
 /* Body */
 body {
     font-family: 'Arial', sans-serif;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    min-height: 100vh;
 }
 
 /* Tagline */
 .tagline pre {
-    font-family: 'Courier New', Courier, monospace; /* Monospace font */
-    white-space: pre; /* Preserve whitespace and line breaks */
-    font-size: 16px; /* Adjust font size if necessary */
-    line-height: 1.4; /* Adjust line height for better readability */
-    color: white; /* You can change the color if needed */
-    margin: 0; /* Remove default margins */
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre;
+    font-size: 16px;
+    line-height: 1.4;
+    color: white; 
+    margin: 0;
 }
 
 /* Custom Cursor */
@@ -245,8 +245,8 @@ body {
     background: var(--highlight-color);
     padding: 4rem 2rem;
     text-align: center;
-    flex: 1; /* Ensure contact section takes remaining space */
-    margin-bottom: 0; /* Remove any bottom margin */
+    flex: 1;
+    margin-bottom: 0;
 }
 
 .contact-section .section-title {
@@ -301,7 +301,7 @@ footer {
     color: white;
     padding: 20px;
     text-align: center;
-    margin-top: 0; /* Remove extra margin */
+    margin-top: 0;
 }
 
 footer p {
