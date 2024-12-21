@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AemoDev - Creating digital excellence with modern tools and extensions for developers.">
     <title>AemoDev</title>
     <link rel="icon" type="image/png" href="images/icon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <!-- Custom Cursor -->
     <div class="cursor"></div>
+
+    <!-- Splash Section -->
     <section class="splash-section">
         <div class="particles"></div>
         <div class="splash-container">
-            <div class="logo">AemoDev</div>
-            <div class="tagline">Creating Digital Excellence</div>
+            <div class="logo" role="banner">AemoDev</div>
+            <div class="tagline" aria-live="polite">Creating Digital Excellence</div>
             <div class="scroll-indicator">
                 <span>Scroll Down</span>
-                <div class="arrow"></div>
+                <div class="arrow" aria-hidden="true"></div>
             </div>
         </div>
     </section>
 
-    
+    <!-- Extensions Section -->
     <section class="extensions-section">
         <h2 class="section-title" data-aos="fade-up">Extensions</h2>
         <div class="card-container">
-            <div class="card" data-aos="fade-up" data-filter="all free" 
-                 data-href="extensions/code_generator/index.html">
+            <div class="card" data-aos="fade-up" data-filter="all free" data-href="extensions/code_generator/index.html">
                 <div class="price-tag free">Free</div>
                 <div class="card-content">
                     <h3 class="card-title">Code Generator Pro</h3>
                     <p class="card-subtitle">Automate your coding workflow with AI-powered suggestions</p>
-                    <button class="card-button">Learn More</button>
+                    <button class="card-button" aria-label="Learn more about Code Generator Pro">Learn More</button>
                 </div>
             </div>
 
-            <div class="card" data-aos="fade-up" data-filter="all paid"
-                 data-href="extensions/theme_manager/index.html">
+            <div class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/theme_manager/index.html">
                 <div class="price-tag paid">$9.99</div>
                 <div class="card-content">
                     <h3 class="card-title">Theme Manager</h3>
                     <p class="card-subtitle">Customize your IDE with beautiful, responsive themes</p>
-                    <button class="card-button">Learn More</button>
+                    <button class="card-button" aria-label="Learn more about Theme Manager">Learn More</button>
                 </div>
             </div>
 
-            <div class="card" data-aos="fade-up" data-filter="all paid"
-                 data-href="extensions/smart_debugger/index.html">
+            <div class="card" data-aos="fade-up" data-filter="all paid" data-href="extensions/smart_debugger/index.html">
                 <div class="price-tag paid">$14.99</div>
                 <div class="card-content">
                     <h3 class="card-title">Smart Debugger</h3>
                     <p class="card-subtitle">Advanced debugging tools for modern development</p>
-                    <button class="card-button">Learn More</button>
+                    <button class="card-button" aria-label="Learn more about Smart Debugger">Learn More</button>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Filter Buttons -->
         <div class="filter-buttons" data-aos="fade-up">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="free">Free</button>
@@ -63,32 +67,42 @@
         </div>
     </section>
 
-     <!-- Contact Section -->
-   <section class="contact-section">
+    <!-- Contact Section -->
+    <section class="contact-section">
         <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
         <div class="contact-options">
-            <div class="contact-card" onclick="window.location.href='https://community.appinventor.mit.edu/'">
+            <div class="contact-card" role="link" aria-label="Go to MIT AI2 Community" onclick="window.location.href='https://community.appinventor.mit.edu/'">
                 <div class="contact-icon">
                     <img src="images/ai2-logo.png" alt="MIT AI2 Logo" class="icon-img">
                 </div>
                 <span class="contact-title">MIT AI2</span>
             </div>
-            <div class="contact-card" onclick="window.location.href='https://community.kodular.io/'">
+
+            <div class="contact-card" role="link" aria-label="Go to Kodular Community" onclick="window.location.href='https://community.kodular.io/'">
                 <div class="contact-icon">
-                    <img src="images/kodular-logo.png" alt="Kodular" class="icon-img">
+                    <img src="images/kodular-logo.png" alt="Kodular Logo" class="icon-img">
                 </div>
                 <span class="contact-title">Kodular Community</span>
             </div>
-            <div class="contact-card" onclick="window.location.href='https://te.me/+201126422405'">
+
+            <div class="contact-card" role="link" aria-label="Contact us via Telegram" onclick="window.location.href='https://te.me/+201126422405'">
                 <div class="contact-icon">
-                    <img src="images/telegram-logo.webp" alt="Telegram" class="icon-img">
+                    <img src="images/telegram-logo.webp" alt="Telegram Logo" class="icon-img">
                 </div>
                 <span class="contact-title">Telegram</span>
             </div>
         </div>
     </section>
-    
+
+    <!-- Footer Section (Optional for your site) -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 AemoDev. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
