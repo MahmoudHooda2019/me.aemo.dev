@@ -1,121 +1,253 @@
-// Initialize AOS
-AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100
-});
+// Constants and Config
+const CONFIG = {
+    PARTICLE: {
+        SIZE: '2px',
+        COLOR: '#00ffcc',
+        INTERVAL: 100,
+        LIFETIME: 3000,
+        TRANSITION: 3000
+    },
+    ANIMATION: {
+        DURATION: 1000,
+        OFFSET: 100
+    },
+    FILTER: {
+        TRANSITION_DELAY: 300
+    }
+};
 
-// cursor
-const cursor = document.querySelector('.cursor');
-const links = document.querySelectorAll('a, button, .card');
+// Utility functions
+const utils = {
+    debounce: (func, wait) => {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+    
+    getRandomPosition: () => ({
+        x: Math.random() * 100,
+        y: Math.random() * 100
+    }),
+    
+    handleError: (error, context) => {
+        console.error(`Error in ${context}:`, error);
+    }
+};
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
+// Cursor Controller
+class CursorController {
+    constructor() {
+        this.cursor = document.querySelector('.cursor');
+        this.links = document.querySelectorAll('a, button, .card');
+        this.isVisible = true;
+        this.init();
+    }
 
-links.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        cursor.classList.add('grow');
-    });
-    
-    link.addEventListener('mouseleave', () => {
-        cursor.classList.remove('grow');
-    });
-});
+    init() {
+        try {
+            this.handleMouseMove();
+            this.handleLinkInteractions();
+            this.handleVisibilityChange();
+        } catch (error) {
+            utils.handleError(error, 'CursorController initialization');
+        }
+    }
 
-// Particle effect
-function createParticle() {
-    const particles = document.querySelector('.particles');
-    const particle = document.createElement('div');
-    particle.style.position = 'absolute';
-    particle.style.width = '2px';
-    particle.style.height = '2px';
-    particle.style.background = '#00ffcc';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.top = Math.random() * 100 + '%';
-    particle.style.opacity = Math.random();
-    particle.style.transition = 'all 3s ease';
-    
-    particles.appendChild(particle);
-    
-    setTimeout(() => {
-        particle.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
-        particle.style.opacity = 0;
-    }, 100);
-    
-    setTimeout(() => {
-        particle.remove();
-    }, 3000);
+    handleMouseMove() {
+        document.addEventListener('mousemove', utils.debounce((e) => {
+            if (this.cursor && this.isVisible) {
+                const { clientX, clientY } = e;
+                this.cursor.style.transform = `translate(${clientX}px, ${clientY}px)`;
+            }
+        }, 5));
+    }
+
+    handleLinkInteractions() {
+        this.links.forEach(link => {
+            link.addEventListener('mouseenter', () => this.cursor?.classList.add('grow'));
+            link.addEventListener('mouseleave', () => this.cursor?.classList.remove('grow'));
+        });
+    }
+
+    handleVisibilityChange() {
+        document.addEventListener('visibilitychange', () => {
+            this.isVisible = !document.hidden;
+        });
+    }
 }
 
-setInterval(createParticle, 100);
+// Particle System
+class ParticleSystem {
+    constructor() {
+        this.container = document.querySelector('.particles');
+        this.particles = new Set();
+        this.isActive = true;
+        this.init();
+    }
 
-// Logo animation control
-const logo = document.querySelector('.logo');
-logo.addEventListener('mouseenter', () => {
-    logo.style.animation = 'glow 0.5s ease-in-out infinite alternate';
-});
-
-logo.addEventListener('mouseleave', () => {
-    logo.style.animation = 'glow 1s ease-in-out infinite alternate';
-});
-
-// Filter functionality
-const filterBtns = document.querySelectorAll('.filter-btn');
-const cards = document.querySelectorAll('.card');
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
-        btn.classList.add('active');
+    init() {
+        if (!this.container) return;
         
-        const filter = btn.getAttribute('data-filter');
-        
-        // Filter cards
-        cards.forEach(card => {
-            if (filter === 'all' || card.getAttribute('data-filter').includes(filter)) {
-                card.style.display = 'block';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'scale(1)';
-                }, 100);
-            } else {
-                card.style.opacity = '0';
-                card.style.transform = 'scale(0.8)';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 300);
-            }
+        document.addEventListener('visibilitychange', () => {
+            this.isActive = !document.hidden;
+            if (!this.isActive) this.clearParticles();
         });
-    });
-});
 
-// Handle card and button clicks
-cards.forEach(card => {
-    const href = card.getAttribute('data-href');
-    
-    // Handle entire card click
-    card.addEventListener('click', (e) => {
-        // Don't navigate if clicking the button
-        if (!e.target.classList.contains('card-button')) {
-            window.location.href = href;
+        this.startParticleGeneration();
+    }
+
+    createParticle() {
+        try {
+            const particle = document.createElement('div');
+            const { x, y } = utils.getRandomPosition();
+            
+            Object.assign(particle.style, {
+                position: 'absolute',
+                width: CONFIG.PARTICLE.SIZE,
+                height: CONFIG.PARTICLE.SIZE,
+                background: CONFIG.PARTICLE.COLOR,
+                left: `${x}%`,
+                top: `${y}%`,
+                opacity: Math.random().toString(),
+                transition: `all ${CONFIG.PARTICLE.TRANSITION}ms ease`,
+                transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`
+            });
+
+            this.container.appendChild(particle);
+            this.particles.add(particle);
+
+            setTimeout(() => {
+                particle.style.opacity = '0';
+                setTimeout(() => {
+                    this.particles.delete(particle);
+                    particle.remove();
+                }, CONFIG.PARTICLE.LIFETIME);
+            }, 100);
+
+        } catch (error) {
+            utils.handleError(error, 'Particle creation');
         }
-    });
-    
-    // Handle Learn More button click
-    const button = card.querySelector('.card-button');
-    button.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent card click event
-        window.location.href = href;
-    });
-});
+    }
 
-// Smooth scroll functionality
-document.querySelector('.scroll-indicator').addEventListener('click', () => {
-    document.querySelector('.extensions-section').scrollIntoView({
-        behavior: 'smooth'
-    });
+    startParticleGeneration() {
+        setInterval(() => {
+            if (this.isActive && document.visibilityState === 'visible') {
+                this.createParticle();
+            }
+        }, CONFIG.PARTICLE.INTERVAL);
+    }
+
+    clearParticles() {
+        this.particles.forEach(particle => particle.remove());
+        this.particles.clear();
+    }
+}
+
+// Filter Controller
+class FilterController {
+    constructor() {
+        this.buttons = document.querySelectorAll('.filter-btn');
+        this.cards = document.querySelectorAll('.card');
+        this.init();
+    }
+
+    init() {
+        this.buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => this.handleFilter(e));
+        });
+    }
+
+    handleFilter(e) {
+        try {
+            const btn = e.currentTarget;
+            const filter = btn.getAttribute('data-filter');
+
+            this.updateActiveButton(btn);
+            this.filterCards(filter);
+        } catch (error) {
+            utils.handleError(error, 'Filter handling');
+        }
+    }
+
+    updateActiveButton(activeBtn) {
+        this.buttons.forEach(btn => btn.classList.remove('active'));
+        activeBtn.classList.add('active');
+    }
+
+    filterCards(filter) {
+        this.cards.forEach(card => {
+            const isVisible = filter === 'all' || card.getAttribute('data-filter').includes(filter);
+            this.toggleCardVisibility(card, isVisible);
+        });
+    }
+
+    toggleCardVisibility(card, isVisible) {
+        if (isVisible) {
+            card.style.display = 'block';
+            requestAnimationFrame(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            });
+        } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, CONFIG.FILTER.TRANSITION_DELAY);
+        }
+    }
+}
+
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        // Initialize AOS
+        AOS.init({
+            duration: CONFIG.ANIMATION.DURATION,
+            once: true,
+            offset: CONFIG.ANIMATION.OFFSET
+        });
+
+        // Initialize main components
+        new CursorController();
+        new ParticleSystem();
+        new FilterController();
+
+        // Setup smooth scroll
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        const extensionsSection = document.querySelector('.extensions-section');
+        
+        if (scrollIndicator && extensionsSection) {
+            scrollIndicator.addEventListener('click', () => {
+                extensionsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // Setup card navigation
+        document.querySelectorAll('.card').forEach(card => {
+            const href = card.getAttribute('data-href');
+            if (!href) return;
+
+            card.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('card-button')) {
+                    window.location.href = href;
+                }
+            });
+
+            const button = card.querySelector('.card-button');
+            button?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.location.href = href;
+            });
+        });
+
+    } catch (error) {
+        utils.handleError(error, 'Main initialization');
+    }
 });
