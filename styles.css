@@ -24,8 +24,12 @@
 body {
     font-family: 'Arial', sans-serif;
     overflow-x: hidden; /* Prevent horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
 }
 
+/* Tagline */
 .tagline pre {
     font-family: 'Courier New', Courier, monospace; /* Monospace font */
     white-space: pre; /* Preserve whitespace and line breaks */
@@ -34,7 +38,6 @@ body {
     color: white; /* You can change the color if needed */
     margin: 0; /* Remove default margins */
 }
-
 
 /* Custom Cursor */
 .cursor {
@@ -242,6 +245,8 @@ body {
     background: var(--highlight-color);
     padding: 4rem 2rem;
     text-align: center;
+    flex: 1; /* Ensure contact section takes remaining space */
+    margin-bottom: 0; /* Remove any bottom margin */
 }
 
 .contact-section .section-title {
@@ -296,8 +301,7 @@ footer {
     color: white;
     padding: 20px;
     text-align: center;
-    margin-top: 40px;
-    font-size: 0.9rem;
+    margin-top: 0; /* Remove extra margin */
 }
 
 footer p {
