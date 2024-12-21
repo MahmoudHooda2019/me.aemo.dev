@@ -51,6 +51,16 @@ function createParticle() {
 
 setInterval(createParticle, 100);
 
+// Logo animation control
+const logo = document.querySelector('.logo');
+logo.addEventListener('mouseenter', () => {
+    logo.style.animation = 'glow 0.5s ease-in-out infinite alternate';
+});
+
+logo.addEventListener('mouseleave', () => {
+    logo.style.animation = 'glow 1s ease-in-out infinite alternate';
+});
+
 // Filter functionality
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cards = document.querySelectorAll('.card');
@@ -83,23 +93,29 @@ filterBtns.forEach(btn => {
     });
 });
 
-// Card hover effect with tilt
+// Handle card and button clicks
 cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    const href = card.getAttribute('data-href');
+    
+    // Handle entire card click
+    card.addEventListener('click', (e) => {
+        // Don't navigate if clicking the button
+        if (!e.target.classList.contains('card-button')) {
+            window.location.href = href;
+        }
     });
     
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+    // Handle Learn More button click
+    const button = card.querySelector('.card-button');
+    button.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card click event
+        window.location.href = href;
+    });
+});
+
+// Smooth scroll functionality
+document.querySelector('.scroll-indicator').addEventListener('click', () => {
+    document.querySelector('.extensions-section').scrollIntoView({
+        behavior: 'smooth'
     });
 });
