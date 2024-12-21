@@ -24,18 +24,17 @@ links.forEach(link => {
     });
 });
 
-// Particle effect
 function createParticle() {
     const particles = document.querySelector('.particles');
     const particle = document.createElement('div');
     particle.style.position = 'absolute';
-    particle.style.width = '2px';
-    particle.style.height = '2px';
+    particle.style.width = '5px';  // Bigger size for visibility
+    particle.style.height = '5px';
     particle.style.background = '#00ffcc';
     particle.style.left = Math.random() * 100 + '%';
     particle.style.top = Math.random() * 100 + '%';
-    particle.style.opacity = Math.random();
-    particle.style.transition = 'all 3s ease';
+    particle.style.opacity = 0.8;  // Fix opacity to make particles visible
+    particle.style.transition = 'transform 3s ease, opacity 3s ease';  // Smooth transition
     
     particles.appendChild(particle);
     
@@ -48,6 +47,7 @@ function createParticle() {
         particle.remove();
     }, 3000);
 }
+
 
 setInterval(createParticle, 100);
 
