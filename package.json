@@ -1,0 +1,13 @@
+{
+  "name": "aemo-api",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "hono": "^3.12.8",
+    "wrangler": "^3.28.1"
+  },
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  }
+}
