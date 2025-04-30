@@ -13,7 +13,11 @@ const ExtensionsAPI = {
 
     // Get extension by ID
     getExtensionById: (id) => {
-        return extensions.find(ext => ext.id === id);
+        const extension = extensions.find(ext => ext.id === id);
+        if (!extension) {
+            return null;
+        }
+        return extension;
     }
 };
 
