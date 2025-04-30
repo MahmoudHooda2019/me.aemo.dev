@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Details</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        body {
+            padding: 2rem;
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        .extension-detail {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .extension-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .extension-info {
+            flex: 1;
+        }
+        
+        .extension-header {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .extension-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .extension-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #aaa;
+        }
+
+        .extension-price {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.5rem 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            z-index: 1;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+            width: 120px;
+            text-align: center;
+        }
+        
+        .extension-price.free {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .extension-price.paid {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .extension-description {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #ddd;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .action-button {
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .download-button {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .download-button:hover {
+            background: #45a049;
+        }
+
+        .buy-button {
+            background: #FF9800;
+            color: white;
+        }
+
+        .buy-button:hover {
+            background: #f57c00;
+        }
+
+        .documentation-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+        }
+
+        .documentation-section {
+            margin-bottom: 2rem;
+        }
+
+        .documentation-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .documentation-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .documentation-content {
+            line-height: 1.6;
+            color: #ddd;
+            white-space: pre-line;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        
+        .back-button:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="back-button">← Back to Extensions</a>
+
+    <div class="extension-detail">
+        <div class="extension-card">
+            <div class="extension-info">
+                <div class="extension-header">
+                    <div>
+                        <h1 class="extension-title" id="extension-title">Loading...</h1>
+                        <div class="extension-meta">
+                            <span id="extension-version">Version: Loading...</span>
+                            <span id="extension-updated">Last Updated: Loading...</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div id="action-buttons">
+                            <!-- Buttons will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="extension-description" id="extension-description">
+                    Loading...
+                </div>
+            </div>
+            <div class="extension-price" id="extension-price">Loading...</div>
+        </div>
+
+        <div class="documentation-card" id="documentation">
+            <!-- Documentation will be added here dynamically -->
+        </div>
+    </div>
+
+    <script>
+        // Get extension data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const extensionId = urlParams.get('id');
+        
+        // Fetch extension data
+        fetch('../../extensions/extensions.js')
+            .then(response => response.text())
+            .then(text => {
+                // Extract the extensions array from the file
+                const extensionsMatch = text.match(/const extensions = (\[.*?\]);/s);
+                if (extensionsMatch) {
+                    try {
+                        const extensions = eval(extensionsMatch[1]);
+                        const extension = extensions.find(ext => ext.id === extensionId);
+                        
+                        if (extension) {
+                            // Update title and meta info
+                            document.getElementById('extension-title').textContent = extension.title;
+                            document.getElementById('extension-version').textContent = `Version: ${extension.version}`;
+                            document.getElementById('extension-updated').textContent = `Last Updated: ${extension.lastUpdated}`;
+                            document.getElementById('extension-price').textContent = extension.price;
+                            document.getElementById('extension-price').classList.add(extension.price === 'Free' ? 'free' : 'paid');
+                            document.getElementById('extension-description').textContent = extension.description;
+
+                            // Add action buttons
+                            const actionButtons = document.getElementById('action-buttons');
+                            if (extension.price === 'Free') {
+                                actionButtons.innerHTML = `
+                                    <a href="${extension.url}" class="action-button download-button">Download</a>
+                                `;
+                            } else {
+                                actionButtons.innerHTML = `
+                                    <a href="${extension.url}" class="action-button buy-button">Buy Now</a>
+                                `;
+                            }
+
+                            // Add documentation
+                            const documentation = document.getElementById('documentation');
+                            if (extension.documentation && extension.documentation.length > 0) {
+                                documentation.innerHTML = extension.documentation.map(doc => `
+                                    <div class="documentation-section">
+                                        <h2 class="documentation-title">${doc.title}</h2>
+                                        <div class="documentation-content">${doc.content}</div>
+                                    </div>
+                                `).join('');
+                            } else {
+                                documentation.innerHTML = '<p>No documentation available.</p>';
+                            }
+                        } else {
+                            document.getElementById('extension-title').textContent = 'Extension Not Found';
+                        }
+                    } catch (error) {
+                        console.error('Error parsing extension data:', error);
+                        document.getElementById('extension-title').textContent = 'Error Loading Extension';
+                    }
+                } else {
+                    document.getElementById('extension-title').textContent = 'Error Loading Extension Data';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading extension data:', error);
+                document.getElementById('extension-title').textContent = 'Error Loading Extension';
+            });
+    </script>
+</body>
+</html> 
