@@ -211,13 +211,17 @@ class ExtensionsController {
     constructor() {
         this.container = document.querySelector('.card-container');
         this.filterButtons = document.querySelectorAll('.filter-btn');
+        this.loadMoreBtn = document.querySelector('.load-more-btn');
         this.currentFilter = 'all';
+        this.displayedCount = 0;
+        this.batchSize = 10;
     }
 
     async init() {
         try {
             await this.renderExtensions();
             this.setupFilterButtons();
+            this.setupLoadMore();
         } catch (error) {
             console.error('Error initializing extensions:', error);
         }
@@ -229,12 +233,41 @@ class ExtensionsController {
         try {
             // Clear existing content
             this.container.innerHTML = '';
+            this.displayedCount = 0;
             
-            // Create and append cards
-            const cards = extensions.map(ext => this.createExtensionCard(ext));
-            this.container.innerHTML = cards.join('');
+            // Show first batch
+            this.showNextBatch(extensions);
         } catch (error) {
             console.error('Error rendering extensions:', error);
+        }
+    }
+
+    showNextBatch(extensions) {
+        const start = this.displayedCount;
+        const end = Math.min(start + this.batchSize, extensions.length);
+        const batch = extensions.slice(start, end);
+
+        batch.forEach(ext => {
+            const card = this.createExtensionCard(ext);
+            this.container.insertAdjacentHTML('beforeend', card);
+        });
+
+        this.displayedCount = end;
+        this.updateLoadMoreButton(extensions.length);
+    }
+
+    updateLoadMoreButton(totalCount) {
+        if (this.loadMoreBtn) {
+            this.loadMoreBtn.style.display = this.displayedCount < totalCount ? 'block' : 'none';
+        }
+    }
+
+    setupLoadMore() {
+        if (this.loadMoreBtn) {
+            this.loadMoreBtn.addEventListener('click', () => {
+                const currentExtensions = ExtensionsAPI.getExtensionsByFilter(this.currentFilter);
+                this.showNextBatch(currentExtensions);
+            });
         }
     }
 
@@ -326,15 +359,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Initialize extensions controller
         const extensionsController = new ExtensionsController();
         await extensionsController.init();
-
-        // Setup floating button
-        const floatingBtn = document.querySelector('.floating-btn');
-        floatingBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
 
     } catch (error) {
         console.error('Error initializing website:', error);
