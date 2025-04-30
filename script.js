@@ -329,14 +329,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Setup floating button
         const floatingBtn = document.querySelector('.floating-btn');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                floatingBtn.classList.add('visible');
-            } else {
-                floatingBtn.classList.remove('visible');
-            }
-        });
-
         floatingBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,

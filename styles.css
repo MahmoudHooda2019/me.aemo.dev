@@ -737,13 +737,7 @@ footer {
     justify-content: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(20px);
-    visibility: hidden;
-}
-
-.floating-btn.visible {
+    z-index: 9999;
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
