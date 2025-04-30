@@ -1,4 +1,4 @@
-import ExtensionsAPI from './extensions.js';
+import ExtensionsAPI from './extensions/extensions.js';
 
 // Constants and Config
 const CONFIG = {
@@ -212,34 +212,40 @@ class ExtensionsController {
         this.container = document.querySelector('.card-container');
         this.filterButtons = document.querySelectorAll('.filter-btn');
         this.currentFilter = 'all';
-        this.init();
     }
 
-    init() {
-        this.renderExtensions();
-        this.setupFilterButtons();
-        this.setupSearch();
+    async init() {
+        try {
+            await this.renderExtensions();
+            this.setupFilterButtons();
+        } catch (error) {
+            console.error('Error initializing extensions:', error);
+        }
     }
 
-    renderExtensions(extensions = ExtensionsAPI.getAllExtensions()) {
-        this.container.innerHTML = extensions.map(ext => this.createExtensionCard(ext)).join('');
-        AOS.refresh(); // Refresh AOS for new elements
+    async renderExtensions(extensions = ExtensionsAPI.getAllExtensions()) {
+        if (!this.container) return;
+        
+        try {
+            // Clear existing content
+            this.container.innerHTML = '';
+            
+            // Create and append cards
+            const cards = extensions.map(ext => this.createExtensionCard(ext));
+            this.container.innerHTML = cards.join('');
+        } catch (error) {
+            console.error('Error rendering extensions:', error);
+        }
     }
 
     createExtensionCard(extension) {
         const isPaid = extension.price !== 'Free';
         return `
-            <article class="card" data-aos="fade-up" data-filter="${extension.filters.join(' ')}" data-href="${extension.href}">
+            <article class="card" data-filter="${extension.filters.join(' ')}" onclick="window.location.href='extensions/template.html?id=${extension.id}'" style="cursor: pointer;">
                 <div class="price-tag ${isPaid ? 'paid' : 'free'}">${extension.price}</div>
                 <div class="card-content">
                     <h3 class="card-title">${extension.title}</h3>
                     <p class="card-subtitle">${extension.subtitle}</p>
-                    <div class="card-footer">
-                        <span class="card-category">${extension.category}</span>
-                        <a href="${extension.href}" class="card-button" aria-label="Learn more about ${extension.title}">
-                            Learn More
-                        </a>
-                    </div>
                 </div>
             </article>
         `;
@@ -265,32 +271,14 @@ class ExtensionsController {
         this.filterButtons.forEach(btn => btn.classList.remove('active'));
         activeBtn.classList.add('active');
     }
-
-    setupSearch() {
-        const searchInput = document.createElement('input');
-        searchInput.type = 'text';
-        searchInput.placeholder = 'Search extensions...';
-        searchInput.className = 'search-input';
-        
-        const filterButtons = document.querySelector('.filter-buttons');
-        filterButtons.parentNode.insertBefore(searchInput, filterButtons.nextSibling);
-
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const allExtensions = ExtensionsAPI.getAllExtensions();
-            const filteredExtensions = allExtensions.filter(ext => 
-                ext.title.toLowerCase().includes(searchTerm) || 
-                ext.subtitle.toLowerCase().includes(searchTerm)
-            );
-            this.renderExtensions(filteredExtensions);
-        });
-    }
 }
 
 // Initialize AOS
 AOS.init({
     duration: 800,
-    once: true
+    once: true,
+    offset: 100,
+    delay: 100
 });
 
 // Loading screen functionality
@@ -329,46 +317,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+// Simplified initialization
+document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // Initialize main components
-        new CursorController();
-        new ParticleSystem();
-        new FilterController();
+        // Update year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
         // Initialize extensions controller
-        new ExtensionsController();
+        const extensionsController = new ExtensionsController();
+        await extensionsController.init();
 
-        // Setup smooth scroll
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        const extensionsSection = document.querySelector('.extensions-section');
-        
-        if (scrollIndicator && extensionsSection) {
-            scrollIndicator.addEventListener('click', () => {
-                extensionsSection.scrollIntoView({ behavior: 'smooth' });
-            });
-        }
+        // Setup floating button
+        const floatingBtn = document.querySelector('.floating-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                floatingBtn.classList.add('visible');
+            } else {
+                floatingBtn.classList.remove('visible');
+            }
+        });
 
-        // Setup card navigation
-        document.querySelectorAll('.card').forEach(card => {
-            const href = card.getAttribute('data-href');
-            if (!href) return;
-
-            card.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('card-button')) {
-                    window.location.href = href;
-                }
-            });
-
-            const button = card.querySelector('.card-button');
-            button?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                window.location.href = href;
+        floatingBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
 
     } catch (error) {
-        utils.handleError(error, 'Main initialization');
+        console.error('Error initializing website:', error);
     }
 });
+
+// Remove all other initialization code and animation-related code

@@ -9,29 +9,37 @@
       <meta property="og:description" content="AemoDev - MIT App Inventor extensions and tools.">
       <meta property="og:image" content="images/icon.png">
       <title>Aemo Developer</title>
-      <link rel="icon" type="image/png" href="images/icon.png">
+      
+      <!-- Resource Hints -->
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+      <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+      <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+      
+      <!-- Preload Critical Resources -->
       <link rel="preload" href="images/icon.png" as="image">
+      <link rel="preload" href="styles.css" as="style">
+      <link rel="preload" href="script.js" as="script">
+      
+      <!-- Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+      
+      <!-- Styles -->
       <link rel="stylesheet" href="styles.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/pace-theme-minimal.css">
+      
+      <!-- Scripts -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
       <script type="module" src="script.js" defer></script>
    </head>
    <body>
-      <!-- Loading Screen -->
-      <div class="loading-screen">
-         <div class="loading-content">
-            <div class="loading-logo">Aemo Developer</div>
-            <div class="loading-spinner"></div>
-         </div>
-      </div>
-       
       <header>
          <!-- Splash Section -->
          <section class="splash-section">
-            <div class="particles"></div>
             <div class="splash-container">
-                
                <div class="logo" role="banner" aria-label="Aemo Developer Logo">Aemo Developer</div>
-                
                <div class="tagline" aria-live="polite">
                   <pre>
 ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
@@ -44,50 +52,42 @@
  ⠀⠀⠀⠀⠀⠀⠀⠙⣷⣶⣶⣤⣤⣤⣤⣶⣦⠃⠀
  ⠀⠀⠀⠀⠀⠀⠀⢐⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
  ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
- ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁
-                    </pre>
-               </div>
-               <div class="scroll-indicator" aria-label="Scroll down to view more content">
-                  <span>Scroll Down</span>
-                  <div class="arrow" aria-hidden="true"></div>
+ ⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁
+                  </pre>
                </div>
             </div>
          </section>
       </header>
        
       <main>
-          
          <!-- Extensions Section -->
-         <section class="extensions-section">
+         <section class="extensions-section section">
             <h2 class="section-title" data-aos="fade-up">Extensions</h2>
-             
-            <!-- Filter Buttons -->
             <div class="filter-buttons" data-aos="fade-up">
                <button class="filter-btn active" data-filter="all">All</button>
                <button class="filter-btn" data-filter="free">Free</button>
                <button class="filter-btn" data-filter="paid">Paid</button>
             </div>
-             <!-- Extensions Content -->
             <div class="card-container"></div>
          </section>
           
          <!-- Contact Section -->
-         <section class="contact-section">
+         <section class="contact-section section">
             <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
             <div class="contact-options">
-               <div class="contact-card" role="link" aria-label="Go to MIT AI2 Community" onclick="window.location.href='https://community.appinventor.mit.edu/'">
+               <div class="contact-card" role="link" aria-label="Go to MIT AI2 Community" onclick="window.open('https://community.appinventor.mit.edu/u/mahmoud_hooda/summary', '_blank')">
                   <div class="contact-icon">
                      <img src="images/ai2-logo.png" alt="MIT App Inventor Logo" class="icon-img">
                   </div>
                   <span class="contact-title">MIT AI2</span>
                </div>
-               <div class="contact-card" role="link" aria-label="Go to Kodular Community" onclick="window.location.href='https://community.kodular.io/'">
+               <div class="contact-card" role="link" aria-label="Go to Kodular Community" onclick="window.open('https://community.kodular.io/u/mahmoud_hooda/summary', '_blank')">
                   <div class="contact-icon">
                      <img src="images/kodular-logo.png" alt="Kodular Community Logo" class="icon-img">
                   </div>
                   <span class="contact-title">Kodular Community</span>
                </div>
-               <div class="contact-card" role="link" aria-label="Contact us via Telegram" onclick="window.location.href='https://t.me/+rc4zQLhKg_Y0MmE0'">
+               <div class="contact-card" role="link" aria-label="Contact us via Telegram" onclick="window.open('https://t.me/+rc4zQLhKg_Y0MmE0', '_blank')">
                   <div class="contact-icon">
                      <img src="images/telegram-logo.webp" alt="Telegram Logo" class="icon-img">
                   </div>
@@ -97,11 +97,41 @@
          </section>
       </main>
        
-      <!-- Footer Section -->
       <footer>
          <div class="footer-content">
-            <p>&copy; 2024 AemoDev. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> AemoDev. All Rights Reserved.</p>
          </div>
       </footer>
+
+      <!-- Floating Action Button -->
+      <button class="floating-btn" aria-label="Scroll to top">
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+         </svg>
+      </button>
+
+      <script type="module">
+         // Update year in footer
+         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+         // Lazy loading sections
+         const sections = document.querySelectorAll('.section');
+         const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+         }, {
+            threshold: 0.1
+         });
+
+         sections.forEach(section => {
+            observer.observe(section);
+         });
+      </script>
+
+      <!-- Pace.js Script -->
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
    </body>
 </html>
