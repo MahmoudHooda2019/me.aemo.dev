@@ -246,6 +246,3 @@ const extensions = [
         ]
     }
 ];
-
-// Export the API
-export default ExtensionsAPI; 
