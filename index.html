@@ -38,6 +38,7 @@
       <!-- Scripts -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
       <script type="module" src="script.js" defer></script>
+      <script type="module" src="extensions/api.js" defer></script>
    </head>
    <body>
       <header>
@@ -130,6 +131,13 @@
          sections.forEach(section => {
             observer.observe(section);
          });
+
+         // Register service worker
+         if ('serviceWorker' in navigator) {
+             navigator.serviceWorker.register('_worker.js')
+                 .then(() => console.log('Service Worker registered successfully.'))
+                 .catch(err => console.error('Service Worker registration failed:', err));
+         }
       </script>
 
       <!-- Pace.js Script -->

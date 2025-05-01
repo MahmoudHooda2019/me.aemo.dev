@@ -76,4 +76,67 @@ app.get('/api/extensions/:id', (c) => {
     }
 });
 
-export default app; 
+export default app;
+
+// Service Worker for API simulation
+
+self.addEventListener('fetch', (event) => {
+    const url = new URL(event.request.url);
+
+    // Handle API requests
+    if (url.pathname.startsWith('/api/extensions')) {
+        event.respondWith(handleAPIRequest(url));
+    }
+});
+
+async function handleAPIRequest(url) {
+    const ExtensionsAPI = await import('./extensions/extensions.js');
+
+    if (url.pathname === '/api/extensions') {
+        // Return all extensions
+        return new Response(JSON.stringify({
+            status: 'success',
+            data: ExtensionsAPI.default.getAllExtensions()
+        }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname.startsWith('/api/extensions/filter/')) {
+        // Filter extensions by type
+        const filterType = url.pathname.split('/').pop();
+        return new Response(JSON.stringify({
+            status: 'success',
+            data: ExtensionsAPI.default.getExtensionsByFilter(filterType)
+        }), {
+            headers: { 'Content-Type': 'application/json' }
+        });
+    } else if (url.pathname.startsWith('/api/extensions/')) {
+        // Get extension by ID
+        const extensionId = url.pathname.split('/').pop();
+        const extension = ExtensionsAPI.default.getExtensionById(extensionId);
+        if (extension) {
+            return new Response(JSON.stringify({
+                status: 'success',
+                data: extension
+            }), {
+                headers: { 'Content-Type': 'application/json' }
+            });
+        } else {
+            return new Response(JSON.stringify({
+                status: 'error',
+                message: 'Extension not found'
+            }), {
+                headers: { 'Content-Type': 'application/json' },
+                status: 404
+            });
+        }
+    }
+
+    // Fallback for unknown routes
+    return new Response(JSON.stringify({
+        status: 'error',
+        message: 'Invalid API endpoint'
+    }), {
+        headers: { 'Content-Type': 'application/json' },
+        status: 404
+    });
+}
