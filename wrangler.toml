@@ -1,3 +1,0 @@
-name = "my-worker"
-main = "./extensions/api.js"
-compatibility_date = "2025-05-01"
