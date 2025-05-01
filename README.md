@@ -66,6 +66,76 @@ Returns an array of extensions matching the filter.
 }
 ```
 
+## API Usage Guide
+
+The Aemo Developer API provides endpoints to interact with extensions. Below is a guide on how to use the API:
+
+### Root Endpoint
+- **URL**: `/`
+- **Method**: GET
+- **Response**:
+  ```json
+  {
+    "status": "success",
+    "message": "Welcome to Aemo Developer API",
+    "endpoints": {
+      "allExtensions": "/api/extensions",
+      "filterExtensions": "/api/extensions/filter/:type",
+      "getExtensionById": "/api/extensions/:id"
+    }
+  }
+  ```
+
+### Fetch All Extensions
+- **URL**: `/api/extensions`
+- **Method**: GET
+- **Response**:
+  ```json
+  {
+    "status": "success",
+    "data": [
+      // List of all extensions
+    ]
+  }
+  ```
+
+### Filter Extensions
+- **URL**: `/api/extensions/filter/:type`
+- **Method**: GET
+- **Path Parameter**:
+  - `type`: The type of extensions to filter (e.g., `free`, `paid`)
+- **Response**:
+  ```json
+  {
+    "status": "success",
+    "data": [
+      // List of filtered extensions
+    ]
+  }
+  ```
+
+### Get Extension by ID
+- **URL**: `/api/extensions/:id`
+- **Method**: GET
+- **Path Parameter**:
+  - `id`: The unique identifier of the extension
+- **Response** (if found):
+  ```json
+  {
+    "status": "success",
+    "data": {
+      // Extension details
+    }
+  }
+  ```
+- **Response** (if not found):
+  ```json
+  {
+    "status": "error",
+    "message": "Extension not found"
+  }
+  ```
+
 ### Android Implementation (Java)
 
 #### Required Permissions
@@ -175,7 +245,41 @@ public class ExtensionsApi {
         new Thread(() -> {
             try {
                 URL url = new URL(BASE_URL + "/api/extensions?filter=" + filter);
-                // ... same implementation as getAllExtensions ...
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setRequestProperty("Accept", "application/json");
+
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream())
+                    );
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    reader.close();
+
+                    // Parse JSON response
+                    JSONArray jsonArray = new JSONArray(response.toString());
+                    List<Extension> extensions = new ArrayList<>();
+                    
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject obj = jsonArray.getJSONObject(i);
+                        Extension extension = parseExtension(obj);
+                        extensions.add(extension);
+                    }
+
+                    // Return result on main thread
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        callback.onSuccess(extensions);
+                    });
+                } else {
+                    throw new IOException("HTTP error code: " + conn.getResponseCode());
+                }
+
+                conn.disconnect();
             } catch (Exception e) {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     callback.onError(e);
