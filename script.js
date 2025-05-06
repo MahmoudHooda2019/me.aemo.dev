@@ -46,8 +46,9 @@ const utils = {
 class CursorController {
     constructor() {
         this.cursor = document.querySelector('.cursor');
+        // Exit early if cursor element doesn't exist
         if (!this.cursor) {
-            console.warn('Cursor element not found');
+            console.warn('Cursor element not found, skipping cursor initialization');
             return;
         }
         this.links = document.querySelectorAll('a, button, .card');
@@ -56,6 +57,7 @@ class CursorController {
     }
 
     init() {
+        if (!this.cursor) return;
         try {
             this.handleMouseMove();
             this.handleLinkInteractions();
