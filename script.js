@@ -353,10 +353,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Simplified initialization
 document.addEventListener('DOMContentLoaded', async () => {
     try {
+        // Load extensions data
+        await ExtensionsAPI.loadExtensions();
+
         // Update year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Initialize extensions controller
+        // Initialize ExtensionsController
         const extensionsController = new ExtensionsController();
         await extensionsController.init();
 
@@ -364,5 +367,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error initializing website:', error);
     }
 });
-
-// Remove all other initialization code and animation-related code

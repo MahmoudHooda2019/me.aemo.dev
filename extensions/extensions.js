@@ -1,4 +1,16 @@
-import extensions from './extensions.json';
+let extensions = [];
+
+export const loadExtensions = async () => {
+    try {
+        const response = await fetch('./extensions.json');
+        if (!response.ok) {
+            throw new Error(`Failed to load extensions.json: ${response.statusText}`);
+        }
+        extensions = await response.json();
+    } catch (error) {
+        console.error('Error loading extensions:', error);
+    }
+};
 
 export const getAllExtensions = () => extensions;
 
@@ -15,4 +27,4 @@ export const getExtensionById = (id) => {
     return extension;
 };
 
-export default { getAllExtensions, getExtensionsByFilter, getExtensionById };
+export default { loadExtensions, getAllExtensions, getExtensionsByFilter, getExtensionById };
