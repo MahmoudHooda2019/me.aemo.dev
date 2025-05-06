@@ -1,0 +1,9 @@
+/extensions/extensions.json
+  Content-Type: application/json
+
+/script.js
+  Content-Type: text/javascript
+
+/_worker.js
+  Content-Type: text/javascript
+  Service-Worker-Allowed: /

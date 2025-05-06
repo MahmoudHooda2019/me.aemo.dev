@@ -46,6 +46,10 @@ const utils = {
 class CursorController {
     constructor() {
         this.cursor = document.querySelector('.cursor');
+        if (!this.cursor) {
+            console.warn('Cursor element not found');
+            return;
+        }
         this.links = document.querySelectorAll('a, button, .card');
         this.isVisible = true;
         this.init();
