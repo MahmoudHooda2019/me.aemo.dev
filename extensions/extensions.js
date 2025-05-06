@@ -2,13 +2,22 @@ let extensions = [];
 
 export const loadExtensions = async () => {
     try {
-        const response = await fetch('./extensions.json');
+        const response = await fetch('/extensions/extensions.json', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
         if (!response.ok) {
             throw new Error(`Failed to load extensions.json: ${response.statusText}`);
+        }
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new Error(`Expected JSON but got ${contentType}`);
         }
         extensions = await response.json();
     } catch (error) {
         console.error('Error loading extensions:', error);
+        throw error;
     }
 };
 

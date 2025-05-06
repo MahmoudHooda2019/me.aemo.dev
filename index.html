@@ -22,8 +22,8 @@
       <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
       
       <!-- Preload Critical Resources -->
-      <link rel="preload" href="images/icon.png" as="image">
-      <link rel="preload" href="styles.css" as="style">
+      <link rel="preload" href="images/icon.png" as="image" type="image/png">
+      <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'">
       <link rel="preload" href="script.js" as="script" crossorigin="anonymous">
       
       <!-- Fonts -->
@@ -38,9 +38,10 @@
       <!-- Scripts -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
       <script type="module" src="script.js" defer></script>
-      <script type="module" src="extensions/api.js" defer></script>
+      <script type="module" src="extensions/extensions.js" defer></script>
    </head>
    <body>
+      <div class="cursor"></div>
       <header>
          <!-- Splash Section -->
          <section class="splash-section">
