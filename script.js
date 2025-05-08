@@ -397,38 +397,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Initialize ExtensionsAPI before using it
-const initializeAPI = async () => {
-    try {
-        // Explicitly load extensions.json with a path relative to the current page
-        const response = await fetch('./extensions/extensions.json');
-        if (!response.ok) {
-            throw new Error(`Failed to load extensions: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Failed to initialize extensions:', error);
-        throw error;
-    }
-};
-
 // Simplified initialization
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // Initialize extensions data
-        const extensionsData = await initializeAPI();
-        
-        // Set the extensions data
-        ExtensionsAPI.extensions = extensionsData;
-
+        // Use embedded extensions data
+        const extensionsData = await ExtensionsAPI.loadExtensions();
+        // Set the extensions data (optional, for compatibility)
+        ExtensionsAPI.setExtensions(extensionsData);
         // Update year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
-
         // Initialize ExtensionsController
         const extensionsController = new ExtensionsController();
         await extensionsController.init();
-
     } catch (error) {
         console.error('Error initializing website:', error);
         const container = document.querySelector('.card-container');
