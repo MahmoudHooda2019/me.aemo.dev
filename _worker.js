@@ -13,6 +13,17 @@ export default {
         }
         const extensions = await assetResponse.json();
 
+        // Parse ?data=id,title,price
+        const dataFields = url.searchParams.get("data")?.split(",").map(f => f.trim()).filter(Boolean);
+        const pickFields = (obj) => {
+          if (!dataFields || dataFields.length === 0) return obj;
+          const result = {};
+          for (const key of dataFields) {
+            if (key in obj) result[key] = obj[key];
+          }
+          return result;
+        };
+
         // /api/extensions/:id
         const match = url.pathname.match(/^\/api\/extensions\/([^\/]+)$/);
         if (match) {
@@ -21,18 +32,20 @@ export default {
           if (!ext) {
             return new Response(JSON.stringify({ error: "Extension not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
           }
-          return new Response(JSON.stringify(ext), { status: 200, headers: { "Content-Type": "application/json" } });
+          return new Response(JSON.stringify(pickFields(ext)), { status: 200, headers: { "Content-Type": "application/json" } });
         }
 
         // /api/extensions?filter=...
         const filter = url.searchParams.get("filter");
+        let result = extensions;
         if (filter && filter !== "all") {
-          const filtered = extensions.filter(e => e.filters && e.filters.includes(filter));
-          return new Response(JSON.stringify(filtered), { status: 200, headers: { "Content-Type": "application/json" } });
+          result = extensions.filter(e => e.filters && e.filters.includes(filter));
         }
-
-        // /api/extensions (all)
-        return new Response(JSON.stringify(extensions), { status: 200, headers: { "Content-Type": "application/json" } });
+        // Apply data fields selection
+        if (dataFields && dataFields.length > 0) {
+          result = result.map(pickFields);
+        }
+        return new Response(JSON.stringify(result), { status: 200, headers: { "Content-Type": "application/json" } });
       }
 
       // Fallback to static assets
