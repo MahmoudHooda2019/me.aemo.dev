@@ -2,34 +2,20 @@ let extensions = [];
 
 export const loadExtensions = async () => {
     try {
-        const response = await fetch('/extensions/extensions.json', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
-
-        // Check if response is ok before trying to parse JSON
+        // Use a relative path that works from both template.html and index.html
+        const response = await fetch('/extensions/extensions.json');
+        
         if (!response.ok) {
+            console.error('Failed to load extensions:', response.status, response.statusText);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        // Verify content type
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            throw new TypeError(`Expected JSON but got ${contentType}`);
-        }
-
-        const text = await response.text();
-        try {
-            extensions = JSON.parse(text);
-        } catch (e) {
-            console.error('Failed to parse JSON:', text.substring(0, 100) + '...');
-            throw e;
-        }
+        extensions = await response.json();
+        console.log('Extensions loaded successfully:', extensions.length);
+        return extensions;
     } catch (error) {
         console.error('Error loading extensions:', error);
-        throw error;
+        return [];
     }
 };
 
@@ -40,12 +26,19 @@ export const getExtensionsByFilter = (filter) => {
     return extensions.filter(ext => ext.filters.includes(filter));
 };
 
-export const getExtensionById = (id) => {
-    const extension = extensions.find(ext => ext.id === id);
-    if (!extension) {
-        return null;
+export const getExtensionById = async (id) => {
+    try {
+        if (extensions.length === 0) {
+            console.log('Loading extensions as none are loaded yet');
+            await loadExtensions();
+        }
+        const extension = extensions.find(ext => ext.id === id);
+        console.log('Found extension:', extension?.title || 'Not found');
+        return extension;
+    } catch (error) {
+        console.error('Error in getExtensionById:', error);
+        throw error;
     }
-    return extension;
 };
 
 export default { loadExtensions, getAllExtensions, getExtensionsByFilter, getExtensionById };

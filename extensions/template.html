@@ -147,118 +147,150 @@
             white-space: pre-line;
         }
 
-        .back-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: #2196F3;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 2rem;
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
         }
-        
-        .back-button:hover {
-            background: #1976D2;
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #333;
+            border-top: 5px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <a href="../../index.html" class="back-button">← Back to Extensions</a>
-
     <div class="extension-detail">
-        <div class="extension-card">
-            <div class="extension-info">
-                <div class="extension-header">
-                    <div>
-                        <h1 class="extension-title" id="extension-title">Loading...</h1>
-                        <div class="extension-meta">
-                            <span id="extension-version">Version: Loading...</span>
-                            <span id="extension-updated">Last Updated: Loading...</span>
-                        </div>
-                    </div>
-                    <div class="header-right">
-                        <div id="action-buttons">
-                            <!-- Buttons will be added here dynamically -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="extension-description" id="extension-description">
-                    Loading...
-                </div>
-            </div>
-            <div class="extension-price" id="extension-price">Loading...</div>
+        <div id="loading-view" class="loading-spinner">
+            <div class="spinner"></div>
         </div>
 
-        <div class="documentation-card" id="documentation">
-            <!-- Documentation will be added here dynamically -->
+        <div id="extension-content" class="hidden">
+            <div class="extension-card">
+                <div class="extension-info">
+                    <div class="extension-header">
+                        <div>
+                            <h1 class="extension-title" id="extension-title">Loading...</h1>
+                            <div class="extension-meta">
+                                <span id="extension-version">Version: Loading...</span>
+                                <span id="extension-updated">Last Updated: Loading...</span>
+                            </div>
+                        </div>
+                        <div class="header-right">
+                            <div id="action-buttons">
+                                <!-- Buttons will be added here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-description" id="extension-description">
+                        Loading...
+                    </div>
+                </div>
+                <div class="extension-price" id="extension-price">Loading...</div>
+            </div>
+
+            <div class="documentation-card" id="documentation">
+                <!-- Documentation will be added here dynamically -->
+            </div>
         </div>
     </div>
 
-    <script>
-        // Get extension data from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const extensionId = urlParams.get('id');
-        
-        // Fetch extension data
-        fetch('../../extensions/extensions.js')
-            .then(response => response.text())
-            .then(text => {
-                // Extract the extensions array from the file
-                const extensionsMatch = text.match(/const extensions = (\[.*?\]);/s);
-                if (extensionsMatch) {
-                    try {
-                        const extensions = eval(extensionsMatch[1]);
-                        const extension = extensions.find(ext => ext.id === extensionId);
-                        
-                        if (extension) {
-                            // Update title and meta info
-                            document.getElementById('extension-title').textContent = extension.title;
-                            document.getElementById('extension-version').textContent = `Version: ${extension.version}`;
-                            document.getElementById('extension-updated').textContent = `Last Updated: ${extension.lastUpdated}`;
-                            document.getElementById('extension-price').textContent = extension.price;
-                            document.getElementById('extension-price').classList.add(extension.price === 'Free' ? 'free' : 'paid');
-                            document.getElementById('extension-description').textContent = extension.description;
+    <script type="module">
+        try {
+            const { getExtensionById } = await import('/extensions/extensions.js');
+            
+            // Get extension data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const extensionId = urlParams.get('id');
+            
+            if (!extensionId) {
+                throw new Error('No extension ID provided');
+            }
 
-                            // Add action buttons
-                            const actionButtons = document.getElementById('action-buttons');
-                            if (extension.price === 'Free') {
-                                actionButtons.innerHTML = `
-                                    <a href="${extension.url}" class="action-button download-button">Download</a>
-                                `;
-                            } else {
-                                actionButtons.innerHTML = `
-                                    <a href="${extension.url}" class="action-button buy-button">Buy Now</a>
-                                `;
-                            }
-
-                            // Add documentation
-                            const documentation = document.getElementById('documentation');
-                            if (extension.documentation && extension.documentation.length > 0) {
-                                documentation.innerHTML = extension.documentation.map(doc => `
-                                    <div class="documentation-section">
-                                        <h2 class="documentation-title">${doc.title}</h2>
-                                        <div class="documentation-content">${doc.content}</div>
-                                    </div>
-                                `).join('');
-                            } else {
-                                documentation.innerHTML = '<p>No documentation available.</p>';
-                            }
-                        } else {
-                            document.getElementById('extension-title').textContent = 'Extension Not Found';
-                        }
-                    } catch (error) {
-                        console.error('Error parsing extension data:', error);
-                        document.getElementById('extension-title').textContent = 'Error Loading Extension';
+            // Load extension data
+            async function loadExtensionData() {
+                try {
+                    const extension = await getExtensionById(extensionId);
+                    console.log('Loading extension data for:', extensionId);
+                    
+                    if (!extension) {
+                        throw new Error('Extension not found');
                     }
-                } else {
-                    document.getElementById('extension-title').textContent = 'Error Loading Extension Data';
+
+                    // Hide loading view and show content
+                    document.getElementById('loading-view').classList.add('hidden');
+                    document.getElementById('extension-content').classList.remove('hidden');
+
+                    // Update title and meta info
+                    document.getElementById('extension-title').textContent = extension.title;
+                    document.getElementById('extension-version').textContent = `Version: ${extension.version}`;
+                    document.getElementById('extension-updated').textContent = `Last Updated: ${extension.lastUpdated}`;
+                    document.getElementById('extension-price').textContent = extension.price;
+                    document.getElementById('extension-price').classList.add(extension.price === 'Free' ? 'free' : 'paid');
+                    document.getElementById('extension-description').textContent = extension.description;
+
+                    // Add action buttons
+                    const actionButtons = document.getElementById('action-buttons');
+                    if (extension.price === 'Free') {
+                        actionButtons.innerHTML = `
+                            <a href="${extension.url || '#'}" class="action-button download-button" ${!extension.url ? 'disabled' : ''}>
+                                Download
+                            </a>
+                        `;
+                    } else {
+                        actionButtons.innerHTML = `
+                            <a href="${extension.url || '#'}" class="action-button buy-button" ${!extension.url ? 'disabled' : ''}>
+                                Buy Now
+                            </a>
+                        `;
+                    }
+
+                    // Add documentation
+                    const documentation = document.getElementById('documentation');
+                    if (extension.documentation && extension.documentation.length > 0) {
+                        documentation.innerHTML = extension.documentation.map(doc => `
+                            <div class="documentation-section">
+                                <h2 class="documentation-title">${doc.title}</h2>
+                                <div class="documentation-content">${doc.content}</div>
+                            </div>
+                        `).join('');
+                    } else {
+                        documentation.innerHTML = '<p>No documentation available.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error loading extension data:', error);
+                    document.getElementById('loading-view').classList.add('hidden');
+                    document.getElementById('extension-content').classList.remove('hidden');
+                    document.getElementById('extension-title').textContent = error.message || 'Error Loading Extension';
+                    document.getElementById('extension-description').textContent = 'There was an error loading the extension data. Please try again later.';
                 }
-            })
-            .catch(error => {
-                console.error('Error loading extension data:', error);
-                document.getElementById('extension-title').textContent = 'Error Loading Extension';
-            });
+            }
+
+            // Load the data when the page loads
+            loadExtensionData();
+            
+        } catch (error) {
+            console.error('Critical error:', error);
+            document.getElementById('loading-view').classList.add('hidden');
+            document.getElementById('extension-content').classList.remove('hidden');
+            document.getElementById('extension-title').textContent = 'Error Loading Extension';
+            document.getElementById('extension-description').textContent = 'Failed to load the extension module. Please try again later.';
+        }
     </script>
 </body>
-</html> 
+</html>

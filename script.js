@@ -220,20 +220,42 @@ class ExtensionsController {
         this.loadMoreBtn = document.querySelector('.load-more-btn');
         this.currentFilter = 'all';
         this.displayedCount = 0;
-        this.batchSize = 10;
+        this.batchSize = 12;
+        this.extensions = [];
     }
 
     async init() {
         try {
-            await this.renderExtensions();
+            // Load extensions first
+            this.extensions = await ExtensionsAPI.loadExtensions();
+            
+            if (this.extensions.length === 0) {
+                this.showErrorMessage('No extensions found');
+                return;
+            }
+
+            await this.renderExtensions(this.extensions);
             this.setupFilterButtons();
             this.setupLoadMore();
+            this.updateLoadMoreButton(this.extensions.length);
         } catch (error) {
             console.error('Error initializing extensions:', error);
+            this.showErrorMessage('Failed to load extensions');
         }
     }
 
-    async renderExtensions(extensions = ExtensionsAPI.getAllExtensions()) {
+    showErrorMessage(message) {
+        if (this.container) {
+            this.container.innerHTML = `
+                <div class="error-message">
+                    <p>${message}</p>
+                    <button onclick="location.reload()">Retry</button>
+                </div>
+            `;
+        }
+    }
+
+    async renderExtensions(extensions = []) {
         if (!this.container) return;
         
         try {
@@ -245,6 +267,7 @@ class ExtensionsController {
             this.showNextBatch(extensions);
         } catch (error) {
             console.error('Error rendering extensions:', error);
+            this.showErrorMessage('Failed to display extensions');
         }
     }
 
@@ -252,14 +275,41 @@ class ExtensionsController {
         const start = this.displayedCount;
         const end = Math.min(start + this.batchSize, extensions.length);
         const batch = extensions.slice(start, end);
-
+        
+        const fragment = document.createDocumentFragment();
+        
         batch.forEach(ext => {
             const card = this.createExtensionCard(ext);
-            this.container.insertAdjacentHTML('beforeend', card);
+            fragment.appendChild(card);
         });
 
+        this.container.appendChild(fragment);
         this.displayedCount = end;
         this.updateLoadMoreButton(extensions.length);
+    }
+
+    createExtensionCard(extension) {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.dataset.filter = extension.filters.join(' ');
+        card.onclick = () => window.location.href = `extensions/template.html?id=${extension.id}`;
+        card.style.cursor = 'pointer';
+
+        const isPaid = extension.price !== 'Free';
+        card.innerHTML = `
+            <div class="price-tag ${isPaid ? 'paid' : 'free'}">${extension.price}</div>
+            <div class="card-content">
+                <h3 class="card-title">${this.escapeHtml(extension.title)}</h3>
+                <p class="card-subtitle">${this.escapeHtml(extension.subtitle)}</p>
+            </div>
+        `;
+        return card;
+    }
+
+    escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
     }
 
     updateLoadMoreButton(totalCount) {
@@ -271,23 +321,12 @@ class ExtensionsController {
     setupLoadMore() {
         if (this.loadMoreBtn) {
             this.loadMoreBtn.addEventListener('click', () => {
-                const currentExtensions = ExtensionsAPI.getExtensionsByFilter(this.currentFilter);
+                const currentExtensions = this.currentFilter === 'all' ? 
+                    this.extensions : 
+                    this.extensions.filter(ext => ext.filters.includes(this.currentFilter));
                 this.showNextBatch(currentExtensions);
             });
         }
-    }
-
-    createExtensionCard(extension) {
-        const isPaid = extension.price !== 'Free';
-        return `
-            <article class="card" data-filter="${extension.filters.join(' ')}" onclick="window.location.href='extensions/template.html?id=${extension.id}'" style="cursor: pointer;">
-                <div class="price-tag ${isPaid ? 'paid' : 'free'}">${extension.price}</div>
-                <div class="card-content">
-                    <h3 class="card-title">${extension.title}</h3>
-                    <p class="card-subtitle">${extension.subtitle}</p>
-                </div>
-            </article>
-        `;
     }
 
     setupFilterButtons() {
@@ -302,7 +341,9 @@ class ExtensionsController {
 
     filterExtensions(filter) {
         this.currentFilter = filter;
-        const filteredExtensions = ExtensionsAPI.getExtensionsByFilter(filter);
+        const filteredExtensions = filter === 'all' ? 
+            this.extensions : 
+            this.extensions.filter(ext => ext.filters.includes(filter));
         this.renderExtensions(filteredExtensions);
     }
 
