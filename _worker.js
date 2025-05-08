@@ -1,15 +1,15 @@
 const CACHE_NAME = 'aemo-cache-v1';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/script.js',
-  '/extensions/extensions.js',
-  '/extensions/extensions.json',
-  '/images/icon.png',
-  '/images/ai2-logo.png',
-  '/images/kodular-logo.png',
-  '/images/telegram-logo.webp'
+  './',
+  './index.html',
+  './styles.css',
+  './script.js',
+  './extensions/extensions.js',
+  './extensions/extensions.json',
+  './images/icon.png',
+  './images/ai2-logo.png',
+  './images/kodular-logo.png',
+  './images/telegram-logo.webp'
 ];
 
 self.addEventListener('install', (event) => {
@@ -34,6 +34,14 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Bypass cache for extensions.json
+  if (event.request.url.includes('extensions.json')) {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   // Handle module scripts
   if (event.request.destination === 'script') {
     event.respondWith(

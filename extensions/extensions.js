@@ -1,22 +1,45 @@
+// Store extensions data
 let extensions = [];
 
 export const loadExtensions = async () => {
     try {
-        // Use a relative path that works from both template.html and index.html
-        const response = await fetch('/extensions/extensions.json');
-        
+        console.log('Attempting to load extensions.json');
+        // If we already have extensions data loaded, return it
+        if (extensions.length > 0) {
+            console.log('Extensions already loaded:', extensions);
+            return extensions;
+        }
+
+        // Dynamically resolve the path to extensions.json
+        let jsonPath;
+        if (location.pathname.endsWith('/index.html') || location.pathname === '/' || location.pathname === '/index.html') {
+            jsonPath = './extensions/extensions.json';
+        } else {
+            jsonPath = './extensions.json';
+        }
+
+        // Get extensions data from JSON file
+        const response = await fetch(jsonPath);
+        console.log('Fetch response:', response);
+
         if (!response.ok) {
-            console.error('Failed to load extensions:', response.status, response.statusText);
+            console.error('Failed to fetch extensions.json:', response.status, response.statusText);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        extensions = await response.json();
-        console.log('Extensions loaded successfully:', extensions.length);
+        const data = await response.json();
+        console.log('Extensions data loaded:', data);
+        extensions = data; // Store the loaded data
         return extensions;
     } catch (error) {
         console.error('Error loading extensions:', error);
         return [];
     }
+};
+
+// Allow setting extensions data from external source
+export const setExtensions = (data) => {
+    extensions = data;
 };
 
 export const getAllExtensions = () => extensions;
@@ -29,11 +52,9 @@ export const getExtensionsByFilter = (filter) => {
 export const getExtensionById = async (id) => {
     try {
         if (extensions.length === 0) {
-            console.log('Loading extensions as none are loaded yet');
             await loadExtensions();
         }
         const extension = extensions.find(ext => ext.id === id);
-        console.log('Found extension:', extension?.title || 'Not found');
         return extension;
     } catch (error) {
         console.error('Error in getExtensionById:', error);
@@ -41,4 +62,10 @@ export const getExtensionById = async (id) => {
     }
 };
 
-export default { loadExtensions, getAllExtensions, getExtensionsByFilter, getExtensionById };
+export default {
+    loadExtensions,
+    getAllExtensions,
+    getExtensionsByFilter,
+    getExtensionById,
+    setExtensions
+};
