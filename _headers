@@ -21,6 +21,9 @@
   Content-Type: application/json
   Access-Control-Allow-Origin: *
 
+/extensions/extensions.js
+  Content-Type: application/javascript
+
 /_worker.js
   Content-Type: text/javascript
   Service-Worker-Allowed: /
