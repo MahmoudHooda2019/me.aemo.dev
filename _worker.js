@@ -5,8 +5,9 @@ export default {
 
       // Serve extensions data as API endpoint
       if (url.pathname === "/api/extensions") {
-        // Fetch the JSON file from static assets
-        const assetResponse = await env.ASSETS.fetch(new Request("/extensions/extensions.json", request));
+        // Construct absolute URL for the asset
+        const assetUrl = new URL("/extensions/extensions.json", request.url).toString();
+        const assetResponse = await env.ASSETS.fetch(new Request(assetUrl, request));
         if (!assetResponse || assetResponse.status !== 200) {
           return new Response(JSON.stringify({ error: "extensions.json not found" }), { status: 404, headers: { "Content-Type": "application/json" } });
         }
