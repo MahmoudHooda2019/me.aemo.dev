@@ -92,8 +92,26 @@
         .action-buttons {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         
+        @media (max-width: 700px) {
+            .extension-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .action-buttons {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .header-right {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
         .action-button {
             padding: 0.8rem 1.5rem;
             border-radius: 5px;
@@ -238,6 +256,7 @@
 
                     // Update title and meta info
                     document.getElementById('extension-title').textContent = extension.title;
+                    document.title = extension.title;
                     document.getElementById('extension-version').textContent = `Version: ${extension.version}`;
                     document.getElementById('extension-updated').textContent = `Last Updated: ${extension.lastUpdated}`;
                     document.getElementById('extension-price').textContent = extension.price;
