@@ -42,54 +42,6 @@ const utils = {
     }
 };
 
-// Cursor Controller
-class CursorController {
-    constructor() {
-        this.cursor = document.querySelector('.cursor');
-        // Exit early if cursor element doesn't exist
-        if (!this.cursor) {
-            console.warn('Cursor element not found, skipping cursor initialization');
-            return;
-        }
-        this.links = document.querySelectorAll('a, button, .card');
-        this.isVisible = true;
-        this.init();
-    }
-
-    init() {
-        if (!this.cursor) return;
-        try {
-            this.handleMouseMove();
-            this.handleLinkInteractions();
-            this.handleVisibilityChange();
-        } catch (error) {
-            utils.handleError(error, 'CursorController initialization');
-        }
-    }
-
-    handleMouseMove() {
-        document.addEventListener('mousemove', utils.debounce((e) => {
-            if (this.cursor && this.isVisible) {
-                const { clientX, clientY } = e;
-                this.cursor.style.transform = `translate(${clientX}px, ${clientY}px)`;
-            }
-        }, 5));
-    }
-
-    handleLinkInteractions() {
-        this.links.forEach(link => {
-            link.addEventListener('mouseenter', () => this.cursor?.classList.add('grow'));
-            link.addEventListener('mouseleave', () => this.cursor?.classList.remove('grow'));
-        });
-    }
-
-    handleVisibilityChange() {
-        document.addEventListener('visibilitychange', () => {
-            this.isVisible = !document.hidden;
-        });
-    }
-}
-
 // Particle System
 class ParticleSystem {
     constructor() {

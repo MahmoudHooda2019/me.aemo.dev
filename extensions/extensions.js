@@ -4,7 +4,7 @@ let extensions = [];
 export const loadExtensions = async () => {
     if (extensions.length > 0) return extensions;
     try {
-        const response = await fetch('./extensions.json');
+        const response = await fetch('./extensions/extensions.json');
         if (!response.ok) {
             throw new Error(`Failed to load extensions.json: ${response.statusText}`);
         }
