@@ -8,7 +8,7 @@
         "filters": ["all", "free"],
         "version": "1.0.0",
         "lastUpdated": "2024-03-15",
-        "url": "https://github.com/yourusername/number_checker/releases/latest",
+        "url": "https://github.com/MahmoudHooda2019/NumerChecker/releases/latest",
         "documentation": [
             { "title": "Getting Started", "content": "To use the Number Checker extension, simply drag and drop the component into your app and use the provided blocks." },
             { "title": "Available Blocks", "content": "1. IsPrime(number) - Returns true if the number is prime\n2. IsEven(number) - Returns true if the number is even\n3. IsOdd(number) - Returns true if the number is odd" },
