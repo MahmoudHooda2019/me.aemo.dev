@@ -6,6 +6,7 @@
         "description": "A powerful extension that helps you check various properties of numbers. Features include prime number checking, even/odd detection, and more mathematical utilities.",
         "price": "Free",
         "filters": ["all", "free"],
+        "tags": ["free", "math", "number", "checker", "utility", "prime", "even", "odd"],
         "version": "2.0",
         "lastUpdated": "2024-03-15",
         "url": "https://community.kodular.io/uploads/short-url/gyQ2Kh0OmG6zbybK5VbXzDnvF8c.aix",

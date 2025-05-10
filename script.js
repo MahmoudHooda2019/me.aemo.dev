@@ -243,16 +243,30 @@ class ExtensionsController {
     createExtensionCard(extension) {
         const card = document.createElement('article');
         card.className = 'card';
-        card.dataset.filter = extension.filters.join(' ');
+        card.dataset.filter = (extension.filters || []).join(' ');
         card.onclick = () => window.location.href = `extensions/template.html?id=${extension.id}`;
         card.style.cursor = 'pointer';
 
         const isPaid = extension.price !== 'Free';
+        // Use only tags from extensions.json (use 'tags' or fallback to 'filters')
+        const tagsArr = extension.tags || extension.filters || [];
+        const tags = [...tagsArr];
+        // Check if lastUpdated is within 10 days of today (2025-05-10)
+        const lastUpdated = new Date(extension.lastUpdated);
+        const today = new Date('2025-05-10');
+        const diffDays = (today - lastUpdated) / (1000 * 60 * 60 * 24);
+        if (diffDays <= 10) {
+            tags.push('NEW');
+        }
+        // Generate tag HTML
+        const tagsHtml = `<div class="card-tags">${tags.map(tag => `<span class="card-tag${tag==='NEW' ? ' new-tag' : ''}">${this.escapeHtml(tag)}</span>`).join(' ')}</div>`;
+
         card.innerHTML = `
             <div class="price-tag ${isPaid ? 'paid' : 'free'}">${extension.price}</div>
             <div class="card-content">
                 <h3 class="card-title">${this.escapeHtml(extension.title)}</h3>
                 <p class="card-subtitle">${this.escapeHtml(extension.subtitle)}</p>
+                ${tagsHtml}
             </div>
         `;
         return card;
