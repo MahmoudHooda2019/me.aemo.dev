@@ -1,7 +1,7 @@
 [
     {
         "id": "number_checker",
-        "title": "NumberChecker",
+        "title": "Number Checker",
         "subtitle": "Check if a number is prime, even, or odd",
         "description": "A powerful extension that helps you check various properties of numbers. Features include prime number checking, even/odd detection, and more mathematical utilities.",
         "price": "Free",
@@ -10,9 +10,9 @@
         "lastUpdated": "2024-03-15",
         "url": "https://community.kodular.io/uploads/short-url/gyQ2Kh0OmG6zbybK5VbXzDnvF8c.aix",
         "documentation": [
-            { "title": "All Blocks", "content": "https://kodular-community.s3.dualstack.eu-west-1.amazonaws.com/original/3X/4/9/496d29b1667f26709176f649640a9371b723980f.png" },
+            { "title": "All Blocks", "content": "<img src=\"https://kodular-community.s3.dualstack.eu-west-1.amazonaws.com/original/3X/4/9/496d29b1667f26709176f649640a9371b723980f.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
             { "title": "Available Blocks", "content": "1. IsPrime(number) - Returns true if the number is prime\n2. IsEven(number) - Returns true if the number is even\n3. IsOdd(number) - Returns true if the number is odd" },
-            { "title": "To Donate", "content": "https://www.paypal.com/paypalme/AemoDev" }
+            { "title": "To Donate", "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>" }
         ]
     },
     {
