@@ -23,12 +23,107 @@
         "description": "A comprehensive extension for Islamic applications. Features include Hijri date conversion, prayer times, and Islamic history events.",
         "price": "Free",
         "filters": ["all", "free"],
-        "version": "1.1.0",
+        "version": "1.0",
         "lastUpdated": "2024-03-12",
+        "url": "https://community.kodular.io/uploads/short-url/l8TxWt1mfGfJ8Jfyq3gj1xpRwH3.aix",
         "documentation": [
-            { "title": "Features", "content": "- Hijri date conversion\n- Prayer times calculation\n- Islamic history events\n- Qibla direction" },
-            { "title": "Usage", "content": "1. Add the Islamic History component to your app\n2. Configure your location settings\n3. Use the provided blocks to access Islamic features" }
+            { "title": "All Blocks", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/d/d/dd2ab7b972e27e951493f90bea167870803f3b8b.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "Available Blocks", "content": "<b>TodayHijri(year, month, day)</b><br><br>Returns the Hijri (Islamic) date for a given Gregorian date.<br><br><b>Parameters:</b><br>&bull; <code>year</code> (integer): Gregorian year (e.g., 2024)<br>&bull; <code>month</code> (integer): Gregorian month (1-12)<br>&bull; <code>day</code> (integer): Gregorian day (1-31)<br><br><b>Returns:</b><br>&bull; List with Hijri year, month, and day." },
+            { "title": "To Donate", "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>" }
         ]
+    },
+    {
+        "id": "device_year",
+        "title": "Device Year",
+        "subtitle": "Analyze device specs and estimate its high-end release year.",
+        "description": "This extension analyzes your Android device's hardware specifications—such as CPU cores, memory, and maximum CPU frequency—and estimates the year in which the device would have been considered high-end. Useful for benchmarking, device classification, and performance-aware app features.",
+        "price": "Free",
+        "filters": ["all", "free"],
+        "version": "0.2",
+        "lastUpdated": "2024-06-07",
+        "documentation": [
+            { "title": "All Blocks", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/d/edb57cbc207551ec87002df96eeebb2c96d353b8.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "All Blocks Description", "content": "<ul style=\"margin-left:0;padding-left:1.2em;\"><li><b>DeviceYear</b>: Returns the estimated year (as integer) the device would be considered 'high end'.</li><li><b>NumberOfCPUCores</b>: Returns the number of CPU cores (integer).</li><li><b>TotalMemory</b>: Returns the total device memory in bytes (integer).</li><li><b>CPUMaxFreqKHz</b>: Returns the maximum CPU frequency in KHz (integer).</li></ul>" },
+            { "title": "Demo", "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/5/2/52e4538c1508611cf8ceadceeb6b27146945767e_2_281x500.png\" alt=\"Demo\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "To Donate", "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>" }
+        ]
+    },
+    {
+        "id": "similarity",
+        "title": "Similarity",
+        "subtitle": "Check if two strings are similar",
+        "description": "An extension component to calculate the similarity score between two strings. A score of 0.0 means the strings are completely dissimilar, while 1.0 means they are identical. Values in between indicate the degree of similarity. Supports multiple algorithms for flexible comparison.",
+        "price": "Free",
+        "filters": ["all", "free"],
+        "version": "0.1",
+        "lastUpdated": "2022-04-30",
+        "url": "https://community.kodular.io/uploads/short-url/v5Q34TK6nbVtUlEFyNSp1RFTObx.aix",
+        "documentation": [
+            { "title": "All Blocks", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/1/9/19a5c8011fe78cddbcfcd05da9581b51d62d8811.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "All Blocks Description", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/5/0/502744430ffad4de1708446cdbca11aa7282a620.png\" alt=\"All Blocks Description\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "Features", "content": "- feature: String to compare\n- target: String to compare against\n- algorithm: Selectable property" },
+            { "title": "Supported Algorithms", "content": "1. JaroSimilarity\n2. JaroWinklerSimilarity\n3. LevenshteinDistance\n4. DiceCoefficient\nReturns a similarity score between 0.0 and 1.0." },
+            { "title": "Error Handling", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/d/3/d3eb0be5ebf80692edef59322c4d6b69a215d504.png\" alt=\"ErrorOccurred block\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br>ErrorOccurred(error, from)<br>Error return and source." },
+            { "title": "Demo Blocks", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/1/6/16dc7e028fbb8975009324583bd2b7c624904df4.png\" alt=\"Demo Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br>In this demo I am trying to find out the similarities between McMahons and McDonald's by algorithm Jaro" },
+            { "title": "To Donate", "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>" }
+        ]
+    },
+    {
+        "id": "morse_code",
+        "title": "Morse Code",
+        "subtitle": "Morse code encoder & decoder",
+        "description": "This is a simple extension to encode & decode Morse code.",
+        "price": "Free",
+        "filters": ["all", "free"],
+        "version": "1.0",
+        "lastUpdated": "2024-07-06",
+        "url": "https://community.kodular.io/uploads/short-url/7NMEXyLfFGUBaUIEM20x2IaiiSs.aix",
+        "documentation": [
+            { "title": "All Blocks", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/4/e4f831e91c40ba3169f020b039679cdfb1331104.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "Demo Block", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/9/b/9b9732724af78e6a20e1100ab72382d956c8409f.png\" alt=\"Demo Block\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "Demo", "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/d/a/da0f80a86f8d41638eab870ebb8f1da2e549158e_2_281x500.png\" alt=\"Demo\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "To Donate", "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>" }
+        ]
+    },
+    {
+        "id": "ruler_picker",
+        "title": "Ruler Picker",
+        "subtitle": "Ruler picker for picking a number from a given range",
+        "description": "Android custom view that uses a ruler for picking a number from a given range.",
+        "price": "Free",
+        "filters": ["all", "free"],
+        "version": "2.0",
+        "lastUpdated": "2024-07-06",
+        "url": "https://community.kodular.io/uploads/short-url/yvVzsXfhrjQZr8gDsdq5VmN6B9B.aix",
+        "documentation": [
+            { "title": "All Blocks", "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/b/0/b03c9516ae4b1581acf6cbb8e6e6bc5df0693a5e_2_202x500.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "Demo", "content": "<iframe width=\"320\" height=\"180\" src=\"https://www.youtube.com/embed/33xGnUBylDo\" title=\"Ruler Picker Demo\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen style=\"border-radius:8px;box-shadow:0 2px 8px #0002;max-width:100%;\"></iframe>" },
+            { "title": "To Donate", "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>" }
+        ]
+    },
+    {
+        "id": "speech_recognition_view",
+        "title": "Speech Recognition View",
+        "subtitle": "Speech recognition view for Android",
+        "description": "Android custom view that uses a speech recognition view for Android.",
+        "price": "Free",
+        "filters": ["all", "free"],
+        "url": "https://drive.google.com/uc?id=19atykVGrdsx3tMObKNFbqzxNby62KZBq&export=download",
+        "documentation": [
+            { "title": "Permission Required", "content": "<code>&lt;uses-permission android:name=\"android.permission.RECORD_AUDIO\"/&gt;</code>" },
+            { "title": "All Blocks", "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/4/6/46bc4073ebdd7844cab7ca824257c7ce44a132e9_2_182x500.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "Demo Blocks", "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/1/b/1b2c916002d6c5af13854b2788f0247980995a2f_2_690x491.png\" alt=\"Demo Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "Demo", "content": "<img src=\"https://cdn.community.kodular.io/original/3X/4/7/47e1e0129e1a3b0276e5b9217c5e953d08eb0605.gif\" alt=\"Demo\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">" },
+            { "title": "To Donate", "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>" }
+        ]
+    },
+    {
+        "id": "jelly_switch_button",
+        "title": "Jelly Switch Button",
+        "subtitle": "Jelly switch button for Android",
+        "description": "Android custom view that uses a jelly switch button for Android.",
+        "price": "Free",
+        "filters": ["all", "free"]
     },
     {
         "id": "device_info",

@@ -80,6 +80,25 @@
             </div>
          </section>
           
+         <!-- Tools Section -->
+         <section class="tools-section section">
+            <h2 class="section-title" data-aos="fade-up">Tools</h2>
+            <div class="card-container">
+               <a href="deeplink-tool/deeplink-tool.html" class="card" style="text-decoration:none;color:inherit;">
+                  <div class="card-content">
+                     <div class="card-title">Deep Link</div>
+                     <div class="card-subtitle">Easily generate and handle deep links for your apps.</div>
+                  </div>
+               </a>
+               <div class="card">
+                  <div class="card-content">
+                     <div class="card-title">Base64 Encode &amp; Decode</div>
+                     <div class="card-subtitle">Convert text or files to and from Base64 encoding.</div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
          <!-- Contact Section -->
          <section class="contact-section section">
             <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
@@ -131,13 +150,6 @@
          sections.forEach(section => {
             observer.observe(section);
          });
-
-         // Register service worker
-         if ('serviceWorker' in navigator) {
-             navigator.serviceWorker.register('_worker.js')
-                 .then(() => console.log('Service Worker registered successfully.'))
-                 .catch(err => console.error('Service Worker registration failed:', err));
-         }
       </script>
 
       <!-- Pace.js Script -->
