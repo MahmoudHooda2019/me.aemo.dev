@@ -1,4 +1,5 @@
-import ExtensionsAPI from './extensions/extensions.js';
+// Import with correct path
+import ExtensionsAPI from './extensions.js';
 
 // Constants and Config
 const CONFIG = {

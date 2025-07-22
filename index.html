@@ -7,7 +7,7 @@
       <meta name="author" content="Aemo Developer">
       <meta property="og:title" content="Aemo Developer">
       <meta property="og:description" content="AemoDev - MIT App Inventor extensions and tools.">
-      <meta property="og:image" content="images/icon.png">
+      <meta property="og:image" content="assets/images/icon.png">
       <title>Aemo Developer</title>
       
       
@@ -22,7 +22,6 @@
       <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
       
       <!-- Preload Critical Resources -->
-      <link rel="preload" href="assets/images/icon.png" as="image" type="image/png">
       <link rel="preload" href="styles/styles.css" as="style" onload="this.rel='stylesheet'">
       <link rel="preload" href="scripts/script.js" as="script" crossorigin="anonymous">
       
@@ -38,9 +37,13 @@
       <!-- Scripts -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
       <script type="module" src="scripts/script.js" defer></script>
-      <script type="module" src="scripts/extensions.js" defer></script>
    </head>
    <body>
+      <!-- Loading Screen -->
+      <div class="loading-screen">
+         <div class="loading-spinner"></div>
+      </div>
+
       <header>
          <!-- Splash Section -->
          <section class="splash-section">
@@ -49,7 +52,7 @@
                <div class="tagline" aria-live="polite">
                   <pre>
 ⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
- ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
+ ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
  ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
  ⠀⠀⢤⣀⣀⣀⠀⠀⢸⣷⡄⠀⣁⣀⣤⣴⣿⣿⣿⣆
  ⠀⠀⠀⠀⠹⠏⠀⠀⠀⣿⣧⠀⠹⣿⣿⣿⣿⣿⡿⣿
@@ -105,19 +108,19 @@
             <div class="contact-options">
                <div class="contact-card" role="link" aria-label="Go to MIT AI2 Community" onclick="window.open('https://community.appinventor.mit.edu/u/mahmoud_hooda/summary', '_blank')">
                   <div class="contact-icon">
-                     <img src="images/ai2-logo.png" alt="MIT App Inventor Logo" class="icon-img">
+                     <img src="assets/images/ai2-logo.png" alt="MIT App Inventor Logo" class="icon-img">
                   </div>
                   <span class="contact-title">MIT AI2</span>
                </div>
                <div class="contact-card" role="link" aria-label="Go to Kodular Community" onclick="window.open('https://community.kodular.io/u/mahmoud_hooda/summary', '_blank')">
                   <div class="contact-icon">
-                     <img src="images/kodular-logo.png" alt="Kodular Community Logo" class="icon-img">
+                     <img src="assets/images/kodular-logo.png" alt="Kodular Community Logo" class="icon-img">
                   </div>
                   <span class="contact-title">Kodular Community</span>
                </div>
                <div class="contact-card" role="link" aria-label="Contact us via Telegram" onclick="window.open('https://t.me/+rc4zQLhKg_Y0MmE0', '_blank')">
                   <div class="contact-icon">
-                     <img src="images/telegram-logo.webp" alt="Telegram Logo" class="icon-img">
+                     <img src="assets/images/telegram-logo.webp" alt="Telegram Logo" class="icon-img">
                   </div>
                   <span class="contact-title">Telegram</span>
                </div>
