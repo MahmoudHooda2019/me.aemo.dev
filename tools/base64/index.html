@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base64 Encode & Decode Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2196f3;
+            --background-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #dddddd;
+        }
+
+        [data-theme="dark"] {
+            --background-color: #1a1a1a;
+            --text-color: #ffffff;
+            --border-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .toggle-dark {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            color: var(--text-color);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            resize: vertical;
+            font-family: monospace;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .file-input {
+            margin-bottom: 20px;
+        }
+
+        #dropZone {
+            border: 2px dashed var(--border-color);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        #dropZone.dragover {
+            border-color: var(--primary-color);
+            background-color: rgba(33, 150, 243, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Base64 Encode & Decode</h2>
+            <button class="toggle-dark" onclick="toggleDarkMode()">🌓</button>
+        </div>
+
+        <div id="dropZone">
+            Drag & Drop files here or click to select
+            <input type="file" id="fileInput" style="display: none">
+        </div>
+
+        <div class="input-group">
+            <textarea id="input" placeholder="Enter text to encode or Base64 to decode"></textarea>
+        </div>
+
+        <div class="button-group">
+            <button onclick="encode()">Encode</button>
+            <button onclick="decode()">Decode</button>
+            <button onclick="copyOutput()">Copy Output</button>
+            <button onclick="clearAll()">Clear All</button>
+        </div>
+
+        <div class="input-group">
+            <textarea id="output" placeholder="Output will appear here" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', document.body.dataset.theme);
+        }
+
+        // Initialize theme
+        document.body.dataset.theme = localStorage.getItem('theme') || 'light';
+
+        // File handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', handleFileDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+
+        function handleFileDrop(e) {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file) processFile(file);
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) processFile(file);
+        }
+
+        function processFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('input').value = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Encode/Decode functions
+        function encode() {
+            const input = document.getElementById('input').value;
+            try {
+                const encoded = btoa(unescape(encodeURIComponent(input)));
+                document.getElementById('output').value = encoded;
+            } catch (e) {
+                alert('Error encoding text: ' + e.message);
+            }
+        }
+
+        function decode() {
+            const input = document.getElementById('input').value;
+            try {
+                const decoded = decodeURIComponent(escape(atob(input)));
+                document.getElementById('output').value = decoded;
+            } catch (e) {
+                alert('Error decoding Base64: ' + e.message);
+            }
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('Copied to clipboard!');
+        }
+
+        function clearAll() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+            fileInput.value = '';
+        }
+    </script>
+</body>
+</html>
