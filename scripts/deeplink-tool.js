@@ -180,8 +180,8 @@ async function submitUserForm() {
   };
 
   try {
-    // Fetch the base .aix file
-    const response = await fetch('me.aemo.deeplink.aix');
+    // Fetch the base .aix file from assets folder
+    const response = await fetch('../../assets/me.aemo.deeplink.aix');
     if (!response.ok) throw new Error('Base .aix file not found');
     const baseAixBlob = await response.blob();
     const baseAixArrayBuffer = await baseAixBlob.arrayBuffer();
