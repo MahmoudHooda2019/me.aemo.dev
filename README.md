@@ -1,6 +1,6 @@
 # 🚀 Aemo Developer
 
-> **Professional MIT App Inventor Extensions & Developer Tools**
+> **MIT App Inventor Extensions & Developer Tools**
 
 Welcome to Aemo Developer - your one-stop destination for high-quality MIT App Inventor extensions and developer tools.
 
