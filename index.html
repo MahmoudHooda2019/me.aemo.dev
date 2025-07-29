@@ -3,17 +3,33 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Aemo Developer - MIT App Inventor Extensions and Tools. Enhance your App Inventor experience with custom utilities.">
+      <meta name="description" content="Aemo Developer - MIT App Inventor Extensions and Tools. Enhance your App Inventor experience with custom utilities, extensions, and developer tools.">
+      <meta name="keywords" content="MIT App Inventor, extensions, tools, mobile development, aemo developer, app inventor components">
       <meta name="author" content="Aemo Developer">
-      <meta property="og:title" content="Aemo Developer">
-      <meta property="og:description" content="AemoDev - MIT App Inventor extensions and tools.">
-      <meta property="og:image" content="assets/images/icon.png">
-      <title>Aemo Developer</title>
+      <meta name="robots" content="index, follow">
+      <meta name="theme-color" content="#bb86fc">
       
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://me.aemo.dev/">
+      <meta property="og:title" content="Aemo Developer - MIT App Inventor Extensions & Tools">
+      <meta property="og:description" content="Professional MIT App Inventor extensions and developer tools. Enhance your mobile app development with custom components and utilities.">
+      <meta property="og:image" content="https://me.aemo.dev/assets/images/icon.png">
+      <meta property="og:image:alt" content="Aemo Developer Logo">
+      
+      <!-- Twitter -->
+      <meta property="twitter:card" content="summary_large_image">
+      <meta property="twitter:url" content="https://me.aemo.dev/">
+      <meta property="twitter:title" content="Aemo Developer - MIT App Inventor Extensions & Tools">
+      <meta property="twitter:description" content="Professional MIT App Inventor extensions and developer tools.">
+      <meta property="twitter:image" content="https://me.aemo.dev/assets/images/icon.png">
+      
+      <title>Aemo Developer - MIT App Inventor Extensions & Tools</title>
       
       <!-- Favicon -->
-      <link rel="icon" type="image/png" href="assets/images/icon.png">
-      <link rel="apple-touch-icon" href="assets/images/icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icon.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icon.png">
+      <link rel="manifest" href="/manifest.json">
       
       <!-- Resource Hints -->
       <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -24,23 +40,26 @@
       <!-- Preload Critical Resources -->
       <link rel="preload" href="styles/styles.css" as="style" onload="this.rel='stylesheet'">
       <link rel="preload" href="scripts/script.js" as="script" crossorigin="anonymous">
+      <noscript><link rel="stylesheet" href="styles/styles.css"></noscript>
       
       <!-- Fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
       
       <!-- Styles -->
       <link rel="stylesheet" href="styles/styles.css">
+      <link rel="stylesheet" href="styles/error-handler.css">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/themes/pace-theme-minimal.css">
       
       <!-- Scripts -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
       <script type="module" src="scripts/script.js" defer></script>
+      <script src="pwa-utils.js"></script>
    </head>
    <body>
       <!-- Loading Screen -->
-      <div class="loading-screen">
+      <div class="loading-screen" aria-hidden="true">
          <div class="loading-spinner"></div>
       </div>
 

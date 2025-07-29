@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Extension Template Styles
+   ========================================================================== */
+
+/* Base Styles */
+body {
+    padding: 2rem;
+    background: #0a0a0a;
+    color: #fff;
+    font-family: var(--font-body);
+}
+
+/* Layout */
+.extension-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.extension-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.extension-info {
+    flex: 1;
+}
+
+/* Header */
+.extension-header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.extension-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.extension-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #aaa;
+}
+
+/* Price Tags */
+.extension-price {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 2rem;
+    font-family: var(--font-ui);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+    width: 120px;
+    text-align: center;
+}
+
+.extension-price.free {
+    background: #4CAF50;
+    color: white;
+}
+
+.extension-price.paid {
+    background: #FF9800;
+    color: white;
+}
+
+/* Content */
+.extension-description {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #ddd;
+}
+
+/* Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.action-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.download-button {
+    background: #4CAF50;
+    color: white;
+}
+
+.download-button:hover {
+    background: #45a049;
+}
+
+.buy-button {
+    background: #FF9800;
+    color: white;
+}
+
+.buy-button:hover {
+    background: #f57c00;
+}
+
+/* Documentation */
+.documentation-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+}
+
+.documentation-section {
+    margin-bottom: 2rem;
+}
+
+.documentation-section:last-child {
+    margin-bottom: 0;
+}
+
+.documentation-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.documentation-content {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: #ddd;
+    white-space: pre-line;
+}
+
+/* Loading */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top: 5px solid #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .extension-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .action-buttons {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
