@@ -1,0 +1,30 @@
+{
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.ignoreFiles": [
+        ".vscode/**",
+        "**/*.scss",
+        "**/*.sass",
+        "**/*.ts"
+    ],
+    "liveServer.settings.mount": [
+        ["/", "./"]
+    ],
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.useWebExt": true,
+    "liveServer.settings.NoBrowser": false,
+    "liveServer.settings.https": {
+        "enable": false,
+        "cert": "",
+        "key": "",
+        "passphrase": ""
+    },
+    "liveServer.settings.file": "",
+    "liveServer.settings.multiRootWorkspaceName": "",
+    "liveServer.settings.ChromeDebuggingAttachment": false,
+    "liveServer.settings.root": "/",
+    "liveServer.settings.mimeTypes": {
+        ".js": "application/javascript",
+        ".mjs": "application/javascript",
+        ".json": "application/json"
+    }
+}
