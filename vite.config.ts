@@ -19,9 +19,7 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        base64Tool: resolve(__dirname, 'tools/base64/index.html'),
-        deeplinkTool: resolve(__dirname, 'tools/deeplink/index.html')
+        main: resolve(__dirname, 'index.html')
       }
     }
   },
