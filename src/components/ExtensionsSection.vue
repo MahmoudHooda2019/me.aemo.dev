@@ -40,14 +40,10 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useExtensions } from '@/composables/useExtensions'
 import ExtensionCard from './ExtensionCard.vue'
-import type { Extension } from '@/types/extension'
 
 const { 
   extensions, 
-  isLoading, 
-  loadExtensions, 
-  getExtensionsByFilter,
-  getExtensionTags 
+  loadExtensions
 } = useExtensions()
 
 const currentFilter = ref('all')
