@@ -33,8 +33,9 @@
 /_worker.ts
   Content-Type: application/typescript
 
-/service-worker.ts
-  Content-Type: application/typescript
+# Service Worker
+/service-worker.js
+  Content-Type: application/javascript
 
 /*.html
   Content-Type: text/html
