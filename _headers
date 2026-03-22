@@ -5,11 +5,17 @@
 /*.js
   Content-Type: text/javascript
 
+/*.ts
+  Content-Type: application/typescript
+
 /*.css
   Content-Type: text/css
 
 /*.json
   Content-Type: application/json
+
+/*.vue
+  Content-Type: application/octet-stream
 
 /*.png
   Content-Type: image/png
@@ -17,13 +23,18 @@
 /*.webp
   Content-Type: image/webp
 
+/*.svg
+  Content-Type: image/svg+xml
+
 /extensions/extensions.json
   Content-Type: application/json
   Access-Control-Allow-Origin: *
 
-/extensions/extensions.js
-  Content-Type: application/javascript
+/_worker.ts
+  Content-Type: application/typescript
 
-/_worker.js
-  Content-Type: text/javascript
-  Service-Worker-Allowed: /
+/service-worker.ts
+  Content-Type: application/typescript
+
+/*.html
+  Content-Type: text/html
