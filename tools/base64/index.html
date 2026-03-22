@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base64 Encode & Decode Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../styles/base64-tool.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Base64 Encode & Decode</h2>
+            <button class="toggle-dark" onclick="toggleDarkMode()">🌓</button>
+        </div>
+
+        <div id="dropZone">
+            Drag & Drop files here or click to select
+            <input type="file" id="fileInput" style="display: none">
+        </div>
+
+        <div class="input-group">
+            <textarea id="input" placeholder="Enter text to encode or Base64 to decode"></textarea>
+        </div>
+
+        <div class="button-group">
+            <button onclick="encode()">Encode</button>
+            <button onclick="decode()">Decode</button>
+            <button onclick="copyOutput()">Copy Output</button>
+            <button onclick="clearAll()">Clear All</button>
+        </div>
+
+        <div class="input-group">
+            <textarea id="output" placeholder="Output will appear here" readonly></textarea>
+        </div>
+    </div>
+
+    <script src="../../scripts/base64-tool.js"></script>
+</body>
+</html>

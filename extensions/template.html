@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Details</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../assets/images/addons.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../styles/extension-template.css">
+</head>
+<body>
+    <div class="extension-detail">
+        <div id="loading-view" class="loading-spinner">
+            <div class="spinner"></div>
+        </div>
+
+        <div id="extension-content" class="hidden">
+            <div class="extension-card">
+                <div class="extension-info">
+                    <div class="extension-header">
+                        <div>
+                            <h1 class="extension-title" id="extension-title">Loading...</h1>
+                            <div class="extension-meta">
+                                <span id="extension-version">Version: Loading...</span>
+                                <span id="extension-updated">Last Updated: Loading...</span>
+                            </div>
+                        </div>
+                        <div class="header-right">
+                            <div id="action-buttons">
+                                <!-- Buttons will be added here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-description" id="extension-description">
+                        Loading...
+                    </div>
+                </div>
+                <div class="extension-price" id="extension-price">Loading...</div>
+            </div>
+
+            <div class="documentation-card" id="documentation">
+                <!-- Documentation will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        try {
+            const { getExtensionById } = await import('../scripts/extensions.js');
+            
+            // Get extension data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const extensionId = urlParams.get('id');
+            
+            if (!extensionId) {
+                throw new Error('No extension ID provided');
+            }
+
+            // Load extension data
+            async function loadExtensionData() {
+                try {
+                    const extension = await getExtensionById(extensionId);
+                    console.log('Loading extension data for:', extensionId);
+                    
+                    if (!extension) {
+                        throw new Error('Extension not found');
+                    }
+
+                    // Hide loading view and show content
+                    document.getElementById('loading-view').classList.add('hidden');
+                    document.getElementById('extension-content').classList.remove('hidden');
+
+                    // Update title and meta info
+                    document.getElementById('extension-title').textContent = extension.title;
+                    document.title = extension.title;
+                    document.getElementById('extension-version').textContent = `Version: ${extension.version}`;
+                    document.getElementById('extension-updated').textContent = `Last Updated: ${extension.lastUpdated}`;
+                    document.getElementById('extension-price').textContent = extension.price;
+                    document.getElementById('extension-price').classList.add(extension.price === 'Free' ? 'free' : 'paid');
+                    document.getElementById('extension-description').textContent = extension.description;
+
+                    // Add action buttons
+                    const actionButtons = document.getElementById('action-buttons');
+                    if (extension.price === 'Free') {
+                        actionButtons.innerHTML = `
+                            <a href="${extension.url || '#'}" class="action-button download-button" ${!extension.url ? 'disabled' : ''}>
+                                Download
+                            </a>
+                        `;
+                    } else {
+                        actionButtons.innerHTML = `
+                            <a href="${extension.url || '#'}" class="action-button buy-button" ${!extension.url ? 'disabled' : ''}>
+                                Buy Now
+                            </a>
+                        `;
+                    }
+
+                    // Add documentation
+                    const documentation = document.getElementById('documentation');
+                    if (extension.documentation && extension.documentation.length > 0) {
+                        documentation.innerHTML = extension.documentation.map(doc => `
+                            <div class="documentation-section">
+                                <h2 class="documentation-title">${doc.title}</h2>
+                                <div class="documentation-content">${doc.content}</div>
+                            </div>
+                        `).join('');
+                    } else {
+                        documentation.innerHTML = '<p>No documentation available.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error loading extension data:', error);
+                    document.getElementById('loading-view').classList.add('hidden');
+                    document.getElementById('extension-content').classList.remove('hidden');
+                    document.getElementById('extension-title').textContent = error.message || 'Error Loading Extension';
+                    document.getElementById('extension-description').textContent = 'There was an error loading the extension data. Please try again later.';
+                }
+            }
+
+            // Load the data when the page loads
+            loadExtensionData();
+            
+        } catch (error) {
+            console.error('Critical error:', error);
+            document.getElementById('loading-view').classList.add('hidden');
+            document.getElementById('extension-content').classList.remove('hidden');
+            document.getElementById('extension-title').textContent = 'Error Loading Extension';
+            document.getElementById('extension-description').textContent = 'Failed to load the extension module. Please try again later.';
+        }
+    </script>
+</body>
+</html>

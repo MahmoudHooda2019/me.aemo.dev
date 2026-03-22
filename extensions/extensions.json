@@ -1,0 +1,660 @@
+﻿[
+    {
+        "id": "number_checker",
+        "title": "Number Checker",
+        "subtitle": "Check if a number is prime, even, or odd",
+        "description": "A powerful extension that helps you check various properties of numbers. Features include prime number checking, even/odd detection, and more mathematical utilities.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "tags": [
+            "free",
+            "math",
+            "number",
+            "checker",
+            "utility",
+            "prime",
+            "even",
+            "odd"
+        ],
+        "version": "2.0",
+        "lastUpdated": "2024-03-15",
+        "url": "https://community.kodular.io/uploads/short-url/gyQ2Kh0OmG6zbybK5VbXzDnvF8c.aix",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://kodular-community.s3.dualstack.eu-west-1.amazonaws.com/original/3X/4/9/496d29b1667f26709176f649640a9371b723980f.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Available Blocks",
+                "content": "1. IsPrime(number) - Returns true if the number is prime\n2. IsEven(number) - Returns true if the number is even\n3. IsOdd(number) - Returns true if the number is odd"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+            }
+        ]
+    },
+    {
+        "id": "islamic_history",
+        "title": "Islamic History",
+        "subtitle": "Hijri date for Muslims and Islamic history utilities",
+        "description": "A comprehensive extension for Islamic applications. Features include Hijri date conversion, prayer times, and Islamic history events.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "version": "1.0",
+        "lastUpdated": "2024-03-12",
+        "url": "https://community.kodular.io/uploads/short-url/l8TxWt1mfGfJ8Jfyq3gj1xpRwH3.aix",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/d/d/dd2ab7b972e27e951493f90bea167870803f3b8b.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Available Blocks",
+                "content": "<b>TodayHijri(year, month, day)</b><br><br>Returns the Hijri (Islamic) date for a given Gregorian date.<br><br><b>Parameters:</b><br>&bull; <code>year</code> (integer): Gregorian year (e.g., 2024)<br>&bull; <code>month</code> (integer): Gregorian month (1-12)<br>&bull; <code>day</code> (integer): Gregorian day (1-31)<br><br><b>Returns:</b><br>&bull; List with Hijri year, month, and day."
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+            }
+        ]
+    },
+    {
+        "id": "device_year",
+        "title": "Device Year",
+        "subtitle": "Analyze device specs and estimate its high-end release year.",
+        "description": "This extension analyzes your Android device's hardware specifications—such as CPU cores, memory, and maximum CPU frequency—and estimates the year in which the device would have been considered high-end. Useful for benchmarking, device classification, and performance-aware app features.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "version": "0.2",
+        "lastUpdated": "2024-06-07",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/d/edb57cbc207551ec87002df96eeebb2c96d353b8.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "All Blocks Description",
+                "content": "<ul style=\"margin-left:0;padding-left:1.2em;\"><li><b>DeviceYear</b>: Returns the estimated year (as integer) the device would be considered 'high end'.</li><li><b>NumberOfCPUCores</b>: Returns the number of CPU cores (integer).</li><li><b>TotalMemory</b>: Returns the total device memory in bytes (integer).</li><li><b>CPUMaxFreqKHz</b>: Returns the maximum CPU frequency in KHz (integer).</li></ul>"
+            },
+            {
+                "title": "Demo",
+                "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/5/2/52e4538c1508611cf8ceadceeb6b27146945767e_2_281x500.png\" alt=\"Demo\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+            }
+        ]
+    },
+    {
+        "id": "similarity",
+        "title": "Similarity",
+        "subtitle": "Check if two strings are similar",
+        "description": "An extension component to calculate the similarity score between two strings. A score of 0.0 means the strings are completely dissimilar, while 1.0 means they are identical. Values in between indicate the degree of similarity. Supports multiple algorithms for flexible comparison.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "version": "0.1",
+        "lastUpdated": "2022-04-30",
+        "url": "https://community.kodular.io/uploads/short-url/v5Q34TK6nbVtUlEFyNSp1RFTObx.aix",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/1/9/19a5c8011fe78cddbcfcd05da9581b51d62d8811.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "All Blocks Description",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/5/0/502744430ffad4de1708446cdbca11aa7282a620.png\" alt=\"All Blocks Description\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Features",
+                "content": "- feature: String to compare\n- target: String to compare against\n- algorithm: Selectable property"
+            },
+            {
+                "title": "Supported Algorithms",
+                "content": "1. JaroSimilarity\n2. JaroWinklerSimilarity\n3. LevenshteinDistance\n4. DiceCoefficient\nReturns a similarity score between 0.0 and 1.0."
+            },
+            {
+                "title": "Error Handling",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/d/3/d3eb0be5ebf80692edef59322c4d6b69a215d504.png\" alt=\"ErrorOccurred block\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br>ErrorOccurred(error, from)<br>Error return and source."
+            },
+            {
+                "title": "Demo Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/1/6/16dc7e028fbb8975009324583bd2b7c624904df4.png\" alt=\"Demo Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br>In this demo I am trying to find out the similarities between McMahons and McDonald's by algorithm Jaro"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+            }
+        ]
+    },
+    {
+        "id": "morse_code",
+        "title": "Morse Code",
+        "subtitle": "Morse code encoder & decoder",
+        "description": "This is a simple extension to encode & decode Morse code.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "version": "1.0",
+        "lastUpdated": "2024-07-06",
+        "url": "https://community.kodular.io/uploads/short-url/7NMEXyLfFGUBaUIEM20x2IaiiSs.aix",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/4/e4f831e91c40ba3169f020b039679cdfb1331104.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo Block",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/9/b/9b9732724af78e6a20e1100ab72382d956c8409f.png\" alt=\"Demo Block\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo",
+                "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/d/a/da0f80a86f8d41638eab870ebb8f1da2e549158e_2_281x500.png\" alt=\"Demo\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+            }
+        ]
+    },
+    {
+        "id": "ruler_picker",
+        "title": "Ruler Picker",
+        "subtitle": "Ruler picker for picking a number from a given range",
+        "description": "Android custom view that uses a ruler for picking a number from a given range.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "version": "2.0",
+        "lastUpdated": "2024-07-06",
+        "url": "https://community.kodular.io/uploads/short-url/yvVzsXfhrjQZr8gDsdq5VmN6B9B.aix",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/b/0/b03c9516ae4b1581acf6cbb8e6e6bc5df0693a5e_2_202x500.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo",
+                "content": "<iframe width=\"320\" height=\"180\" src=\"https://www.youtube.com/embed/33xGnUBylDo\" title=\"Ruler Picker Demo\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen style=\"border-radius:8px;box-shadow:0 2px 8px #0002;max-width:100%;\"></iframe>"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+            }
+        ]
+    },
+    {
+        "id": "speech_recognition_view",
+        "title": "Speech Recognition View",
+        "subtitle": "Speech recognition view for Android",
+        "description": "Android custom view that uses a speech recognition view for Android.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "url": "https://drive.google.com/uc?id=19atykVGrdsx3tMObKNFbqzxNby62KZBq&export=download",
+        "documentation": [
+            {
+                "title": "Permission Required",
+                "content": "<code>&lt;uses-permission android:name=\"android.permission.RECORD_AUDIO\"/&gt;</code>"
+            },
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/4/6/46bc4073ebdd7844cab7ca824257c7ce44a132e9_2_182x500.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/optimized/3X/1/b/1b2c916002d6c5af13854b2788f0247980995a2f_2_690x491.png\" alt=\"Demo Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/4/7/47e1e0129e1a3b0276e5b9217c5e953d08eb0605.gif\" alt=\"Demo\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+            }
+        ]
+    },
+    {
+        "id": "jelly_switch_button",
+        "title": "Jelly Switch Button",
+        "subtitle": "Jelly switch button for Android",
+        "description": "Android custom view that uses a jelly switch button for Android. An extension to create switch button make effect like jelly.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "url": "https://drive.google.com/uc?id=11Smhg2V80QPaa9j65r47jot7EzZ3poNQ&export=download",
+        "documentation": [
+            {
+                "title": "Description",
+                "content": "An extension to create switch button make effect like jelly"
+            },
+            {
+                "title": "All blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/7/6/767f967b8cf414b9a6ffe2af4e1194800d801857.png\" alt=\"blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Instructions to use your extension",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/1/e1eb55ad13e2e90262c471c510a809b297f1ffae.png\" alt=\"blocks (1)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Layout",
+                "content": "<ul><li>layout = Horizontal_Arrangement (View)</li></ul>"
+            },
+            {
+                "title": "Jelly Block",
+                "content": "<ul><li>jelly = Look for that 👇<details><summary>All block of jelly</summary><img src=\"https://cdn.community.kodular.io/original/3X/f/8/f8d73b5b9c3525a2379ee7a692f519807a88ec42.png\" alt=\"blocks (2)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></details></li></ul>"
+            },
+            {
+                "title": "Jelly Effects",
+                "content": "<ul><li><details><summary>Jelly effects</summary><ul><li>jelly_ITSELF<br><img src=\"https://cdn.community.kodular.io/original/3X/c/b/cb498a1210271b15d57958fc8fc25f212461330a.gif\" alt=\"Itself\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_TREMBLE_HEAD_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/a/2/a2ced2c2406c269903634a4f463ea02337fe238d.gif\" alt=\"LazyTrembleHeadFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_TREMBLE_HEAD_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/2/6/267e99765356e351245d21aafcbb6f7b87420145.gif\" alt=\"LazyTrembleHeadSlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_TREMBLE_TAIL_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/f/f/ff483630443b287645a2de371e3b5133ac0bd793.gif\" alt=\"LazyTrembleTailFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_TREMBLE_TAIL_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/d/b/dbf012866da6b701d8ae6adab11838f8bd2fffa4.gif\" alt=\"LazyTrembleTailSlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_TREMBLE_BODY_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/b/8/b8c1f752c39e99e927707d47c1706cd45c815b1a.gif\" alt=\"LazyTrembleBodyFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_TREMBLE_BODY_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/5/c/5cabd59b669eb6da4f2082d82fdbbf29eb10e5d9.gif\" alt=\"LazyTrembleBodySlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_STIFF_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/e/2/e208b6a888acb1a8d053649dccb54ba221dc613c.gif\" alt=\"LazyStiffFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_LAZY_STIFF_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/4/6/468e4c08a73d7150263feb11d3df23040524ebdf.gif\" alt=\"LazyStiffSlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_TREMBLE_HEAD_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/9/0/905a57822c7d6b8d730eee185768bbf00cd589a0.gif\" alt=\"ActiveTrembleHeadFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_TREMBLE_HEAD_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/d/5/d59ba346938b61b0be349117c50bb97e10483a3d.gif\" alt=\"ActiveTrembleHeadSlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_TREMBLE_TAIL_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/0/6/06b804801e6da4a5c08ddac00600f633ab1a5aa5.gif\" alt=\"ActiveTrembleTailFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_TREMBLE_TAIL_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/f/2/f28de76314b4e34d52933fe45be54061580d927f.gif\" alt=\"ActiveTrembleTailSlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_TREMBLE_BODY_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/a/3/a39ec0b97913a43bac64725fae63caf168871e76.gif\" alt=\"ActiveTrembleBodyFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_TREMBLE_BODY_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/4/9/4923ab52cbe59c5a15d50e68e179b536df2d4307.gif\" alt=\"ActiveTrembleBodySlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_STIFF_FATTY<br><img src=\"https://cdn.community.kodular.io/original/3X/e/5/e56bea6f9a8f75a32602e5c7c5df2671f326437e.gif\" alt=\"ActiveStiffFatty\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_ACTIVE_STIFF_SLIM_JIM<br><img src=\"https://cdn.community.kodular.io/original/3X/5/7/57f0decf3ff1a1c1ccaaa955f9a91e09da362c55.gif\" alt=\"ActiveStiffSlimJim\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></li><li>jelly_RANDOM<br><b>All Above</b></li></ul></details></li></ul>"
+            },
+            {
+                "title": "Effect Movement Type",
+                "content": "<ul><li>effectMovementType = Look for that 👇<details><summary>All block of EMT</summary><img src=\"https://cdn.community.kodular.io/original/3X/7/4/74bf5ca55a83f289802047cee3603e675fa878ff.png\" alt=\"blocks (3)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></details></li></ul>"
+            },
+            {
+                "title": "Movement Effects",
+                "content": "<ul><li><details><summary>Movement effects</summary><img src=\"https://cdn.community.kodular.io/original/3X/6/e/6e2c5686a37d0f911dcc52637cde7d4526b5f6e2.png\" alt=\"ease\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></details></li></ul>"
+            },
+            {
+                "title": "Set the JellySwitchButton to checked or not with animation",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/5/5/559f971b9596b1bc056c13ce411897fdb61c91bb.png\" alt=\"blocks (4)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Animation Parameters",
+                "content": "Set the JellySwitchButton to checked or not with animation.<br><br><b>Parameters:</b><br>&bull; <code>checked</code> (boolean): Whether to set the switch to checked or not<br>&bull; <code>callListener</code> (boolean): If true it will be called (OnStateChange)"
+            },
+            {
+                "title": "Animation Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/7/5/758dfbd27de82a0b7ea85fa7550a507763af5af9.png\" alt=\"blocks (6)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Set the JTB to checked or not immediately without animation",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/2/2/2243d4728ed4ef9aa7b14373800cc17bba4894e6.png\" alt=\"blocks (5)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Immediate Parameters",
+                "content": "Set the JTB to checked or not immediately without animation.<br><br><b>Parameters:</b><br>&bull; <code>checked</code> (boolean): Whether to set the switch to checked or not<br>&bull; <code>callListener</code> (boolean): If true it will be called (OnStateChange)"
+            },
+            {
+                "title": "Additional Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/6/e631c8c75135e74d91e421774e183c5834c45727.png\" alt=\"blocks (7)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/0/9/093e90cc24df49fe7f679b65f1ee10383bc7578a.png\" alt=\"blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/1/7/17b2621597d49c80a85aa56ab8a244211be4b623.png\" alt=\"blocks (1)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/e/a/ea1459c6449754f88330b2b518635d0035b9473f.png\" alt=\"blocks (3)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/f/4/f48e1f26e498330a21b315b5eca576486b33c955.png\" alt=\"blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/b/6/b691a223e3da46031071ab5c69a597a4322518ee.png\" alt=\"blocks (1)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/4/b/4b930cdf670a98eacad6a487fdaa19746873ac17.png\" alt=\"blocks (2)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/6/9/69339536fb8c3f8f3590878fbc2e97c60b28b4ba.png\" alt=\"blocks (4)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/9/d/9de56f8105e3d1576bdaf969e695e5df45157ea4.png\" alt=\"blocks (7)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><br><br><img src=\"https://cdn.community.kodular.io/original/3X/6/3/639a5fa305a1a11860d8ffa28083180bfabbf080.png\" alt=\"blocks (8)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Support the Developer",
+                "content": "<h3 style=\"color:#4CAF50;\">Show Your Support</h3><p>If you find this extension helpful, consider supporting the developer:</p><a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;margin:5px;padding:10px 15px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;font-weight:bold;\">Donate via PayPal</a><br><a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;margin:5px;padding:10px 15px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;font-weight:bold;\">Support on Ko-fi</a>"
+            }
+        ]
+    },
+    {
+        "id": "view_charging",
+        "title": "ViewCharging",
+        "subtitle": "A simple charging view ♥",
+        "description": "This extension provides a simple and stylish charging view animation for your app, offering visual feedback when the device is charging.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "tags": [
+            "free",
+            "charging",
+            "UI",
+            "battery"
+        ],
+        "version": "1.0",
+        "lastUpdated": "2022-07-28",
+        "url": "https://drive.google.com/uc?id=1K4duMggIXbA2FY1QkaxPabJVEhTV_4tc&export=download",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/2/e2186dfe7e0aa835f9b4b46e2dcb75946525f4ee.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/f/4/f4b09a0227dc27a579744f1105034c5d44b75656.png\" alt=\"Demo Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo Video",
+                "content": "<video controls style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><source src=\"https://cdn.community.kodular.io/original/3X/d/0/d02238ee8e181a78ac22eafd2b0b6898d57a850d.mp4\" type=\"video/mp4\">Your browser does not support the video tag.</video>"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\">PayPal</a> | <a href=\"https://ko-fi.com/mhooda\" target=\"_blank\">Ko-fi</a>"
+            }
+        ]
+    },
+    {
+        "id": "cube_view",
+        "title": "CubeView",
+        "subtitle": "To create cube loading view, you can use it in splash screen",
+        "description": "This extension creates a stylish cube loading animation that can be used in splash screens or loading UIs. Highly customizable with sliding cube colors.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "tags": [
+            "free",
+            "animation",
+            "cube",
+            "splash",
+            "UI",
+            "loader"
+        ],
+        "version": "1.0",
+        "lastUpdated": "Unknown",
+        "url": "https://drive.google.com/uc?id=1riNslOGD9VQv2li6MVss54OTRdG9KOd2&export=download",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/0/4/04b5eeb4174be69a56eb0a6727e41c21d73a4c03.png\" alt=\"All Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Demo Video",
+                "content": "<video controls style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><source src=\"https://cdn.community.kodular.io/original/3X/1/f/1f5e2d18a0dc08261328bc97374559759850c5cd.mp4\" type=\"video/mp4\">Your browser does not support the video tag.</video>"
+            },
+            {
+                "title": "Demo Blocks",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/6/d/6de1bffc8a9ddf4601687c93ce59bf25eac7eab7.png\" alt=\"Demo Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Cube Colors Preview",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/1/c/1c7fdf251681384a46ffa5773ac80116a4c20385.png\" alt=\"All Slid Cube Colors\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "Library Used",
+                "content": "<a href=\"https://github.com/samlss/CubeLoadingView\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">CubeLoadingView by samlss</a>"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">PayPal</a> | <a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Ko-fi</a>"
+            },
+            {
+                "title": "Telegram",
+                "content": "<a href=\"https://t.me/+rc4zQLhKg_Y0MmE0\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Join the Telegram channel</a>"
+            }
+        ]
+    },
+    {
+        "id": "string_validation",
+        "title": "StringValidation",
+        "subtitle": "Fast and simple string validation",
+        "description": "A powerful open-source extension that helps validate strings against common patterns (email, IP, base64, hex, JSON, regex, etc.) using the ValidateTor library. Returns boolean values for all checks.",
+        "price": "Free / Open Source",
+        "filters": [
+            "all",
+            "free",
+            "open source"
+        ],
+        "tags": [
+            "string",
+            "regex",
+            "validation",
+            "free",
+            "open-source",
+            "utility"
+        ],
+        "version": "1.0",
+        "lastUpdated": "Unknown",
+        "url": "https://community.kodular.io/uploads/short-url/bYJTIrWublRuZYd8CM30WmdFrjy.aix",
+        "documentation": [
+            {
+                "title": "All Blocks",
+                "content": "<div style=\"display:flex;flex-direction:column;gap:12px;\"><img src=\"https://cdn.community.kodular.io/original/3X/9/f/9f6ac9de5a93262f6a8fba5d627f5e534490f04f.png\" alt=\"All Blocks 1\" style=\"max-width:40%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><img src=\"https://cdn.community.kodular.io/original/3X/8/6/8617d552cddfb158a873b9beaa9f0bfd6144e3e6.png\" alt=\"All Blocks 2\" style=\"max-width:40%;border-radius:8px;box-shadow:0 2px 8px #0002;\"><img src=\"https://cdn.community.kodular.io/original/3X/c/3/c3a35585ede5dc33c44854cd90c78339d7ab9e95.png\" alt=\"All Blocks 3\" style=\"max-width:40%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></div>"
+            },
+            {
+                "title": "Regex & Pattern",
+                "content": "<img src=\"https://cdn.community.kodular.io/original/3X/e/4/e4bb10d360b09363c70679176ebb797bed29f228.png\" alt=\"Regex Blocks\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\">"
+            },
+            {
+                "title": "AIA Download",
+                "content": "<a href=\"https://community.kodular.io/uploads/short-url/b62eKoBDPhsx6i7lE3VxbkutlG5.aia\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Download validate.aia</a>"
+            },
+            {
+                "title": "Source Code",
+                "content": "<a href=\"https://github.com/MahmoudHooda2019/StringValidation-MIT-App-Inventor-extension\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">GitHub - StringValidation Extension</a>"
+            },
+            {
+                "title": "Library Used",
+                "content": "<a href=\"https://github.com/nisrulz/validatetor\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">ValidateTor by nisrulz</a>"
+            },
+            {
+                "title": "To Donate",
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">PayPal</a> | <a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Ko-fi</a>"
+            }
+        ]
+    },
+    {
+        "id": "device_info",
+        "title": "Device Info",
+        "subtitle": "Retrieve essential information about the device",
+        "description": "Get detailed information about the user's device including hardware specifications, software version, and system status.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "version": "1.0.0",
+        "lastUpdated": "2024-03-10",
+        "documentation": [
+            {
+                "title": "Available Information",
+                "content": "- Device model and manufacturer\n- Android version\n- Screen resolution\n- Battery status\n- Memory usage"
+            }
+        ]
+    },
+    {
+        "id": "slide_color_picker",
+        "title": "Slide Color Picker",
+        "subtitle": "Create a custom slider bar for color selection",
+        "description": "A beautiful and intuitive color picker with sliding controls. Perfect for apps that need color customization features.",
+        "price": "$5.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.2.0",
+        "lastUpdated": "2024-03-08",
+        "documentation": [
+            {
+                "title": "Features",
+                "content": "- RGB and HSV color modes\n- Customizable slider appearance\n- Color preview\n- Color value export"
+            }
+        ]
+    },
+    {
+        "id": "painter",
+        "title": "Painter",
+        "subtitle": "Create custom drawings with awesome functions",
+        "description": "A powerful drawing extension with various tools and effects. Perfect for creating art apps or adding drawing features to your application.",
+        "price": "$8.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.3.0",
+        "lastUpdated": "2024-03-05",
+        "documentation": [
+            {
+                "title": "Tools",
+                "content": "- Brush with customizable size and color\n- Eraser\n- Shapes (circle, rectangle, line)\n- Text tool\n- Fill tool"
+            }
+        ]
+    },
+    {
+        "id": "painter_pro",
+        "title": "Painter Pro",
+        "subtitle": "Advanced features for custom drawings with even more functionality",
+        "description": "The professional version of Painter with advanced features for serious artists and developers.",
+        "price": "$8.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.5.0",
+        "lastUpdated": "2024-03-01",
+        "documentation": [
+            {
+                "title": "Advanced Features",
+                "content": "- Layer support\n- Advanced brush engine\n- Custom filters and effects\n- Export to multiple formats"
+            }
+        ]
+    },
+    {
+        "id": "image_compressor",
+        "title": "Image Compressor",
+        "subtitle": "Compress images efficiently",
+        "description": "Optimize your app's storage and performance with efficient image compression.",
+        "price": "$5.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.1.0",
+        "lastUpdated": "2024-02-28",
+        "documentation": [
+            {
+                "title": "Compression Options",
+                "content": "- Quality adjustment\n- Size reduction\n- Format conversion\n- Batch processing"
+            }
+        ]
+    },
+    {
+        "id": "video_compressor",
+        "title": "Video Compressor",
+        "subtitle": "Compress video files with ease",
+        "description": "Reduce video file sizes while maintaining quality. Perfect for apps that handle video uploads.",
+        "price": "$5.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.0.0",
+        "lastUpdated": "2024-02-25",
+        "documentation": [
+            {
+                "title": "Features",
+                "content": "- Resolution adjustment\n- Bitrate control\n- Format conversion\n- Progress tracking"
+            }
+        ]
+    },
+    {
+        "id": "photo_filter_pro",
+        "title": "Photo Filter Pro",
+        "subtitle": "Filter your images with custom filters",
+        "description": "Add professional photo filters and effects to your app with this powerful extension.",
+        "price": "$5.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.2.0",
+        "lastUpdated": "2024-02-20",
+        "documentation": [
+            {
+                "title": "Filter Types",
+                "content": "- Color filters\n- Vintage effects\n- Artistic filters\n- Custom filter creation"
+            }
+        ]
+    },
+    {
+        "id": "htxml",
+        "title": "HTXML",
+        "subtitle": "Advanced HTML/XML functionalities",
+        "description": "Handle HTML and XML data with ease in your App Inventor projects.",
+        "price": "$8.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.1.0",
+        "lastUpdated": "2024-02-15",
+        "documentation": [
+            {
+                "title": "Features",
+                "content": "- HTML parsing\n- XML processing\n- Web scraping\n- Data extraction"
+            }
+        ]
+    },
+    {
+        "id": "music_bar",
+        "title": "Music Bar",
+        "subtitle": "Create custom music bars",
+        "description": "Create beautiful and customizable music bars for your app. Perfect for music players, audio visualizers, and more.",
+        "price": "$5.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.2.0",
+        "lastUpdated": "2024-03-10",
+        "url": "https://gumroad.com/l/music_bar",
+        "documentation": [
+            {
+                "title": "Features",
+                "content": "- Customizable bar colors\n- Adjustable bar width and spacing\n- Smooth animations\n- Real-time audio visualization"
+            }
+        ]
+    },
+    {
+        "id": "sms_pro",
+        "title": "SMS Pro",
+        "subtitle": "Advanced SMS features",
+        "description": "Enhanced SMS capabilities for your app including scheduled messages and group sending.",
+        "price": "$8.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.3.0",
+        "lastUpdated": "2024-02-10",
+        "documentation": [
+            {
+                "title": "Advanced Features",
+                "content": "- Scheduled messages\n- Group messaging\n- Message templates\n- Delivery reports"
+            }
+        ]
+    },
+    {
+        "id": "youtube_downloader",
+        "title": "YouTube Downloader",
+        "subtitle": "Download videos from YouTube with ease",
+        "description": "Download YouTube videos directly to your app with various quality options.",
+        "price": "$10.00",
+        "filters": [
+            "all",
+            "paid"
+        ],
+        "version": "1.0.0",
+        "lastUpdated": "2024-02-05",
+        "documentation": [
+            {
+                "title": "Features",
+                "content": "- Multiple quality options\n- Audio extraction\n- Playlist support\n- Download progress tracking"
+            }
+        ]
+    }
+]
