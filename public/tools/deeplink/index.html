@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Link Generator - Aemo Developer Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-primary: #bb86fc;
+            --accent-secondary: #03dac6;
+            --border-color: #333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent-primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .tool-section {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(187, 134, 252, 0.3);
+        }
+
+        .result {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-secondary);
+        }
+
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../../" class="back-link">← Back to Tools</a>
+        
+        <div class="header">
+            <h1 class="title">Deep Link Generator</h1>
+            <p class="subtitle">Easily generate and handle deep links for your apps</p>
+        </div>
+
+        <div class="tool-section">
+            <h2 class="section-title">Generate Deep Link</h2>
+            
+            <div class="input-group">
+                <label for="scheme">Scheme</label>
+                <input type="text" id="scheme" placeholder="myapp" value="myapp">
+            </div>
+
+            <div class="input-group">
+                <label for="host">Host</label>
+                <input type="text" id="host" placeholder="example.com">
+            </div>
+
+            <div class="input-group">
+                <label for="path">Path</label>
+                <input type="text" id="path" placeholder="/product/123">
+            </div>
+
+            <div class="input-group">
+                <label for="params">Parameters (JSON format)</label>
+                <textarea id="params" placeholder='{"key": "value", "id": "123"}'></textarea>
+            </div>
+
+            <button class="btn" onclick="generateDeepLink()">Generate Deep Link</button>
+
+            <div id="result" class="result" style="display: none;">
+                <button class="copy-btn" onclick="copyResult()">Copy</button>
+                <span id="resultText"></span>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h2 class="section-title">Parse Deep Link</h2>
+            
+            <div class="input-group">
+                <label for="deepLink">Deep Link URL</label>
+                <input type="text" id="deepLink" placeholder="myapp://example.com/product/123?key=value&id=123">
+            </div>
+
+            <button class="btn" onclick="parseDeepLink()">Parse Deep Link</button>
+
+            <div id="parseResult" class="result" style="display: none;">
+                <button class="copy-btn" onclick="copyParseResult()">Copy</button>
+                <pre id="parseResultText"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateDeepLink() {
+            const scheme = document.getElementById('scheme').value;
+            const host = document.getElementById('host').value;
+            const path = document.getElementById('path').value;
+            const paramsText = document.getElementById('params').value;
+
+            let url = scheme + '://';
+            
+            if (host) {
+                url += host;
+            }
+            
+            if (path) {
+                url += path;
+            }
+
+            if (paramsText) {
+                try {
+                    const params = JSON.parse(paramsText);
+                    const searchParams = new URLSearchParams();
+                    
+                    for (const [key, value] of Object.entries(params)) {
+                        searchParams.append(key, value);
+                    }
+                    
+                    url += '?' + searchParams.toString();
+                } catch (e) {
+                    alert('Invalid JSON format in parameters');
+                    return;
+                }
+            }
+
+            showResult(url);
+        }
+
+        function parseDeepLink() {
+            const deepLink = document.getElementById('deepLink').value;
+            
+            if (!deepLink) {
+                alert('Please enter a deep link URL');
+                return;
+            }
+
+            try {
+                const url = new URL(deepLink);
+                
+                const parsed = {
+                    scheme: url.protocol.replace(':', ''),
+                    host: url.hostname,
+                    port: url.port,
+                    path: url.pathname,
+                    params: {}
+                };
+
+                url.searchParams.forEach((value, key) => {
+                    parsed.params[key] = value;
+                });
+
+                showParseResult(parsed);
+            } catch (e) {
+                alert('Invalid deep link URL format');
+            }
+        }
+
+        function showResult(text) {
+            const resultDiv = document.getElementById('result');
+            const resultText = document.getElementById('resultText');
+            
+            resultText.textContent = text;
+            resultDiv.style.display = 'block';
+        }
+
+        function showParseResult(data) {
+            const resultDiv = document.getElementById('parseResult');
+            const resultText = document.getElementById('parseResultText');
+            
+            resultText.textContent = JSON.stringify(data, null, 2);
+            resultDiv.style.display = 'block';
+        }
+
+        function copyResult() {
+            const text = document.getElementById('resultText').textContent;
+            copyToClipboard(text);
+        }
+
+        function copyParseResult() {
+            const text = document.getElementById('parseResultText').textContent;
+            copyToClipboard(text);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
