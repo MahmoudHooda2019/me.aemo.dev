@@ -78,12 +78,6 @@
           </div>
         </div>
       </div>
-      
-      <!-- Contact Section with Grid Pattern -->
-      <div class="section-wrapper relative">
-        <div class="grid-pattern"></div>
-        <ContactSection />
-      </div>
     </main>
     
     <!-- Footer -->
@@ -98,7 +92,6 @@ import LoadingScreen from '@/components/LoadingScreen.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import ExtensionsSection from '@/components/ExtensionsSection.vue'
 import ToolsSection from '@/components/ToolsSection.vue'
-import ContactSection from '@/components/ContactSection.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
 import { useTheme } from '@/composables/useTheme'
