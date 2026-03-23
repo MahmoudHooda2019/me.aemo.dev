@@ -1,0 +1,146 @@
+[
+  {
+    "id": "deeplink",
+    "title": "Deep Link Generator",
+    "subtitle": "Create powerful deep links for your apps",
+    "description": "Generate and parse deep links with custom schemes, parameters, and validation. Perfect for mobile app deep linking.",
+    "icon": "🔗",
+    "url": "tools/deeplink/",
+    "features": [
+      "Custom scheme support",
+      "URL parameter handling",
+      "Link validation",
+      "Parse existing links",
+      "Copy to clipboard"
+    ],
+    "category": "URL",
+    "difficulty": "BEGINNER",
+    "tags": ["mobile", "url", "deep-link", "app"]
+  },
+  {
+    "id": "base64",
+    "title": "Base64 Encode & Decode",
+    "subtitle": "Convert text and files to Base64 format",
+    "description": "Encode and decode text or files to Base64 with support for large files and batch processing.",
+    "icon": "🔐",
+    "url": "tools/base64/",
+    "features": [
+      "Text encoding/decoding",
+      "File support",
+      "Batch processing",
+      "History tracking",
+      "Download results"
+    ],
+    "category": "ENCODING",
+    "difficulty": "BEGINNER",
+    "tags": ["encoding", "base64", "security", "file"]
+  },
+  {
+    "id": "json-formatter",
+    "title": "JSON Formatter & Validator",
+    "subtitle": "Format, validate, and beautify JSON data",
+    "description": "Professional JSON formatting tool with syntax highlighting, validation, and minification capabilities.",
+    "icon": "📋",
+    "url": "tools/json-formatter/",
+    "features": [
+      "Syntax highlighting",
+      "Error detection",
+      "Minify/Beautify",
+      "Schema validation",
+      "Export options"
+    ],
+    "category": "DEVELOPMENT",
+    "difficulty": "INTERMEDIATE",
+    "tags": ["json", "formatting", "validation", "development"]
+  },
+  {
+    "id": "color-picker",
+    "title": "Advanced Color Picker",
+    "subtitle": "Professional color selection and conversion",
+    "description": "Pick colors, convert between formats, and generate color palettes for your projects.",
+    "icon": "🎨",
+    "url": "tools/color-picker/",
+    "features": [
+      "Multiple formats",
+      "Palette generator",
+      "Color blindness simulator",
+      "Export palettes",
+      "Color contrast"
+    ],
+    "category": "UTILITY",
+    "difficulty": "BEGINNER",
+    "tags": ["color", "design", "palette", "accessibility"]
+  },
+  {
+    "id": "regex-tester",
+    "title": "Regex Tester & Builder",
+    "subtitle": "Test and build regular expressions",
+    "description": "Interactive regex testing with real-time matching, group extraction, and pattern library.",
+    "icon": "🔍",
+    "url": "tools/regex-tester/",
+    "features": [
+      "Real-time testing",
+      "Group extraction",
+      "Pattern library",
+      "Syntax highlighting",
+      "Export patterns"
+    ],
+    "category": "DEVELOPMENT",
+    "difficulty": "ADVANCED",
+    "tags": ["regex", "pattern", "testing", "development"]
+  },
+  {
+    "id": "url-encoder",
+    "title": "URL Encoder & Decoder",
+    "subtitle": "Encode and decode URLs safely",
+    "description": "Professional URL encoding tool with support for various encoding formats and batch processing.",
+    "icon": "🌐",
+    "url": "tools/url-encoder/",
+    "features": [
+      "URL encode/decode",
+      "Component parsing",
+      "Batch processing",
+      "Format validation",
+      "Copy results"
+    ],
+    "category": "URL",
+    "difficulty": "BEGINNER",
+    "tags": ["url", "encoding", "web", "validation"]
+  },
+  {
+    "id": "hash-generator",
+    "title": "Hash Generator",
+    "subtitle": "Generate various hash types",
+    "description": "Create MD5, SHA1, SHA256, and other hash types for data integrity and security.",
+    "icon": "🔑",
+    "url": "tools/hash-generator/",
+    "features": [
+      "Multiple hash types",
+      "File hashing",
+      "Text hashing",
+      "Compare hashes",
+      "Batch processing"
+    ],
+    "category": "SECURITY",
+    "difficulty": "INTERMEDIATE",
+    "tags": ["hash", "security", "md5", "sha", "encryption"]
+  },
+  {
+    "id": "timestamp-converter",
+    "title": "Timestamp Converter",
+    "subtitle": "Convert between timestamp formats",
+    "description": "Convert between Unix timestamps, ISO dates, and human-readable formats with timezone support.",
+    "icon": "⏰",
+    "url": "tools/timestamp-converter/",
+    "features": [
+      "Unix timestamp",
+      "ISO format",
+      "Timezone support",
+      "Batch conversion",
+      "Current time"
+    ],
+    "category": "UTILITY",
+    "difficulty": "BEGINNER",
+    "tags": ["timestamp", "date", "time", "conversion", "timezone"]
+  }
+]

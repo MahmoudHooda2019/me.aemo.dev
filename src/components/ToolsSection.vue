@@ -1,46 +1,177 @@
 <template>
   <section id="tools" class="tools-section section">
-    <h2 class="section-title" data-aos="fade-up">Tools</h2>
-    <div class="card-container">
-      <a 
-        v-for="tool in tools" 
-        :key="tool.id"
-        :href="tool.url" 
-        class="card" 
-        style="text-decoration:none;color:inherit;"
-        data-aos="fade-up"
-      >
-        <div class="card-content">
-          <div class="card-title">{{ tool.title }}</div>
-          <div class="card-subtitle">{{ tool.subtitle }}</div>
-        </div>
-      </a>
+    <h2 class="section-title" data-aos="fade-up">Developer Tools</h2>
+    <p class="section-subtitle" data-aos="fade-up">Free utilities to enhance your development workflow</p>
+    
+    <!-- Loading State -->
+    <div v-if="isLoading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading tools...</p>
     </div>
+
+    <!-- Error State -->
+    <div v-else-if="error" class="error-state">
+      <div class="error-icon">⚠️</div>
+      <h3>Failed to load tools</h3>
+      <p>{{ error }}</p>
+      <button class="retry-btn" @click="loadTools">Retry</button>
+    </div>
+
+    <!-- Tools Content -->
+    <template v-else>
+      <!-- Category Filter -->
+      <div class="category-filter" data-aos="fade-up">
+        <button 
+          v-for="category in categories" 
+          :key="category"
+          class="category-btn"
+          :class="{ active: selectedCategory === category }"
+          @click="selectedCategory = category"
+        >
+          {{ getCategoryLabel(category) }}
+        </button>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container" data-aos="fade-up">
+        <div class="search-box">
+          <input 
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search tools..."
+            class="search-input"
+          >
+          <span class="search-icon">🔍</span>
+        </div>
+      </div>
+
+      <!-- Tools Grid -->
+      <div class="card-container">
+        <div 
+          v-for="tool in filteredTools" 
+          :key="tool.id"
+          class="card" 
+          @click="navigateToTool(tool.url)"
+          data-aos="fade-up"
+          :data-aos-delay="getAosDelay(tool)"
+        >
+          <div class="card-header">
+            <div class="card-icon">{{ tool.icon }}</div>
+            <div class="card-badge" :class="getDifficultyClass(tool.difficulty)">
+              {{ tool.difficulty }}
+            </div>
+          </div>
+          
+          <div class="card-content">
+            <h3 class="card-title">{{ tool.title }}</h3>
+            <p class="card-subtitle">{{ tool.subtitle }}</p>
+            <p class="card-description">{{ tool.description }}</p>
+            
+            <div class="card-features">
+              <span 
+                v-for="feature in tool.features.slice(0, 3)" 
+                :key="feature"
+                class="feature-tag"
+              >
+                ✓ {{ feature }}
+              </span>
+              <span v-if="tool.features.length > 3" class="feature-more">
+                +{{ tool.features.length - 3 }} more
+              </span>
+            </div>
+            
+            <div class="card-tags">
+              <span 
+                v-for="tag in tool.tags" 
+                :key="tag"
+                class="tag"
+              >
+                {{ tag }}
+              </span>
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <span class="card-link">Open Tool →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Results -->
+      <div v-if="filteredTools.length === 0" class="no-results">
+        <div class="no-results-icon">🔍</div>
+        <h3>No tools found</h3>
+        <p>Try adjusting your search or filter criteria</p>
+        <button class="reset-btn" @click="resetFilters">Reset Filters</button>
+      </div>
+    </template>
   </section>
 </template>
 
 <script setup lang="ts">
-interface Tool {
-  id: string
-  title: string
-  subtitle: string
-  url: string
+import { ref, computed, onMounted } from 'vue'
+import type { Tool } from '@/types/tools'
+import { ToolCategory, ToolDifficulty } from '@/types/tools'
+import { useTools } from '@/composables/useTools'
+
+const selectedCategory = ref<ToolCategory | 'all'>('all')
+const searchQuery = ref('')
+
+const {
+  tools,
+  isLoading,
+  error,
+  loadTools,
+  getToolsByCategory,
+  searchTools: searchToolsUtil,
+  getCategories,
+  getCategoryLabel: getCategoryLabelFromComposable,
+  getDifficultyClass: getDifficultyClassFromComposable
+} = useTools()
+
+const filteredTools = computed(() => {
+  let filtered = tools.value
+
+  // Filter by category
+  if (selectedCategory.value !== 'all') {
+    filtered = getToolsByCategory(selectedCategory.value)
+  }
+
+  // Filter by search query
+  if (searchQuery.value.trim()) {
+    filtered = searchToolsUtil(searchQuery.value)
+  }
+
+  return filtered
+})
+
+const categories = computed(() => getCategories())
+
+const getCategoryLabel = (category: ToolCategory | 'all'): string => {
+  return getCategoryLabelFromComposable(category)
 }
 
-const tools: Tool[] = [
-  {
-    id: 'deeplink',
-    title: 'Deep Link',
-    subtitle: 'Easily generate and handle deep links for your apps.',
-    url: 'tools/deeplink/'
-  },
-  {
-    id: 'base64',
-    title: 'Base64 Encode & Decode',
-    subtitle: 'Convert text or files to and from Base64 encoding.',
-    url: 'tools/base64/'
-  }
-]
+const getDifficultyClass = (difficulty: ToolDifficulty): string => {
+  return getDifficultyClassFromComposable(difficulty)
+}
+
+const getAosDelay = (tool: Tool): number => {
+  const index = filteredTools.value.indexOf(tool)
+  return index * 100
+}
+
+const navigateToTool = (url: string) => {
+  window.location.href = url
+}
+
+const resetFilters = () => {
+  selectedCategory.value = 'all'
+  searchQuery.value = ''
+}
+
+onMounted(async () => {
+  await loadTools()
+})
 </script>
 
 <style scoped>
@@ -58,25 +189,105 @@ const tools: Tool[] = [
   font-size: 2.5rem;
   font-weight: 600;
   color: var(--accent-secondary);
+  margin-bottom: 0.5rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
   margin-bottom: 3rem;
   font-family: 'Inter', sans-serif;
 }
 
+/* Category Filter */
+.category-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.category-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+/* Search Bar */
+.search-container {
+  max-width: 500px;
+  margin: 0 auto 3rem;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+/* Tools Grid */
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
 }
 
 .card {
-  background: var(--bg-card);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .card::before {
@@ -101,23 +312,218 @@ const tools: Tool[] = [
   border-color: var(--accent-secondary);
 }
 
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  display: block;
+}
+
+.card-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.difficulty-beginner {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.difficulty-intermediate {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.difficulty-advanced {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
 .card-content {
-  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-title {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-family: 'Inter', sans-serif;
 }
 
 .card-subtitle {
   color: var(--text-secondary);
   font-size: 0.95rem;
-  line-height: 1.5;
+  margin-bottom: 1rem;
   font-family: 'Inter', sans-serif;
+}
+
+.card-description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature-tag {
+  background: rgba(3, 218, 198, 0.1);
+  color: var(--accent-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.feature-more {
+  background: rgba(187, 134, 252, 0.1);
+  color: var(--accent-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-link {
+  color: var(--accent-primary);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.card:hover .card-link {
+  transform: translateX(5px);
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.error-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #f44336;
+}
+
+.retry-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(244, 67, 54, 0.3);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.no-results-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-results h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.reset-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(187, 134, 252, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -136,6 +542,15 @@ const tools: Tool[] = [
   
   .card {
     padding: 1.5rem;
+  }
+  
+  .category-filter {
+    gap: 0.5rem;
+  }
+  
+  .category-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }
 </style>
