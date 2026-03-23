@@ -58,7 +58,9 @@ const contacts: Contact[] = [
 ]
 
 const openLink = (url: string) => {
-  window.open(url, '_blank')
+  // noopener prevents the opened page from accessing window.opener (reverse tabnapping)
+  // noreferrer additionally hides the referrer header
+  window.open(url, '_blank', 'noopener,noreferrer')
 }
 </script>
 

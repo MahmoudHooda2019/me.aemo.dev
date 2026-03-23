@@ -15,3 +15,12 @@ AOS.init({
 })
 
 createApp(App).mount('#app')
+
+// Register service worker from the module bundle (avoids inline script / CSP issues)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').catch(() => {
+      // SW registration failure is non-critical — silently ignore
+    })
+  })
+}

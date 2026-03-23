@@ -1,41 +1,90 @@
-/*
-  Cache-Control: public, max-age=31536000
-  Access-Control-Allow-Origin: *
+# =============================================================================
+# Aemo Developer — Cloudflare Pages HTTP Headers
+# =============================================================================
 
+# ---------------------------------------------------------------------------
+# Global defaults applied to EVERY response
+# ---------------------------------------------------------------------------
+/*
+  # Prevent clickjacking
+  X-Frame-Options: DENY
+
+  # Prevent MIME-type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Referrer policy — don't leak full URL to third parties
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions policy — disable features the site doesn't use
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+
+  # Force HTTPS for 1 year, include sub-domains
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Content Security Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+
+  # Cache HTML pages — allow revalidation
+  Cache-Control: no-cache, must-revalidate
+
+# ---------------------------------------------------------------------------
+# Static assets — long-lived cache (content-hashed by Vite)
+# ---------------------------------------------------------------------------
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ---------------------------------------------------------------------------
+# Scripts & Styles
+# ---------------------------------------------------------------------------
 /*.js
   Content-Type: text/javascript
-
-/*.ts
-  Content-Type: application/typescript
 
 /*.css
   Content-Type: text/css
 
-/*.json
-  Content-Type: application/json
-
-/*.vue
-  Content-Type: application/octet-stream
-
+# ---------------------------------------------------------------------------
+# Images
+# ---------------------------------------------------------------------------
 /*.png
   Content-Type: image/png
+  Cache-Control: public, max-age=86400
 
 /*.webp
   Content-Type: image/webp
+  Cache-Control: public, max-age=86400
 
 /*.svg
   Content-Type: image/svg+xml
+  Cache-Control: public, max-age=86400
+
+# ---------------------------------------------------------------------------
+# Manifest & Service Worker — short cache so updates propagate quickly
+# ---------------------------------------------------------------------------
+/manifest.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=86400
+
+/service-worker.js
+  Content-Type: application/javascript
+  Cache-Control: no-cache, must-revalidate
+
+# ---------------------------------------------------------------------------
+# HTML pages
+# ---------------------------------------------------------------------------
+/*.html
+  Content-Type: text/html
+
+# ---------------------------------------------------------------------------
+# API — CORS only on the public extensions API
+# ---------------------------------------------------------------------------
+/api/extensions*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type
+  Cache-Control: public, max-age=300
 
 /extensions/extensions.json
   Content-Type: application/json
   Access-Control-Allow-Origin: *
-
-/_worker.ts
-  Content-Type: application/typescript
-
-# Service Worker
-/service-worker.js
-  Content-Type: application/javascript
-
-/*.html
-  Content-Type: text/html
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Cache-Control: public, max-age=300

@@ -83,7 +83,7 @@ export const useExtensions = () => {
 
   const isNewExtension = (lastUpdated: string): boolean => {
     const lastUpdatedDate = new Date(lastUpdated)
-    const today = new Date('2025-05-10')
+    const today = new Date()
     const diffDays = (today.getTime() - lastUpdatedDate.getTime()) / (1000 * 60 * 60 * 24)
     return diffDays <= 10
   }
