@@ -664,3 +664,76 @@ footer {
 .load-more-btn:active {
     transform: translateY(0);
 }
+
+/* ==========================================================================
+   UI Polish — Section dividers, spacing, scroll behaviour
+   ========================================================================== */
+
+/* Smooth scroll behaviour for the whole page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section scroll offset so content is not hidden behind the fixed navbar */
+.section {
+    scroll-margin-top: 72px;
+}
+
+/* Subtle gradient divider between sections */
+.extensions-section,
+.tools-section,
+.contact-section {
+    position: relative;
+}
+
+.extensions-section::before,
+.tools-section::before,
+.contact-section::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(187, 134, 252, 0.25) 30%, rgba(3, 218, 198, 0.25) 70%, transparent 100%);
+    margin-bottom: 0;
+}
+
+/* Ensure every main section has a consistent max-width wrapper */
+.extensions-section,
+.tools-section,
+.contact-section {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Inner content centring for sections that lack it */
+.tools-section .card-container,
+.extensions-section .card-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Tools section background — differentiate it from extensions */
+.tools-section {
+    background: linear-gradient(180deg, #111111 0%, #161616 100%);
+}
+
+/* Contact section background */
+.contact-section {
+    background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+}
+
+/* Slightly brighten card hover glow for better contrast */
+.card:hover {
+    box-shadow: 0 16px 40px rgba(187, 134, 252, 0.22), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Section title gradient enhancement */
+.section-title {
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}

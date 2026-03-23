@@ -1,5 +1,5 @@
 <template>
-  <section class="extensions-section section">
+  <section id="extensions" class="extensions-section section">
     <h2 class="section-title" data-aos="fade-up">Extensions</h2>
     
     <div class="filter-buttons" data-aos="fade-up">

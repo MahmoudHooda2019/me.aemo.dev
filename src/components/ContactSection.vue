@@ -1,5 +1,5 @@
 <template>
-  <section class="contact-section section">
+  <section id="contact" class="contact-section section">
     <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
     <div class="contact-options">
       <div 

@@ -1,5 +1,5 @@
 <template>
-  <section class="tools-section section">
+  <section id="tools" class="tools-section section">
     <h2 class="section-title" data-aos="fade-up">Tools</h2>
     <div class="card-container">
       <a 
