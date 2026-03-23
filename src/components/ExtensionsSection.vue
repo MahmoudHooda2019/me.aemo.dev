@@ -117,13 +117,15 @@ watch(filteredExtensions, (newFiltered) => {
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 600;
-  color: #bb86fc;
+  color: var(--accent-primary);
   margin-bottom: 3rem;
   font-family: 'Inter', sans-serif;
 }
@@ -138,9 +140,9 @@ watch(filteredExtensions, (newFiltered) => {
 
 .filter-btn {
   padding: 0.75rem 1.5rem;
-  border: 2px solid #bb86fc;
+  border: 2px solid var(--accent-primary);
   background: transparent;
-  color: #bb86fc;
+  color: var(--accent-primary);
   border-radius: 25px;
   cursor: pointer;
   font-weight: 500;
@@ -154,8 +156,8 @@ watch(filteredExtensions, (newFiltered) => {
 }
 
 .filter-btn.active {
-  background: #bb86fc;
-  color: #121212;
+  background: var(--accent-primary);
+  color: var(--bg-secondary);
 }
 
 .card-container {
@@ -171,9 +173,9 @@ watch(filteredExtensions, (newFiltered) => {
 
 .load-more-btn {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #bb86fc, #03dac6);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   border: none;
-  color: #121212;
+  color: var(--bg-secondary);
   border-radius: 25px;
   cursor: pointer;
   font-weight: 600;
@@ -183,7 +185,7 @@ watch(filteredExtensions, (newFiltered) => {
 
 .load-more-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(187, 134, 252, 0.3);
+  box-shadow: 0 10px 25px var(--shadow-color);
 }
 
 .error-message {

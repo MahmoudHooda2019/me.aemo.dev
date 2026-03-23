@@ -8,11 +8,21 @@
         <li><a href="#tools" @click.prevent="scrollTo('tools')">Tools</a></li>
         <li><a href="#contact" @click.prevent="scrollTo('contact')">Contact</a></li>
       </ul>
-      <button class="nav-toggle" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav-actions">
+        <button
+          class="theme-toggle"
+          @click="toggleTheme"
+          :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        >
+          <span class="theme-icon" :class="{ spin: true }">{{ theme === 'dark' ? '☀️' : '🌙' }}</span>
+        </button>
+        <button class="nav-toggle" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
 
     <!-- Mobile Dropdown Menu -->
@@ -27,19 +37,8 @@
       <div class="splash-container">
         <div class="logo" role="banner" aria-label="Aemo Developer Logo">Aemo Developer</div>
         <div class="tagline" aria-live="polite">
-          <pre>
-⠛⠛⣿⣿⣿⣿⣿⡷⢶⣦⣶⣶⣤⣤⣤⣀⠀⠀⠀
- ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
- ⠀⠀⠀⠉⠉⠉⠙⠻⣿⣿⠿⠿⠛⠛⠛⠻⣿⣿⣇⠀
- ⠀⠀⢤⣀⣀⣀⠀⠀⢸⣷⡄⠀⣁⣀⣤⣴⣿⣿⣿⣆
- ⠀⠀⠀⠀⠹⠏⠀⠀⠀⣿⣧⠀⠹⣿⣿⣿⣿⣿⡿⣿
- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⠇⢀⣼⣿⣿⠛⢯⡿⡟
- ⠀⠀⠀⠀⠀⠀⠀⠀⠦⠴⢿⢿⣿⡿⠷⠀⣿⠀
- ⠀⠀⠀⠀⠀⠙⣷⣶⣶⣤⣤⣤⣤⣶⣦⠃⠀
- ⠀⠀⠀⠀⠀⢐⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀
- ⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀
- ⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁
-                  </pre>
+          <p class="tagline-text">MIT App Inventor Extensions & Developer Tools</p>
+          <p class="tagline-sub">Build better apps with powerful components</p>
         </div>
         <div class="scroll-hint" @click="scrollTo('extensions')" aria-label="Scroll to extensions">
           <span>Explore</span>
@@ -52,9 +51,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useTheme } from '@/composables/useTheme'
 
 const isScrolled = ref(false)
 const menuOpen = ref(false)
+const { theme, toggleTheme } = useTheme()
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 80
@@ -93,23 +94,23 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background: transparent;
+  background: var(--nav-bg);
   transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 .navbar.scrolled {
-  background: rgba(18, 18, 18, 0.88);
+  background: var(--nav-bg-scrolled);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid rgba(187, 134, 252, 0.18);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nav-brand {
   font-family: 'Orbitron', monospace;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #bb86fc;
+  color: var(--accent-primary);
   letter-spacing: 1px;
   text-shadow: 0 0 12px rgba(187, 134, 252, 0.4);
   cursor: pointer;
@@ -125,7 +126,7 @@ onUnmounted(() => {
 }
 
 .nav-links a {
-  color: #cccccc;
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.92rem;
   font-family: 'Inter', sans-serif;
@@ -143,17 +144,56 @@ onUnmounted(() => {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #bb86fc, #03dac6);
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
   border-radius: 2px;
   transition: width 0.25s ease;
 }
 
 .nav-links a:hover {
-  color: #bb86fc;
+  color: var(--accent-primary);
 }
 
 .nav-links a:hover::after {
   width: 100%;
+}
+
+/* ===== Nav actions group (theme toggle + hamburger) ===== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ===== Theme toggle button ===== */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(187, 134, 252, 0.3);
+  background: rgba(187, 134, 252, 0.08);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: rgba(187, 134, 252, 0.18);
+  border-color: var(--accent-primary);
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  font-size: 1rem;
+  line-height: 1;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(20deg);
 }
 
 /* ===== Hamburger ===== */
@@ -174,14 +214,14 @@ onUnmounted(() => {
   display: block;
   width: 22px;
   height: 2px;
-  background: #cccccc;
+  background: var(--text-secondary);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease, background 0.2s ease;
   transform-origin: center;
 }
 
 .nav-toggle:hover span {
-  background: #bb86fc;
+  background: var(--accent-primary);
 }
 
 /* Animated X state */
@@ -203,10 +243,10 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   z-index: 999;
-  background: rgba(18, 18, 18, 0.96);
+  background: var(--nav-bg-scrolled);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(187, 134, 252, 0.2);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -221,7 +261,7 @@ onUnmounted(() => {
 }
 
 .nav-mobile a {
-  color: #cccccc;
+  color: var(--text-secondary);
   text-decoration: none;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
@@ -232,9 +272,9 @@ onUnmounted(() => {
 }
 
 .nav-mobile a:hover {
-  color: #bb86fc;
+  color: var(--accent-primary);
   background: rgba(187, 134, 252, 0.07);
-  border-left-color: #bb86fc;
+  border-left-color: var(--accent-primary);
 }
 
 /* ===== Splash Section ===== */
@@ -260,8 +300,8 @@ onUnmounted(() => {
   font-family: 'Orbitron', monospace;
   font-size: 3.5rem;
   font-weight: 700;
-  color: #bb86fc;
-  margin-bottom: 2rem;
+  color: var(--accent-primary);
+  margin-bottom: 1.5rem;
   text-shadow: 0 0 20px rgba(187, 134, 252, 0.5);
   animation: glow 2s ease-in-out infinite alternate;
 }
@@ -272,18 +312,20 @@ onUnmounted(() => {
 }
 
 .tagline {
-  font-family: 'JetBrains Mono', monospace;
-  color: #00ffcc;
-  font-size: 0.8rem;
-  line-height: 1;
-  opacity: 0.9;
+  font-family: 'Inter', sans-serif;
   margin-bottom: 3rem;
 }
 
-.tagline pre {
-  margin: 0;
-  white-space: pre;
-  letter-spacing: 0.1em;
+.tagline-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.tagline-sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
 }
 
 /* ===== Scroll hint ===== */
@@ -307,12 +349,12 @@ onUnmounted(() => {
   font-size: 0.75rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #03dac6;
+  color: var(--accent-secondary);
 }
 
 .scroll-arrow {
   font-size: 1.2rem;
-  color: #03dac6;
+  color: var(--accent-secondary);
 }
 
 @keyframes bounceDown {
@@ -338,8 +380,12 @@ onUnmounted(() => {
     font-size: 2.2rem;
   }
 
-  .tagline {
-    font-size: 0.65rem;
+  .tagline-text {
+    font-size: 1.1rem;
+  }
+  
+  .tagline-sub {
+    font-size: 0.9rem;
   }
 }
 </style>

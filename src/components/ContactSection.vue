@@ -70,12 +70,14 @@ const openLink = (url: string) => {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: #bb86fc;
+  color: var(--accent-primary);
   margin-bottom: 3rem;
   font-family: 'Inter', sans-serif;
 }
@@ -92,8 +94,8 @@ const openLink = (url: string) => {
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-  border: 1px solid #333;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -120,8 +122,8 @@ const openLink = (url: string) => {
 
 .contact-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(187, 134, 252, 0.2);
-  border-color: #bb86fc;
+  box-shadow: 0 15px 35px var(--shadow-color);
+  border-color: var(--accent-primary);
 }
 
 .contact-icon {
@@ -150,7 +152,7 @@ const openLink = (url: string) => {
 .contact-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   position: relative;
   z-index: 1;

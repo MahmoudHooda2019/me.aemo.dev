@@ -67,7 +67,226 @@
     --font-size-5xl: 3rem;
 }
 
-/* Base Styles & Reset
+/* ==========================================================================
+   Light Mode Variable Overrides
+   Applied when <html data-theme="light"> is set by useTheme composable
+   ========================================================================== */
+[data-theme="light"] {
+    /* Brand Colors — deeper purple/teal for light backgrounds */
+    --primary-color: #6200ee;
+    --secondary-color: #3700b3;
+    --accent-color: #018786;
+
+    /* UI Colors */
+    --background-color: #f4f4f8;
+    --card-background: #ffffff;
+    --highlight-color: #eeeeee;
+
+    /* Text Colors */
+    --text-color: #1a1a1a;
+    --text-color-light: #555555;
+    --text-light: #444444;
+    --text-dark: #f4f4f8;
+
+    /* Neutral Colors */
+    --neutral-light: #888;
+    --border-color: rgba(0, 0, 0, 0.12);
+    --shadow-color: rgba(0, 0, 0, 0.12);
+
+    /* Focus & Interaction */
+    --focus-color: var(--accent-color);
+    --focus-shadow: 0 0 0 3px rgba(1, 135, 134, 0.3);
+}
+
+/* Smooth colour transition for all theme-sensitive elements */
+body,
+.card,
+.filter-btn,
+footer,
+.contact-card,
+.contact-section,
+.tools-section,
+.extensions-section,
+.card-tag,
+.load-more-btn,
+.section-title,
+.card-title,
+.card-subtitle {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Light-mode specific overrides for elements that use hardcoded dark colours */
+[data-theme="light"] body {
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+[data-theme="light"] .splash-section {
+    background: linear-gradient(135deg, #e8e8f0 0%, #f0eeff 100%);
+}
+
+[data-theme="light"] .logo {
+    color: #6200ee;
+    text-shadow: 0 0 20px rgba(98, 0, 238, 0.3);
+    animation: glow-light 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-light {
+    from { text-shadow: 0 0 20px rgba(98, 0, 238, 0.3); }
+    to   { text-shadow: 0 0 30px rgba(98, 0, 238, 0.6), 0 0 40px rgba(98, 0, 238, 0.4); }
+}
+
+[data-theme="light"] .tagline {
+    color: #018786;
+}
+
+[data-theme="light"] .scroll-hint span,
+[data-theme="light"] .scroll-arrow {
+    color: #018786;
+}
+
+[data-theme="light"] .tools-section {
+    background: linear-gradient(180deg, #ededf5 0%, #e8e8f0 100%);
+}
+
+[data-theme="light"] .contact-section {
+    background: linear-gradient(180deg, #f0eeff 0%, #ebebf5 100%);
+}
+
+[data-theme="light"] .card {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5ff 100%);
+    border-color: rgba(98, 0, 238, 0.12);
+}
+
+[data-theme="light"] .card:hover {
+    box-shadow: 0 16px 40px rgba(98, 0, 238, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: rgba(98, 0, 238, 0.4);
+}
+
+[data-theme="light"] .card-title {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .card-subtitle {
+    color: #555555;
+}
+
+[data-theme="light"] .card-tag {
+    background: rgba(98, 0, 238, 0.07);
+    color: #6200ee;
+    border-color: rgba(98, 0, 238, 0.25);
+}
+
+[data-theme="light"] .price-tag.paid {
+    background: linear-gradient(135deg, #6200ee, #3700b3);
+    color: #fff;
+}
+
+[data-theme="light"] .filter-btn {
+    border-color: #6200ee;
+    color: #6200ee;
+    background: transparent;
+}
+
+[data-theme="light"] .filter-btn:hover,
+[data-theme="light"] .filter-btn.active {
+    background: #6200ee;
+    color: #ffffff;
+    border-color: transparent;
+}
+
+[data-theme="light"] .contact-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5ff 100%);
+    border-color: rgba(98, 0, 238, 0.12);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .contact-card:hover {
+    box-shadow: 0 8px 25px rgba(98, 0, 238, 0.2);
+    border-color: rgba(98, 0, 238, 0.4);
+}
+
+[data-theme="light"] .contact-title {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] footer {
+    background: linear-gradient(135deg, #e8e8f0 0%, #ededf5 100%);
+    border-top-color: rgba(98, 0, 238, 0.15);
+}
+
+[data-theme="light"] .footer-content p {
+    color: #555555;
+}
+
+[data-theme="light"] .load-more-btn {
+    background: linear-gradient(135deg, #6200ee, #018786);
+    color: #ffffff;
+}
+
+/* Light-mode navbar adjustments */
+[data-theme="light"] .navbar.scrolled {
+    background: rgba(244, 244, 248, 0.9);
+    border-bottom-color: rgba(98, 0, 238, 0.15);
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .nav-brand {
+    color: #6200ee;
+    text-shadow: 0 0 12px rgba(98, 0, 238, 0.25);
+}
+
+[data-theme="light"] .nav-links a {
+    color: #444444;
+}
+
+[data-theme="light"] .nav-links a:hover {
+    color: #6200ee;
+}
+
+[data-theme="light"] .nav-links a::after {
+    background: linear-gradient(90deg, #6200ee, #018786);
+}
+
+[data-theme="light"] .nav-mobile {
+    background: rgba(244, 244, 248, 0.97);
+    border-bottom-color: rgba(98, 0, 238, 0.15);
+}
+
+[data-theme="light"] .nav-mobile a {
+    color: #444444;
+}
+
+[data-theme="light"] .nav-mobile a:hover {
+    color: #6200ee;
+    background: rgba(98, 0, 238, 0.05);
+    border-left-color: #6200ee;
+}
+
+[data-theme="light"] .nav-toggle span {
+    background: #444444;
+}
+
+[data-theme="light"] .nav-toggle:hover span {
+    background: #6200ee;
+}
+
+[data-theme="light"] .theme-toggle {
+    border-color: rgba(98, 0, 238, 0.3);
+    background: rgba(98, 0, 238, 0.06);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(98, 0, 238, 0.14);
+    border-color: rgba(98, 0, 238, 0.5);
+}
+
+/* ==========================================================================
+   Base Styles & Reset
    ========================================================================== */
 * {
     box-sizing: border-box;

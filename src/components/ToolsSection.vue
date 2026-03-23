@@ -48,14 +48,16 @@ const tools: Tool[] = [
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  background: var(--bg-card);
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 600;
-  color: #03dac6;
+  color: var(--accent-secondary);
   margin-bottom: 3rem;
   font-family: 'Inter', sans-serif;
 }
@@ -67,8 +69,8 @@ const tools: Tool[] = [
 }
 
 .card {
-  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-  border: 1px solid #333;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 2rem;
   cursor: pointer;
@@ -84,7 +86,7 @@ const tools: Tool[] = [
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #03dac6, #bb86fc);
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -95,8 +97,8 @@ const tools: Tool[] = [
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(3, 218, 198, 0.2);
-  border-color: #03dac6;
+  box-shadow: 0 15px 35px var(--shadow-color-alt);
+  border-color: var(--accent-secondary);
 }
 
 .card-content {
@@ -106,13 +108,13 @@ const tools: Tool[] = [
 .card-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   font-family: 'Inter', sans-serif;
 }
 
 .card-subtitle {
-  color: #b0b0b0;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.5;
   font-family: 'Inter', sans-serif;

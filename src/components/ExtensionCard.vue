@@ -42,8 +42,8 @@ const tags = computed(() => getExtensionTags(props.extension))
 
 <style scoped>
 .card {
-  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-  border: 1px solid #333;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
@@ -54,8 +54,8 @@ const tags = computed(() => getExtensionTags(props.extension))
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(187, 134, 252, 0.2);
-  border-color: #bb86fc;
+  box-shadow: 0 15px 35px var(--shadow-color);
+  border-color: var(--accent-primary);
 }
 
 .price-tag {
@@ -87,14 +87,14 @@ const tags = computed(() => getExtensionTags(props.extension))
 .card-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   font-family: 'Inter', sans-serif;
   line-height: 1.3;
 }
 
 .card-subtitle {
-  color: #b0b0b0;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.4;
   margin-bottom: 1rem;
@@ -110,7 +110,7 @@ const tags = computed(() => getExtensionTags(props.extension))
 .card-tag {
   padding: 0.25rem 0.5rem;
   background: rgba(187, 134, 252, 0.1);
-  color: #bb86fc;
+  color: var(--accent-primary);
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 500;

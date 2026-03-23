@@ -11,14 +11,39 @@
     
     <!-- Main Content -->
     <main>
-      <!-- Extensions Section -->
-      <ExtensionsSection />
+      <!-- Extensions Section with Grid Pattern and Floating Badges -->
+      <div class="section-wrapper relative">
+        <div class="grid-pattern"></div>
+        <ExtensionsSection />
+        <!-- Floating Badge for Extensions -->
+        <div class="floating-badge badge-extensions">
+          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #bb86fc20, #bb86fc40);">📦</div>
+          <div>
+            <div class="floating-badge-text">50+ Extensions</div>
+            <div class="floating-badge-subtext">Ready to use</div>
+          </div>
+        </div>
+      </div>
       
-      <!-- Tools Section -->
-      <ToolsSection />
+      <!-- Tools Section with Grid Pattern and Floating Badges -->
+      <div class="section-wrapper relative">
+        <div class="grid-pattern"></div>
+        <ToolsSection />
+        <!-- Floating Badge for Tools -->
+        <div class="floating-badge badge-tools" style="top: 20%;">
+          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #03dac620, #03dac640);">🛠️</div>
+          <div>
+            <div class="floating-badge-text">Free Tools</div>
+            <div class="floating-badge-subtext">Open source</div>
+          </div>
+        </div>
+      </div>
       
-      <!-- Contact Section -->
-      <ContactSection />
+      <!-- Contact Section with Grid Pattern -->
+      <div class="section-wrapper relative">
+        <div class="grid-pattern"></div>
+        <ContactSection />
+      </div>
     </main>
     
     <!-- Footer -->
@@ -36,10 +61,15 @@ import ToolsSection from '@/components/ToolsSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
+import { useTheme } from '@/composables/useTheme'
 
 const isLoading = ref(true)
+const { initTheme } = useTheme()
 
 onMounted(() => {
+  // Apply saved/preferred theme before first render to avoid flash
+  initTheme()
+
   // Initialize intersection observer for lazy loading
   const { observeElements } = useIntersectionObserver()
   
@@ -90,5 +120,36 @@ onMounted(() => {
 
 main {
   flex: 1;
+}
+
+.section-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-wrapper .grid-pattern {
+  z-index: 0;
+}
+
+.section-wrapper > *:not(.grid-pattern):not(.floating-badge) {
+  position: relative;
+  z-index: 1;
+}
+
+.badge-extensions {
+  right: -4px;
+  top: 25%;
+}
+
+.badge-tools {
+  right: -4px;
+  top: 30%;
+}
+
+@media (max-width: 1024px) {
+  .badge-extensions,
+  .badge-tools {
+    display: none;
+  }
 }
 </style>
