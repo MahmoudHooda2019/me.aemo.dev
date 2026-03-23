@@ -39,6 +39,22 @@
             <div class="floating-badge-subtext">Optimized Performance</div>
           </div>
         </div>
+        <!-- Center Right Floating Badge -->
+        <div class="floating-badge badge-center-right">
+          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #ffd93d20, #ffd93d40);">🚀</div>
+          <div>
+            <div class="floating-badge-text">High Performance</div>
+            <div class="floating-badge-subtext">Enterprise Ready</div>
+          </div>
+        </div>
+        <!-- Center Left Floating Badge -->
+        <div class="floating-badge badge-center-left">
+          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #6bcf7f20, #6bcf7f40);">🔧</div>
+          <div>
+            <div class="floating-badge-text">Easy Integration</div>
+            <div class="floating-badge-subtext">Plug & Play</div>
+          </div>
+        </div>
       </div>
       
       <!-- Tools Section with Grid Pattern and Floating Badges -->
@@ -200,12 +216,34 @@ main {
   transform: translateX(0);
 }
 
+.badge-center-right {
+  right: 15%;
+  top: 45%;
+  transform: translateX(10%);
+}
+
+.badge-center-right:hover {
+  transform: translateX(0);
+}
+
+.badge-center-left {
+  left: 15%;
+  top: 40%;
+  transform: translateX(-10%);
+}
+
+.badge-center-left:hover {
+  transform: translateX(0);
+}
+
 @media (max-width: 768px) {
   .badge-extensions,
   .badge-tools,
   .badge-left,
   .badge-left-tools,
-  .badge-right-middle {
+  .badge-right-middle,
+  .badge-center-right,
+  .badge-center-left {
     display: none;
   }
 }

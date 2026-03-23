@@ -61,9 +61,15 @@ const filteredExtensions = computed(() => {
   if (currentFilter.value === 'all') {
     return extensions.value
   }
-  return extensions.value.filter(ext => 
-    ext.price.toLowerCase() === currentFilter.value
-  )
+  return extensions.value.filter(ext => {
+    const price = ext.price.toLowerCase()
+    if (currentFilter.value === 'free') {
+      return price === 'free' || price.includes('free')
+    } else if (currentFilter.value === 'paid') {
+      return price.includes('$') || price.includes('paid') || !price.includes('free')
+    }
+    return false
+  })
 })
 
 const displayedExtensions = computed(() => {
