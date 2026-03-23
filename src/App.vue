@@ -23,6 +23,22 @@
             <div class="floating-badge-subtext">Ready to use</div>
           </div>
         </div>
+        <!-- Left Floating Badge -->
+        <div class="floating-badge badge-left">
+          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #ff6b6b20, #ff6b6b40);">🧩</div>
+          <div>
+            <div class="floating-badge-text">Drag & Drop</div>
+            <div class="floating-badge-subtext">Visual Builder</div>
+          </div>
+        </div>
+        <!-- Additional Floating Badge -->
+        <div class="floating-badge badge-right-middle">
+          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #4ecdc420, #4ecdc440);">⚡</div>
+          <div>
+            <div class="floating-badge-text">Lightning Fast</div>
+            <div class="floating-badge-subtext">Optimized Performance</div>
+          </div>
+        </div>
       </div>
       
       <!-- Tools Section with Grid Pattern and Floating Badges -->
@@ -35,6 +51,14 @@
           <div>
             <div class="floating-badge-text">Free Tools</div>
             <div class="floating-badge-subtext">Open source</div>
+          </div>
+        </div>
+        <!-- Left Floating Badge for Tools -->
+        <div class="floating-badge badge-left-tools" style="top: 25%;">
+          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #4ecdc420, #4ecdc440);">⚡</div>
+          <div>
+            <div class="floating-badge-text">Fast & Secure</div>
+            <div class="floating-badge-subtext">No tracking</div>
           </div>
         </div>
       </div>
@@ -141,14 +165,47 @@ main {
   top: 25%;
 }
 
+.badge-left {
+  left: -4px;
+  bottom: 25%;
+  transform: translateX(-5%);
+}
+
+.badge-left:hover {
+  transform: translateX(0);
+}
+
 .badge-tools {
   right: -4px;
   top: 30%;
 }
 
-@media (max-width: 1024px) {
+.badge-left-tools {
+  left: -4px;
+  top: 25%;
+  transform: translateX(-5%);
+}
+
+.badge-left-tools:hover {
+  transform: translateX(0);
+}
+
+.badge-right-middle {
+  right: -4px;
+  top: 60%;
+  transform: translateX(5%);
+}
+
+.badge-right-middle:hover {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
   .badge-extensions,
-  .badge-tools {
+  .badge-tools,
+  .badge-left,
+  .badge-left-tools,
+  .badge-right-middle {
     display: none;
   }
 }

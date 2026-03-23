@@ -3,11 +3,11 @@
     <!-- Sticky Navbar -->
     <nav class="navbar" :class="{ scrolled: isScrolled }">
       <div class="nav-brand">Aemo Developer</div>
-      <ul class="nav-links">
-        <li><a href="#extensions" @click.prevent="scrollTo('extensions')">Extensions</a></li>
-        <li><a href="#tools" @click.prevent="scrollTo('tools')">Tools</a></li>
-        <li><a href="#contact" @click.prevent="scrollTo('contact')">Contact</a></li>
-      </ul>
+      <div class="nav-links">
+        <button class="nav-link-btn" @click="scrollTo('extensions')">Extensions</button>
+        <button class="nav-link-btn" @click="scrollTo('tools')">Tools</button>
+        <button class="nav-link-btn" @click="scrollTo('contact')">Contact</button>
+      </div>
       <div class="nav-actions">
         <button
           class="theme-toggle"
@@ -96,6 +96,7 @@ onUnmounted(() => {
   padding: 1rem 2rem;
   background: var(--nav-bg);
   transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .navbar.scrolled {
@@ -118,43 +119,50 @@ onUnmounted(() => {
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   gap: 2.2rem;
   margin: 0;
   padding: 0;
 }
 
-.nav-links a {
+.nav-link-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.92rem;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   letter-spacing: 0.3px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
   position: relative;
-  transition: color 0.2s ease;
-  padding-bottom: 2px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-  border-radius: 2px;
-  transition: width 0.25s ease;
-}
-
-.nav-links a:hover {
+.nav-link-btn:hover {
   color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  background: rgba(187, 134, 252, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(187, 134, 252, 0.3);
 }
 
-.nav-links a:hover::after {
-  width: 100%;
+.navbar:not(.scrolled) .nav-link-btn {
+  border-color: rgba(187, 134, 252, 0.3);
+  background: rgba(187, 134, 252, 0.05);
+  box-shadow: 0 2px 8px rgba(187, 134, 252, 0.1);
+}
+
+.navbar:not(.scrolled) .nav-link-btn:hover {
+  border-color: var(--accent-primary);
+  background: rgba(187, 134, 252, 0.15);
+  box-shadow: 0 4px 16px rgba(187, 134, 252, 0.3);
 }
 
 /* ===== Nav actions group (theme toggle + hamburger) ===== */
