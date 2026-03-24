@@ -1,5 +1,6 @@
 <template>
   <section id="tools" class="tools-section section">
+    <div class="grid-pattern"></div>
     <h2 class="section-title" data-aos="fade-up">Developer Tools</h2>
     <p class="section-subtitle" data-aos="fade-up">Free utilities to enhance your development workflow</p>
     

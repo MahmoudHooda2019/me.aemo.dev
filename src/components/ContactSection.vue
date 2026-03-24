@@ -1,5 +1,6 @@
 <template>
   <section id="contact" class="contact-section section">
+    <div class="grid-pattern"></div>
     <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
     <div class="contact-options">
       <div 

@@ -16,24 +16,36 @@
   --grid-color: rgba(0, 0, 0, 0.03);
   --nav-bg: rgba(10, 10, 10, 0.95);
   --nav-bg-scrolled: rgba(18, 18, 18, 0.95);
+  /* Notch specific */
+  --notch-bg: rgba(0, 0, 0, 0.92);
+  --notch-bg-hover: rgba(20, 20, 25, 0.95);
+  --notch-camera-bg: radial-gradient(circle at 30% 30%, #1a1a2e 0%, #0f0f1a 40%, #000 100%);
+  --notch-speaker-bg: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+  --notch-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme='light'] {
-  --bg-primary: #fafafa;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f5f5f5;
-  --bg-card: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-  --text-primary: #1a1a1a;
-  --text-secondary: #555555;
-  --text-muted: #888888;
-  --accent-primary: #7c4dff;
-  --accent-secondary: #00bfa5;
-  --border-color: #e0e0e0;
-  --shadow-color: rgba(124, 77, 255, 0.15);
-  --shadow-color-alt: rgba(0, 191, 165, 0.15);
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #f1f3f4;
+  --bg-tertiary: #e8eaed;
+  --bg-card: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --text-muted: #80868b;
+  --accent-primary: #6c5ce7;
+  --accent-secondary: #00b894;
+  --border-color: #dadce0;
+  --shadow-color: rgba(108, 92, 231, 0.18);
+  --shadow-color-alt: rgba(0, 184, 148, 0.18);
   --grid-color: rgba(0, 0, 0, 0.05);
-  --nav-bg: rgba(250, 250, 250, 0.95);
-  --nav-bg-scrolled: rgba(255, 255, 255, 0.95);
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --nav-bg-scrolled: rgba(248, 249, 250, 0.98);
+  /* Notch specific - light mode */
+  --notch-bg: rgba(32, 33, 36, 0.95);
+  --notch-bg-hover: rgba(48, 49, 52, 0.98);
+  --notch-camera-bg: radial-gradient(circle at 30% 30%, #3c4043 0%, #282a2d 40%, #1a1c1e 100%);
+  --notch-speaker-bg: linear-gradient(180deg, #3c4043 0%, #282a2d 100%);
+  --notch-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* Grid Pattern Background */
@@ -43,7 +55,16 @@
   background-image: 
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(to right, var(--grid-color) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-pattern-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--grid-color) 1.5px, transparent 1.5px);
+  background-size: 30px 30px;
   pointer-events: none;
   z-index: 0;
 }
@@ -52,6 +73,10 @@
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+[data-theme='dark'] .grid-pattern-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1.5px, transparent 1.5px);
 }
 
 /* Reset and Base Styles */

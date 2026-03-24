@@ -1,5 +1,6 @@
 <template>
   <section id="extensions" class="extensions-section section">
+    <div class="grid-pattern"></div>
     <h2 class="section-title" data-aos="fade-up">Extensions</h2>
     
     <div class="filter-buttons" data-aos="fade-up">
