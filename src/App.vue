@@ -77,7 +77,6 @@ const expandedBadges = ref<Set<string>>(new Set())
 let badgeTimers: Map<string, number> = new Map()
 
 const handleBadgeClick = (badgeId: string) => {
-  console.log('Badge clicked:', badgeId)
   // Clear existing timer for this badge if any
   const existingTimer = badgeTimers.get(badgeId)
   if (existingTimer) {
@@ -86,28 +85,21 @@ const handleBadgeClick = (badgeId: string) => {
   
   // Add expanded class
   expandedBadges.value.add(badgeId)
-  console.log('Expanded badges:', Array.from(expandedBadges.value))
   
   // Set timer to remove after 2 seconds
   const timer = window.setTimeout(() => {
     expandedBadges.value.delete(badgeId)
     badgeTimers.delete(badgeId)
-    console.log('Badge auto-collapsed:', badgeId)
   }, 2000)
   
   badgeTimers.set(badgeId, timer)
 }
 
 const isBadgeExpanded = (badgeId: string): boolean => {
-  const expanded = expandedBadges.value.has(badgeId)
-  console.log('Checking badge expanded:', badgeId, expanded)
-  return expanded
+  return expandedBadges.value.has(badgeId)
 }
 
 onMounted(() => {
-  console.log('App mounted, badges count:', badges.length)
-  console.log('Window width:', window.innerWidth)
-  console.log('Badges data:', badges)
   // Apply saved/preferred theme before first render to avoid flash
   initTheme()
   

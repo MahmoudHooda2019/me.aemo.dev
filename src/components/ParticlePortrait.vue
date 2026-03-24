@@ -118,7 +118,7 @@ const initCanvas = () => {
 
   const img = new Image()
   img.crossOrigin = 'anonymous'
-  img.src = '/assets/images/profile.png'
+  img.src = 'assets/images/profile.png'
 
   img.onload = () => {
     originalImage.value = img
