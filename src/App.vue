@@ -15,69 +15,17 @@
           <ParticlePortrait />
         </div>
         <div 
-          class="floating-badge badge-home-right-top"
-          :class="{ expanded: isBadgeExpanded('right-top') }"
-          @click="handleBadgeClick('right-top')"
+          v-for="badge in badges"
+          :key="badge.id"
+          class="floating-badge"
+          :class="[badge.cssClass, { expanded: isBadgeExpanded(badge.id) }]"
+          @click="handleBadgeClick(badge.id)"
+          :data-badge-id="badge.id"
         >
-          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #bb86fc20, #bb86fc40);">✨</div>
+          <div class="floating-badge-icon" :style="{ background: badge.gradient }">{{ badge.icon }}</div>
           <div>
-            <div class="floating-badge-text">Interactive</div>
-            <div class="floating-badge-subtext">Move cursor</div>
-          </div>
-        </div>
-        <div 
-          class="floating-badge badge-home-right-center"
-          :class="{ expanded: isBadgeExpanded('right-center') }"
-          @click="handleBadgeClick('right-center')"
-        >
-          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #03dac620, #03dac640);">🎨</div>
-          <div>
-            <div class="floating-badge-text">Particles</div>
-            <div class="floating-badge-subtext">Canvas</div>
-          </div>
-        </div>
-        <div 
-          class="floating-badge badge-home-right-bottom"
-          :class="{ expanded: isBadgeExpanded('right-bottom') }"
-          @click="handleBadgeClick('right-bottom')"
-        >
-          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #ffd93d20, #ffd93d40);">🔮</div>
-          <div>
-            <div class="floating-badge-text">Shader</div>
-            <div class="floating-badge-subtext">Dynamic</div>
-          </div>
-        </div>
-        <div 
-          class="floating-badge badge-home-left-top"
-          :class="{ expanded: isBadgeExpanded('left-top') }"
-          @click="handleBadgeClick('left-top')"
-        >
-          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #ff6b6b20, #ff6b6b40);">🚀</div>
-          <div>
-            <div class="floating-badge-text">Vue 3</div>
-            <div class="floating-badge-subtext">TypeScript</div>
-          </div>
-        </div>
-        <div 
-          class="floating-badge badge-home-left-center"
-          :class="{ expanded: isBadgeExpanded('left-center') }"
-          @click="handleBadgeClick('left-center')"
-        >
-          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #4ecdc420, #4ecdc440);">⚡</div>
-          <div>
-            <div class="floating-badge-text">Fast</div>
-            <div class="floating-badge-subtext">Optimized</div>
-          </div>
-        </div>
-        <div 
-          class="floating-badge badge-home-left-bottom"
-          :class="{ expanded: isBadgeExpanded('left-bottom') }"
-          @click="handleBadgeClick('left-bottom')"
-        >
-          <div class="floating-badge-icon" style="background: linear-gradient(135deg, #6bcf7f20, #6bcf7f40);">🔧</div>
-          <div>
-            <div class="floating-badge-text">Modern</div>
-            <div class="floating-badge-subtext">Web Tech</div>
+            <div class="floating-badge-text">{{ badge.text }}</div>
+            <div class="floating-badge-subtext">{{ badge.subtext }}</div>
           </div>
         </div>
       </section>
@@ -114,34 +62,52 @@ import { useTheme } from '@/composables/useTheme'
 const isLoading = ref(true)
 const { initTheme } = useTheme()
 
+// Badge data
+const badges = [
+  { id: 'right-top', cssClass: 'badge-home-right-top', icon: '✨', text: 'Interactive', subtext: 'Move cursor', gradient: 'linear-gradient(135deg, #bb86fc20, #bb86fc40)' },
+  { id: 'right-center', cssClass: 'badge-home-right-center', icon: '🎨', text: 'Particles', subtext: 'Canvas', gradient: 'linear-gradient(135deg, #03dac620, #03dac640)' },
+  { id: 'right-bottom', cssClass: 'badge-home-right-bottom', icon: '🔮', text: 'Shader', subtext: 'Dynamic', gradient: 'linear-gradient(135deg, #ffd93d20, #ffd93d40)' },
+  { id: 'left-top', cssClass: 'badge-home-left-top', icon: '🚀', text: 'Vue 3', subtext: 'TypeScript', gradient: 'linear-gradient(135deg, #ff6b6b20, #ff6b6b40)' },
+  { id: 'left-center', cssClass: 'badge-home-left-center', icon: '⚡', text: 'Fast', subtext: 'Optimized', gradient: 'linear-gradient(135deg, #4ecdc420, #4ecdc440)' },
+  { id: 'left-bottom', cssClass: 'badge-home-left-bottom', icon: '🔧', text: 'Modern', subtext: 'Web Tech', gradient: 'linear-gradient(135deg, #6bcf7f20, #6bcf7f40)' },
+]
+
 // Badge expansion state
 const expandedBadges = ref<Set<string>>(new Set())
 let badgeTimers: Map<string, number> = new Map()
 
-const handleBadgeClick = (badgeClass: string) => {
+const handleBadgeClick = (badgeId: string) => {
+  console.log('Badge clicked:', badgeId)
   // Clear existing timer for this badge if any
-  const existingTimer = badgeTimers.get(badgeClass)
+  const existingTimer = badgeTimers.get(badgeId)
   if (existingTimer) {
     clearTimeout(existingTimer)
   }
   
   // Add expanded class
-  expandedBadges.value.add(badgeClass)
+  expandedBadges.value.add(badgeId)
+  console.log('Expanded badges:', Array.from(expandedBadges.value))
   
   // Set timer to remove after 2 seconds
   const timer = window.setTimeout(() => {
-    expandedBadges.value.delete(badgeClass)
-    badgeTimers.delete(badgeClass)
+    expandedBadges.value.delete(badgeId)
+    badgeTimers.delete(badgeId)
+    console.log('Badge auto-collapsed:', badgeId)
   }, 2000)
   
-  badgeTimers.set(badgeClass, timer)
+  badgeTimers.set(badgeId, timer)
 }
 
-const isBadgeExpanded = (badgeClass: string): boolean => {
-  return expandedBadges.value.has(badgeClass)
+const isBadgeExpanded = (badgeId: string): boolean => {
+  const expanded = expandedBadges.value.has(badgeId)
+  console.log('Checking badge expanded:', badgeId, expanded)
+  return expanded
 }
 
 onMounted(() => {
+  console.log('App mounted, badges count:', badges.length)
+  console.log('Window width:', window.innerWidth)
+  console.log('Badges data:', badges)
   // Apply saved/preferred theme before first render to avoid flash
   initTheme()
   
@@ -288,32 +254,45 @@ main {
     padding: 1rem;
   }
   
+  .floating-badge {
+    position: fixed !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    opacity: 1 !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  
   .badge-home-right-top,
   .badge-home-right-center,
   .badge-home-right-bottom {
-    right: -80px;
-    transform: translateX(0);
-    transition: transform 0.3s ease;
+    right: -110px !important;
+    transform: translateX(0) !important;
   }
   
   .badge-home-right-top.expanded,
   .badge-home-right-center.expanded,
   .badge-home-right-bottom.expanded {
-    transform: translateX(-85px);
+    transform: translateX(-95px) !important;
   }
   
   .badge-home-left-top,
   .badge-home-left-center,
   .badge-home-left-bottom {
-    left: -80px;
-    transform: translateX(0);
-    transition: transform 0.3s ease;
+    left: -150px !important;
+    transform: translateX(0) !important;
   }
   
   .badge-home-left-top.expanded,
   .badge-home-left-center.expanded,
   .badge-home-left-bottom.expanded {
-    transform: translateX(85px);
+    transform: translateX(135px) !important;
   }
+  
+  .badge-home-right-top { top: 15% !important; }
+  .badge-home-right-center { top: 50% !important; }
+  .badge-home-right-bottom { top: 85% !important; }
+  .badge-home-left-top { top: 15% !important; }
+  .badge-home-left-center { top: 50% !important; }
+  .badge-home-left-bottom { top: 85% !important; }
 }
 </style>
