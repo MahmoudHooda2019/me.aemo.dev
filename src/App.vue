@@ -246,8 +246,13 @@ main {
     padding: 1rem;
   }
   
-  .floating-badge {
-    position: fixed !important;
+  /* Only show floating badges in home section */
+  .section-wrapper .floating-badge {
+    display: none !important;
+  }
+  
+  .particle-section .floating-badge {
+    position: absolute !important;
     z-index: 9999 !important;
     display: flex !important;
     opacity: 1 !important;
@@ -270,21 +275,21 @@ main {
   .badge-home-left-top,
   .badge-home-left-center,
   .badge-home-left-bottom {
-    left: -150px !important;
+    left: -110px !important;
     transform: translateX(0) !important;
   }
   
   .badge-home-left-top.expanded,
   .badge-home-left-center.expanded,
   .badge-home-left-bottom.expanded {
-    transform: translateX(135px) !important;
+    transform: translateX(95px) !important;
   }
   
-  .badge-home-right-top { top: 15% !important; }
+  .badge-home-right-top { top: 20% !important; }
   .badge-home-right-center { top: 50% !important; }
-  .badge-home-right-bottom { top: 85% !important; }
-  .badge-home-left-top { top: 15% !important; }
+  .badge-home-right-bottom { top: 80% !important; }
+  .badge-home-left-top { top: 20% !important; }
   .badge-home-left-center { top: 50% !important; }
-  .badge-home-left-bottom { top: 85% !important; }
+  .badge-home-left-bottom { top: 80% !important; }
 }
 </style>
