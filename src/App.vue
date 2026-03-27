@@ -262,27 +262,27 @@ main {
   .badge-home-right-top,
   .badge-home-right-center,
   .badge-home-right-bottom {
-    right: -110px !important;
+    right: -130px !important;
     transform: translateX(0) !important;
   }
   
   .badge-home-right-top.expanded,
   .badge-home-right-center.expanded,
   .badge-home-right-bottom.expanded {
-    transform: translateX(-95px) !important;
+    transform: translateX(-115px) !important;
   }
   
   .badge-home-left-top,
   .badge-home-left-center,
   .badge-home-left-bottom {
-    left: -110px !important;
+    left: -130px !important;
     transform: translateX(0) !important;
   }
   
   .badge-home-left-top.expanded,
   .badge-home-left-center.expanded,
   .badge-home-left-bottom.expanded {
-    transform: translateX(95px) !important;
+    transform: translateX(115px) !important;
   }
   
   .badge-home-right-top { top: 20% !important; }
