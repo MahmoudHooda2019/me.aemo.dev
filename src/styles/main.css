@@ -16,12 +16,6 @@
   --grid-color: rgba(255, 255, 255, 0.03);
   --nav-bg: rgba(15, 23, 42, 0.95);
   --nav-bg-scrolled: rgba(30, 41, 59, 0.98);
-  /* Notch specific */
-  --notch-bg: rgba(15, 23, 42, 0.98);
-  --notch-bg-hover: rgba(30, 41, 59, 0.98);
-  --notch-camera-bg: radial-gradient(circle at 30% 30%, #1E293B 0%, #0F172A 40%, #020617 100%);
-  --notch-speaker-bg: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
-  --notch-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
   /* States */
   --success: #34D399;
   --error: #F87171;
@@ -44,12 +38,6 @@
   --grid-color: rgba(0, 0, 0, 0.03);
   --nav-bg: rgba(255, 255, 255, 0.95);
   --nav-bg-scrolled: rgba(249, 250, 251, 0.98);
-  /* Notch specific - light mode */
-  --notch-bg: rgba(17, 24, 39, 0.98);
-  --notch-bg-hover: rgba(31, 41, 55, 0.98);
-  --notch-camera-bg: radial-gradient(circle at 30% 30%, #374151 0%, #1F2937 40%, #111827 100%);
-  --notch-speaker-bg: linear-gradient(180deg, #374151 0%, #1F2937 100%);
-  --notch-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   /* States */
   --success: #10B981;
   --error: #EF4444;
@@ -107,7 +95,7 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Section Base Styles */
+/* Section Base Styles - used by multiple components */
 .section {
   opacity: 0;
   transform: translateY(30px);
@@ -119,135 +107,10 @@ body {
   transform: translateY(0);
 }
 
-/* Floating Badge Styles */
-.floating-badge {
-  position: absolute;
-  background: var(--bg-secondary);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
-  padding: 16px 20px;
-  transform: translateX(40%);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 30;
-  border: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateX(40%) translateY(0px); }
-  50% { transform: translateX(42%) translateY(-10px); }
-}
-
-.floating-badge:hover {
-  transform: translateX(35%) translateY(-5px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-  border-color: var(--accent-primary);
-}
-
-.floating-badge-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-  position: relative;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-}
-
-.floating-badge-icon::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.floating-badge:hover .floating-badge-icon {
-  transform: scale(1.15) rotate(5deg);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-}
-
-.floating-badge:hover .floating-badge-icon::before {
-  opacity: 1;
-}
-
-.floating-badge-text {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.2;
-  transition: color 0.3s ease;
-}
-
-.floating-badge-subtext {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.2;
-  margin-top: 4px;
-  transition: color 0.3s ease;
-}
-
-.floating-badge:hover .floating-badge-text {
-  color: var(--accent-primary);
-}
-
-.floating-badge:hover .floating-badge-subtext {
-  color: var(--text-primary);
-}
-
-/* Loading Screen */
-.loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-secondary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.loading-screen.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 3px solid var(--border-color);
-  border-top: 3px solid var(--accent-primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   body {
     font-size: 14px;
-  }
-  
-  .floating-badge {
-    display: none;
   }
 }
 

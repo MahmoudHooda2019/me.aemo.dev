@@ -3,6 +3,37 @@
     <div class="grid-pattern"></div>
     <h2 class="section-title" data-aos="fade-up">Extensions</h2>
     
+    <!-- Search Bar -->
+    <div class="search-container" data-aos="fade-up">
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          v-model="searchQuery"
+          type="text"
+          class="search-input"
+          placeholder="Search extensions by name or description..."
+          aria-label="Search extensions"
+        />
+        <button
+          v-if="searchQuery"
+          class="search-clear"
+          @click="searchQuery = ''"
+          aria-label="Clear search"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <span v-if="searchQuery" class="search-results">
+        {{ filteredExtensions.length }} result{{ filteredExtensions.length !== 1 ? 's' : '' }}
+      </span>
+    </div>
+
     <div class="filter-buttons" data-aos="fade-up">
       <button 
         v-for="filter in filterOptions" 
@@ -18,6 +49,11 @@
     <div v-if="error" class="error-message">
       <p>{{ error }}</p>
       <button @click="retryLoading">Retry</button>
+    </div>
+    
+    <div v-else-if="filteredExtensions.length === 0" class="no-results">
+      <p>No extensions found matching "{{ searchQuery }}"</p>
+      <button class="clear-search-btn" @click="searchQuery = ''">Clear Search</button>
     </div>
     
     <div v-else class="card-container">
@@ -48,6 +84,7 @@ const {
 } = useExtensions()
 
 const currentFilter = ref('all')
+const searchQuery = ref('')
 const displayedCount = ref(0)
 const batchSize = 12
 const error = ref('')
@@ -59,18 +96,31 @@ const filterOptions = [
 ]
 
 const filteredExtensions = computed(() => {
-  if (currentFilter.value === 'all') {
-    return extensions.value
+  let result = extensions.value
+  
+  // Filter by search query
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase()
+    result = result.filter(ext => 
+      ext.title.toLowerCase().includes(query) || 
+      ext.subtitle.toLowerCase().includes(query)
+    )
   }
-  return extensions.value.filter(ext => {
-    const price = ext.price.toLowerCase()
-    if (currentFilter.value === 'free') {
-      return price === 'free' || price.includes('free')
-    } else if (currentFilter.value === 'paid') {
-      return price.includes('$') || price.includes('paid') || !price.includes('free')
-    }
-    return false
-  })
+  
+  // Filter by price filter
+  if (currentFilter.value !== 'all') {
+    result = result.filter(ext => {
+      const price = ext.price.toLowerCase()
+      if (currentFilter.value === 'free') {
+        return price === 'free' || price.includes('free')
+      } else if (currentFilter.value === 'paid') {
+        return price.includes('$') || price.includes('paid') || !price.includes('free')
+      }
+      return false
+    })
+  }
+  
+  return result
 })
 
 const displayedExtensions = computed(() => {
@@ -133,8 +183,122 @@ watch(filteredExtensions, (newFiltered) => {
   font-size: 2.5rem;
   font-weight: 600;
   color: var(--accent-primary);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   font-family: 'Inter', sans-serif;
+}
+
+/* Search container */
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.875rem 2.5rem 0.875rem 3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.search-clear:hover {
+  background: rgba(187, 134, 252, 0.1);
+  color: var(--accent-primary);
+}
+
+.search-clear svg {
+  width: 16px;
+  height: 16px;
+}
+
+.search-results {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: 'Inter', sans-serif;
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.no-results p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.clear-search-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-primary);
+  border: none;
+  color: var(--bg-secondary);
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.clear-search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px var(--shadow-color);
 }
 
 .filter-buttons {
@@ -222,11 +386,38 @@ watch(filteredExtensions, (newFiltered) => {
   
   .section-title {
     font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-container {
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-input {
+    padding: 0.75rem 2.25rem 0.75rem 2.75rem;
+    font-size: 0.95rem;
+  }
+
+  .search-icon {
+    left: 0.875rem;
+    width: 18px;
+    height: 18px;
+  }
+
+  .search-clear {
+    right: 0.5rem;
+    width: 26px;
+    height: 26px;
   }
   
   .card-container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .no-results {
+    padding: 2rem 1rem;
   }
 }
 </style>

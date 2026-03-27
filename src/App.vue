@@ -152,6 +152,94 @@ main {
   justify-content: center;
 }
 
+/* Floating Badge Base Styles */
+.floating-badge {
+  position: absolute;
+  background: var(--bg-secondary);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  padding: 16px 20px;
+  transform: translateX(40%);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 30;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(40%) translateY(0px); }
+  50% { transform: translateX(42%) translateY(-10px); }
+}
+
+.floating-badge:hover {
+  transform: translateX(35%) translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border-color: var(--accent-primary);
+}
+
+.floating-badge-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.floating-badge-icon::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.floating-badge:hover .floating-badge-icon {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.floating-badge:hover .floating-badge-icon::before {
+  opacity: 1;
+}
+
+.floating-badge-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+.floating-badge-subtext {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  margin-top: 4px;
+  transition: color 0.3s ease;
+}
+
+.floating-badge:hover .floating-badge-text {
+  color: var(--accent-primary);
+}
+
+.floating-badge:hover .floating-badge-subtext {
+  color: var(--text-primary);
+}
+
+/* Badge Positioning Classes */
 .badge-home-right-top {
   right: calc(50% - 300px);
   top: calc(50% - 220px);

@@ -8,132 +8,193 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../../assets/images/addons.png">
     
-    <!-- Fonts -->
+    <!-- Fonts - Optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../../styles.css">
+    <!-- Styles -->
     <link rel="stylesheet" href="../../styles/extension-template.css">
 </head>
 <body>
     <div class="extension-detail">
+        <!-- Loading State -->
         <div id="loading-view" class="loading-spinner">
             <div class="spinner"></div>
         </div>
 
+        <!-- Extension Content -->
         <div id="extension-content" class="hidden">
+            <!-- Hero Card -->
             <div class="extension-card">
-                <div class="extension-info">
-                    <div class="extension-header">
-                        <div>
-                            <h1 class="extension-title" id="extension-title">Loading...</h1>
-                            <div class="extension-meta">
-                                <span id="extension-version">Version: Loading...</span>
-                                <span id="extension-updated">Last Updated: Loading...</span>
-                            </div>
-                        </div>
-                        <div class="header-right">
-                            <div id="action-buttons">
-                                <!-- Buttons will be added here dynamically -->
-                            </div>
+                <div class="extension-header">
+                    <div class="extension-header-main">
+                        <div class="extension-price" id="extension-price">Loading...</div>
+                        <h1 class="extension-title" id="extension-title">Loading...</h1>
+                        <div class="extension-meta">
+                            <span id="extension-version">Version: Loading...</span>
+                            <span id="extension-updated">Last Updated: Loading...</span>
                         </div>
                     </div>
-                    
-                    <div class="extension-description" id="extension-description">
-                        Loading...
+                    <div class="header-right">
+                        <div id="action-buttons">
+                            <!-- Buttons injected dynamically -->
+                        </div>
                     </div>
                 </div>
-                <div class="extension-price" id="extension-price">Loading...</div>
+                
+                <div class="extension-description" id="extension-description">
+                    Loading...
+                </div>
             </div>
 
+            <!-- Documentation Card -->
             <div class="documentation-card" id="documentation">
-                <!-- Documentation will be added here dynamically -->
+                <!-- Documentation injected dynamically -->
             </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-view" class="hidden error-state">
+            <h1 id="error-title">Error</h1>
+            <p id="error-message">Something went wrong.</p>
         </div>
     </div>
 
     <script type="module">
-        try {
-            const { getExtensionById } = await import('../scripts/extensions.js');
-            
-            // Get extension data from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const extensionId = urlParams.get('id');
-            
-            if (!extensionId) {
-                throw new Error('No extension ID provided');
-            }
+        // Extension detail page logic
+        import { getExtensionById } from '../scripts/extensions.js';
 
-            // Load extension data
-            async function loadExtensionData() {
-                try {
-                    const extension = await getExtensionById(extensionId);
-                    console.log('Loading extension data for:', extensionId);
-                    
-                    if (!extension) {
-                        throw new Error('Extension not found');
-                    }
+        const urlParams = new URLSearchParams(window.location.search);
+        const extensionId = urlParams.get('id');
 
-                    // Hide loading view and show content
-                    document.getElementById('loading-view').classList.add('hidden');
-                    document.getElementById('extension-content').classList.remove('hidden');
+        // DOM elements
+        const loadingView = document.getElementById('loading-view');
+        const contentView = document.getElementById('extension-content');
+        const errorView = document.getElementById('error-view');
 
-                    // Update title and meta info
-                    document.getElementById('extension-title').textContent = extension.title;
-                    document.title = extension.title;
-                    document.getElementById('extension-version').textContent = `Version: ${extension.version}`;
-                    document.getElementById('extension-updated').textContent = `Last Updated: ${extension.lastUpdated}`;
-                    document.getElementById('extension-price').textContent = extension.price;
-                    document.getElementById('extension-price').classList.add(extension.price === 'Free' ? 'free' : 'paid');
-                    document.getElementById('extension-description').textContent = extension.description;
+        if (!extensionId) {
+            showError('No Extension ID', 'Please provide an extension ID in the URL.');
+        } else {
+            loadExtension();
+        }
 
-                    // Add action buttons
-                    const actionButtons = document.getElementById('action-buttons');
-                    if (extension.price === 'Free') {
-                        actionButtons.innerHTML = `
-                            <a href="${extension.url || '#'}" class="action-button download-button" ${!extension.url ? 'disabled' : ''}>
-                                Download
-                            </a>
-                        `;
-                    } else {
-                        actionButtons.innerHTML = `
-                            <a href="${extension.url || '#'}" class="action-button buy-button" ${!extension.url ? 'disabled' : ''}>
-                                Buy Now
-                            </a>
-                        `;
-                    }
-
-                    // Add documentation
-                    const documentation = document.getElementById('documentation');
-                    if (extension.documentation && extension.documentation.length > 0) {
-                        documentation.innerHTML = extension.documentation.map(doc => `
-                            <div class="documentation-section">
-                                <h2 class="documentation-title">${doc.title}</h2>
-                                <div class="documentation-content">${doc.content}</div>
-                            </div>
-                        `).join('');
-                    } else {
-                        documentation.innerHTML = '<p>No documentation available.</p>';
-                    }
-                } catch (error) {
-                    console.error('Error loading extension data:', error);
-                    document.getElementById('loading-view').classList.add('hidden');
-                    document.getElementById('extension-content').classList.remove('hidden');
-                    document.getElementById('extension-title').textContent = error.message || 'Error Loading Extension';
-                    document.getElementById('extension-description').textContent = 'There was an error loading the extension data. Please try again later.';
+        async function loadExtension() {
+            try {
+                const extension = await getExtensionById(extensionId);
+                
+                if (!extension) {
+                    throw new Error('Extension not found');
                 }
-            }
 
-            // Load the data when the page loads
-            loadExtensionData();
+                renderExtension(extension);
+                hideLoading();
+            } catch (error) {
+                console.error('Failed to load extension:', error);
+                showError(
+                    'Extension Not Found',
+                    'The extension you\'re looking for doesn\'t exist or failed to load.'
+                );
+            }
+        }
+
+        function renderExtension(ext) {
+            // Update page title
+            document.title = `${ext.title} - Extension Details`;
+
+            // Title & meta
+            document.getElementById('extension-title').textContent = ext.title;
+            document.getElementById('extension-version').textContent = `Version ${ext.version || '1.0.0'}`;
+            document.getElementById('extension-updated').textContent = `Updated ${ext.lastUpdated || 'Recently'}`;
+
+            // Price badge - simplified detection
+            const priceText = (ext.price || 'Free').toString().trim();
+            const isFree = /^(free|\$0|0)$/i.test(priceText) || !ext.price;
             
-        } catch (error) {
-            console.error('Critical error:', error);
-            document.getElementById('loading-view').classList.add('hidden');
-            document.getElementById('extension-content').classList.remove('hidden');
-            document.getElementById('extension-title').textContent = 'Error Loading Extension';
-            document.getElementById('extension-description').textContent = 'Failed to load the extension module. Please try again later.';
+            const priceEl = document.getElementById('extension-price');
+            priceEl.textContent = priceText || 'Free';
+            priceEl.className = `extension-price ${isFree ? 'free' : 'paid'}`;
+
+            // Description
+            document.getElementById('extension-description').textContent = 
+                ext.description || ext.subtitle || 'No description available.';
+
+            // Action buttons - ensure container is visible
+            const buttonsContainer = document.getElementById('action-buttons');
+            buttonsContainer.style.display = 'flex';
+            buttonsContainer.style.visibility = 'visible';
+            buttonsContainer.style.zIndex = '1';
+            
+            const hasUrl = ext.url && ext.url !== '#';
+            
+            if (isFree) {
+                buttonsContainer.innerHTML = `
+                    <a href="${hasUrl ? ext.url : '#'}" 
+                       class="action-button download-button" 
+                       ${!hasUrl ? 'disabled' : ''}
+                       target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download
+                    </a>
+                `;
+            } else {
+                buttonsContainer.innerHTML = `
+                    <a href="${hasUrl ? ext.url : '#'}" 
+                       class="action-button buy-button" 
+                       ${!hasUrl ? 'disabled' : ''}
+                       target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                            <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                        Buy Now
+                    </a>
+                `;
+            }
+            
+            // Documentation
+            const docContainer = document.getElementById('documentation');
+            if (ext.documentation && ext.documentation.length > 0) {
+                docContainer.innerHTML = ext.documentation.map(doc => `
+                    <div class="documentation-section">
+                        <h2 class="documentation-title">${doc.title}</h2>
+                        <div class="documentation-content">${formatContent(doc.content)}</div>
+                    </div>
+                `).join('');
+            } else {
+                docContainer.innerHTML = `
+                    <div class="documentation-section">
+                        <p style="color: var(--text-muted); text-align: center; padding: 2rem;">
+                            No documentation available for this extension.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        function formatContent(content) {
+            // Convert newlines to paragraphs if plain text
+            if (!content.includes('<')) {
+                return content.split('\n\n').map(p => `<p>${p}</p>`).join('');
+            }
+            return content;
+        }
+
+        function hideLoading() {
+            loadingView.classList.add('hidden');
+            contentView.classList.remove('hidden');
+        }
+
+        function showError(title, message) {
+            loadingView.classList.add('hidden');
+            contentView.classList.add('hidden');
+            errorView.classList.remove('hidden');
+            document.getElementById('error-title').textContent = title;
+            document.getElementById('error-message').textContent = message;
         }
     </script>
 </body>

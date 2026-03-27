@@ -1,5 +1,5 @@
 <template>
-  <article class="card" @click="$emit('click')">
+  <article class="card" @click="handleCardClick">
     <div class="price-tag" :class="{ paid: isPaid, free: !isPaid }">
       {{ extension.price }}
     </div>
@@ -12,6 +12,7 @@
           :key="tag" 
           class="card-tag"
           :class="{ 'new-tag': tag === 'NEW' }"
+          @click.stop
         >
           {{ tag }}
         </span>
@@ -30,9 +31,13 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-defineEmits<{
+const emit = defineEmits<{
   click: []
 }>()
+
+const handleCardClick = () => {
+  emit('click')
+}
 
 const { getExtensionTags } = useExtensions()
 
