@@ -44,7 +44,7 @@
         ></span>
 
         <button
-          class="nav-btn home-btn"
+          class="nav-btn"
           :class="{ active: activeSection === 'home' }"
           @click="scrollTo('top')"
           aria-label="Home"
@@ -532,12 +532,21 @@ onUnmounted(() => {
   a JS-bound .pip-active class. See template binding for logic.
 */
 .island-pip {
-  width: 4px; height: 4px; border-radius: 50%;
+  width: 6px; height: 6px; border-radius: 50%;
   background: var(--text-muted);
   flex-shrink: 0;
-  transition: background .3s, transform .3s;
+  transition: all .35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  opacity: 0.6;
 }
-.island-pip.pip-active { background: var(--shadow-color); transform: scale(1.2); }
+.island-pip.pip-active {
+  background: var(--shadow-color);
+  transform: scale(1.4);
+  opacity: 1;
+  box-shadow: 0 0 10px var(--shadow-color), 0 0 20px var(--shadow-color);
+}
+.island-pip.pip-active:nth-of-type(2) {
+  box-shadow: 0 0 10px var(--shadow-color-alt), 0 0 20px var(--shadow-color-alt);
+}
 
 .nav-btn {
   display: flex; align-items: center; gap: 0; padding: .42rem .72rem;
@@ -597,9 +606,6 @@ onUnmounted(() => {
   transition: filter .3s, color .3s;
 }
 .btn-icon svg { width: 100%; height: 100%; }
-
-.home-btn { background: rgba(255,255,255,.025); }
-[data-theme='light'] .home-btn { background: rgba(0,0,0,.04); }
 
 /* ── Theme Toggle ────────────────────────────────────────────────────────── */
 .theme-toggle {
