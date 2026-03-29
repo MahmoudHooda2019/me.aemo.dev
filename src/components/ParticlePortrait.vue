@@ -7,9 +7,15 @@
         width: `${size}px`,
         height: `${size}px`,
         cursor: 'crosshair',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
       }"
+      oncontextmenu="return false;"
     />
-    <h1 class="profile-name">Mahmoud Hussien</h1>
+    <div class="typing-text">
+      <span class="typed-text">{{ displayedText }}</span>
+      <span class="cursor" :class="{ 'cursor-blink': isBlinking }"></span>
+    </div>
   </div>
 </template>
 
@@ -292,10 +298,34 @@ const handleClick = () => {
   }, 1000)
 }
 
+const displayedText = ref('')
+const isBlinking = ref(false)
+const fullText = "hi, Aemo here. "
+let typingInterval: ReturnType<typeof setInterval> | null = null
+
+const startTyping = () => {
+  displayedText.value = ''
+  isBlinking.value = false
+  let index = 0
+  
+  typingInterval = setInterval(() => {
+    if (index < fullText.length) {
+      displayedText.value += fullText.charAt(index)
+      index++
+    } else {
+      if (typingInterval) clearInterval(typingInterval)
+      isBlinking.value = true
+    }
+  }, 100)
+}
+
 onMounted(() => {
   updateSize()
   initCanvas()
   window.addEventListener('resize', handleResize)
+  
+  // Start typing animation after 2 seconds
+  setTimeout(startTyping, 2000)
 
   const canvas = canvasRef.value
   if (canvas) {
@@ -312,6 +342,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
   if (animationId) cancelAnimationFrame(animationId)
+  if (typingInterval) clearInterval(typingInterval)
 
   const canvas = canvasRef.value
   if (canvas) {
@@ -331,6 +362,14 @@ watch(size, () => {
 <style scoped>
 .simulation-container {
   display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.simulation-container::-webkit-media-controls,
+.simulation-container::-webkit-media-controls-enclosure {
+  display: none !important;
 }
 
 .portrait-wrapper {
@@ -352,5 +391,41 @@ watch(size, () => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.typing-text {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: center;
+  min-height: 1.2em;
+}
+
+.typed-text {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.8em;
+  background: var(--accent-primary);
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 </style>

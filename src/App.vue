@@ -64,12 +64,12 @@ const { initTheme } = useTheme()
 
 // Badge data
 const badges = [
-  { id: 'right-top', cssClass: 'badge-home-right-top', icon: '✨', text: 'Interactive', subtext: 'Move cursor', gradient: 'linear-gradient(135deg, #bb86fc20, #bb86fc40)' },
-  { id: 'right-center', cssClass: 'badge-home-right-center', icon: '🎨', text: 'Particles', subtext: 'Canvas', gradient: 'linear-gradient(135deg, #03dac620, #03dac640)' },
-  { id: 'right-bottom', cssClass: 'badge-home-right-bottom', icon: '🔮', text: 'Shader', subtext: 'Dynamic', gradient: 'linear-gradient(135deg, #ffd93d20, #ffd93d40)' },
-  { id: 'left-top', cssClass: 'badge-home-left-top', icon: '🚀', text: 'Vue 3', subtext: 'TypeScript', gradient: 'linear-gradient(135deg, #ff6b6b20, #ff6b6b40)' },
-  { id: 'left-center', cssClass: 'badge-home-left-center', icon: '⚡', text: 'Fast', subtext: 'Optimized', gradient: 'linear-gradient(135deg, #4ecdc420, #4ecdc440)' },
-  { id: 'left-bottom', cssClass: 'badge-home-left-bottom', icon: '🔧', text: 'Modern', subtext: 'Web Tech', gradient: 'linear-gradient(135deg, #6bcf7f20, #6bcf7f40)' },
+  { id: 'right-top', cssClass: 'badge-home-right-top', icon: '🐹', text: 'Backend', subtext: 'Golang', gradient: 'linear-gradient(135deg, #bb86fc20, #bb86fc40)' },
+  { id: 'right-center', cssClass: 'badge-home-right-center', icon: '💻', text: 'Frontend', subtext: 'Typescript + Vue', gradient: 'linear-gradient(135deg, #03dac620, #03dac640)' },
+  { id: 'right-bottom', cssClass: 'badge-home-right-bottom', icon: '🛠️', text: 'Other Languages', subtext: 'Java, Kotlin, Python', gradient: 'linear-gradient(135deg, #ffd93d20, #ffd93d40)' },
+  { id: 'left-top', cssClass: 'badge-home-left-top', icon: '👤', text: 'Name', subtext: 'Mahmoud Hussien', gradient: 'linear-gradient(135deg, #ff6b6b20, #ff6b6b40)' },
+  { id: 'left-center', cssClass: 'badge-home-left-center', icon: '📍', text: 'Location', subtext: 'Egypt', gradient: 'linear-gradient(135deg, #4ecdc420, #4ecdc440)' },
+  { id: 'left-bottom', cssClass: 'badge-home-left-bottom', icon: '🧩', text: 'Job', subtext: 'Extension Developer', gradient: 'linear-gradient(135deg, #6bcf7f20, #6bcf7f40)' },
 ]
 
 // Badge expansion state
@@ -122,6 +122,18 @@ onMounted(() => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Prevent image saving via right-click */
+img, canvas {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: auto;
+}
+
+img {
+  -webkit-user-drag: none;
 }
 
 main {
