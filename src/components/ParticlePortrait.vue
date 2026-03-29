@@ -24,14 +24,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// ─── Constants ────────────────────────────────────────────────────────────────
+// Constants
 const PHRASES      = ['hi, Aemo here.', 'designer & dev.', "let's build."]
 const TYPE_SPEED   = 90
 const DELETE_SPEED = 45
 const PAUSE_END    = 1800
 const PAUSE_START  = 400
 
-// ─── State ────────────────────────────────────────────────────────────────────
+// State
 const canvasRef  = ref<HTMLCanvasElement | null>(null)
 const wrapperRef = ref<HTMLElement | null>(null)
 const size       = ref(400)
@@ -49,7 +49,7 @@ const displayedText = ref('')
 const isBlinking    = ref(false)
 let typingTimeout: ReturnType<typeof setTimeout> | null = null
 
-// ─── Shape types ─────────────────────────────────────────────────────────────
+// Shape types
 type ShapeType = 'line' | 'circle' | 'square' | 'triangle' | 'diamond' | 'star'
 
 interface Line {
@@ -76,7 +76,7 @@ const originalImage = ref<HTMLImageElement | null>(null)
 const imageOffset   = ref({ x: 0, y: 0, width: 0, height: 0 })
 const pixelData     = ref<Uint8ClampedArray | null>(null)
 
-// ─── Sizing ───────────────────────────────────────────────────────────────────
+// Sizing
 const updateSize = () => {
   const w = window.innerWidth
   size.value = w <= 480 ? Math.min(220, w - 40)
@@ -84,7 +84,7 @@ const updateSize = () => {
              : 400
 }
 
-// ─── Shader lerp ─────────────────────────────────────────────────────────────
+// Shader lerp
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
 const updateShaderTarget = () => {
@@ -107,7 +107,7 @@ const updateShaderTarget = () => {
   }
 }
 
-// ─── Draw ─────────────────────────────────────────────────────────────────────
+// Draw
 const drawBackground = (ctx: CanvasRenderingContext2D) => {
   if (!originalImage.value) return
   const { blur, opacity, brightness } = shaderCurrent.value
@@ -248,7 +248,7 @@ const draw = () => {
   })
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
+// Init
 const initCanvas = () => {
   const canvas = canvasRef.value
   if (!canvas) return
@@ -347,7 +347,7 @@ const initCanvas = () => {
   }
 }
 
-// ─── Typing loop ─────────────────────────────────────────────────────────────
+// Typing loop
 let phraseIndex = 0
 let charIndex   = 0
 let deleting    = false
@@ -387,7 +387,7 @@ const startTyping = () => {
   typingTimeout = setTimeout(tick, 600)
 }
 
-// ─── Pointer ──────────────────────────────────────────────────────────────────
+// Pointer
 const getCanvasPos = (clientX: number, clientY: number) => {
   const rect = canvasRef.value?.getBoundingClientRect()
   if (!rect) return { x: -1000, y: -1000 }
@@ -402,7 +402,7 @@ const onPointerMove = (e: MouseEvent | TouchEvent) => {
 const onPointerLeave  = () => { pointer.value.active = false }
 const onPointerClick  = () => { clickFlashUntil = performance.now() + 900 }
 
-// ─── Lifecycle ────────────────────────────────────────────────────────────────
+// Lifecycle
 let resizeObserver: ResizeObserver | null = null
 let intersectionObserver: IntersectionObserver | null = null
 

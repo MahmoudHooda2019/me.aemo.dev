@@ -1,6 +1,6 @@
 <template>
   <header>
-    <!-- ── Desktop Notch / Navbar ────────────────────────────────────────── -->
+    <!-- Desktop Notch / Navbar -->
     <div
       ref="navIslandRef"
       class="nav-island"
@@ -33,10 +33,6 @@
           <span class="btn-label">Tools</span>
         </button>
 
-        <!--
-          FIX: Replaced CSS :has() pip selector (poor browser support) with
-          a JS-driven class binding. Left pip lights up when Tools or Home is active.
-        -->
         <span
           class="island-pip"
           :class="{ 'pip-active': activeSection === 'tools' || activeSection === 'home' }"
@@ -58,7 +54,6 @@
           <span class="btn-label">Home</span>
         </button>
 
-        <!-- Right pip lights up when Home or Extensions is active -->
         <span
           class="island-pip"
           :class="{ 'pip-active': activeSection === 'home' || activeSection === 'extensions' }"
@@ -82,7 +77,7 @@
       </nav>
     </div>
 
-    <!-- ── Theme Toggle ──────────────────────────────────────────────────── -->
+    <!-- Theme Toggle -->
     <button
       class="theme-toggle"
       :class="{ spinning: isThemeChanging }"
@@ -93,7 +88,7 @@
       <span class="theme-ripple" :class="{ active: isThemeChanging }"></span>
     </button>
 
-    <!-- ── Mobile Navigation ─────────────────────────────────────────────── -->
+    <!-- Mobile Navigation -->
 
     <!-- Backdrop -->
     <transition name="backdrop-fade">
@@ -133,11 +128,6 @@
       :aria-expanded="menuOpen"
       aria-label="Navigation menu"
     >
-      <!--
-        FIX: Wrapped in .m-trigger-content (position: relative) so that
-        section-swap-leave-active's `position: absolute` is correctly contained
-        and doesn't escape the pill boundary during transitions.
-      -->
       <span class="m-trigger-content">
         <transition name="section-swap" mode="out-in">
           <span class="m-trigger-inner" :key="activeSection">
@@ -165,7 +155,7 @@
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useTheme } from '@/composables/useTheme'
 
-// ── Refs ───────────────────────────────────────────────────────────────────────
+// Refs
 const isScrolled      = ref(false)
 const isHidden        = ref(false)
 const isMouseNear     = ref(false)
@@ -174,44 +164,38 @@ const isThemeChanging = ref(false)
 const activeSection   = ref<'home' | 'tools' | 'extensions'>('home')
 const menuOpen        = ref(false)
 
-// FIX: template ref for nav island — avoids document.querySelector on every
-// mousemove event (was a hidden performance bottleneck in the original).
 const navIslandRef = ref<HTMLElement | null>(null)
 const triggerRef   = ref<HTMLElement | null>(null)
 const triggerWidth = ref(114)
 
 const { theme, toggleTheme } = useTheme()
 
-// ── Computed ───────────────────────────────────────────────────────────────────
+// Computed
 const isNotch = computed(
   () => isHidden.value && !isScrolled.value && !isExpanding.value,
 )
 
-// ── Timer handles ──────────────────────────────────────────────────────────────
-let hideTimer:       ReturnType<typeof setTimeout> | null = null
-let expandTimer:     ReturnType<typeof setTimeout> | null = null
-let unwatchTrigger:  (() => void) | null = null
-let unwatchTheme:    (() => void) | null = null  // FIX: was leaking — never cleaned up
-let resizeObserver:  ResizeObserver | null = null // FIX: use ResizeObserver instead of window resize
+// Timer handles
+let hideTimer:      ReturnType<typeof setTimeout> | null = null
+let expandTimer:    ReturnType<typeof setTimeout> | null = null
+let unwatchTrigger: (() => void) | null = null
+let unwatchTheme:   (() => void) | null = null
+let resizeObserver: ResizeObserver | null = null
 
 const clearTimers = () => {
   if (hideTimer)   { clearTimeout(hideTimer);   hideTimer   = null }
   if (expandTimer) { clearTimeout(expandTimer); expandTimer = null }
 }
 
-// ── Scroll handling ────────────────────────────────────────────────────────────
+// Scroll handling
 const handleScroll = () => {
   const wasScrolled = isScrolled.value
   isScrolled.value  = window.scrollY > 80
 
-  // FIX: handle scroll-start → expand; scroll-back-to-top → restart collapse timer.
-  // Original code never reset isHidden when returning to top, causing jarring notch snap.
   if (!wasScrolled && isScrolled.value) {
-    // Started scrolling — cancel any pending hide, show expanded nav
     clearTimers()
     isHidden.value = false
   } else if (wasScrolled && !isScrolled.value) {
-    // Scrolled back to top — gracefully collapse after delay (same feel as onLeave)
     clearTimers()
     hideTimer = setTimeout(() => {
       if (!isMouseNear.value) {
@@ -235,9 +219,8 @@ const handleScroll = () => {
   if (!found && window.scrollY < 100) activeSection.value = 'home'
 }
 
-// ── Mouse proximity ────────────────────────────────────────────────────────────
+// Mouse proximity
 const handleMouseMove = (e: MouseEvent) => {
-  // FIX: use cached template ref instead of querySelector on every event
   const el = navIslandRef.value
   if (!el) return
   const { bottom, left, right } = el.getBoundingClientRect()
@@ -265,14 +248,14 @@ const onLeave = () => {
   }, 2200)
 }
 
-// ── Theme toggle ───────────────────────────────────────────────────────────────
+// Theme toggle
 const handleThemeToggle = () => {
   isThemeChanging.value = true
   toggleTheme()
   setTimeout(() => { isThemeChanging.value = false }, 800)
 }
 
-// ── Nav items ──────────────────────────────────────────────────────────────────
+// Nav items
 const navItems = [
   {
     id: 'home'       as const,
@@ -297,7 +280,7 @@ const navItems = [
 const currentItem = computed(() => navItems.find(i => i.id === activeSection.value) ?? navItems[0])
 const otherItems  = computed(() => navItems.filter(i => i.id !== activeSection.value))
 
-// ── Menu controls ──────────────────────────────────────────────────────────────
+// Menu controls
 const toggleMenu  = () => { menuOpen.value = !menuOpen.value }
 const closeMenu   = () => { menuOpen.value = false }
 
@@ -309,9 +292,6 @@ const selectSection = (item: typeof navItems[number]) => {
   }, 80)
 }
 
-// FIX: Renamed internal function to avoid shadowing window.scrollTo.
-// In the original, the local `scrollTo` called `window.scrollTo` explicitly,
-// which worked, but was confusing and fragile. Now it's clearly separated.
 const scrollTo = (id: string) => {
   if (id === 'top') {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -320,37 +300,30 @@ const scrollTo = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-// ── Trigger width measurement ──────────────────────────────────────────────────
+// Trigger width measurement
 const measureTrigger = () => {
   if (triggerRef.value) {
     triggerWidth.value = triggerRef.value.getBoundingClientRect().width
   }
 }
 
-// ── Lifecycle ──────────────────────────────────────────────────────────────────
+// Lifecycle
 onMounted(() => {
   window.addEventListener('scroll',    handleScroll,    { passive: true })
   window.addEventListener('mousemove', handleMouseMove, { passive: true })
 
-  // Collapse to notch after 3 s idle
   hideTimer = setTimeout(() => {
     if (!isMouseNear.value) isHidden.value = true
   }, 3000)
 
-  // FIX: Use ResizeObserver instead of window 'resize' — catches label-length
-  // changes (section switching) and CSS transition end without manual retries.
   if (triggerRef.value) {
     resizeObserver = new ResizeObserver(measureTrigger)
     resizeObserver.observe(triggerRef.value)
     measureTrigger()
   }
 
-  // Re-measure on section change (label length differs per section)
   unwatchTrigger = watch(activeSection, () => nextTick(measureTrigger))
-
-  // FIX: store watcher stop handle so it can be cleaned up in onUnmounted.
-  // Original discarded the return value → watcher kept running after unmount.
-  unwatchTheme = watch(theme, () => setTimeout(measureTrigger, 150))
+  unwatchTheme   = watch(theme, () => setTimeout(measureTrigger, 150))
 })
 
 onUnmounted(() => {
@@ -358,15 +331,14 @@ onUnmounted(() => {
   window.removeEventListener('mousemove', handleMouseMove)
   resizeObserver?.disconnect()
   unwatchTrigger?.()
-  unwatchTheme?.()     // FIX: was never called in original
+  unwatchTheme?.()
   clearTimers()
 })
 </script>
 
 <!--
-  FIX: CSS variables live in an UNSCOPED block so they reach :root and
-  [data-theme] on <html>. Scoped styles cannot target outside the component's
-  shadow boundary, so all variable lookups would silently fall back to nothing.
+  Global CSS variables — must be unscoped so :root and [data-theme] on <html>
+  are reachable. Scoped styles cannot pierce outside the component boundary.
 -->
 <style>
 :root {
@@ -421,9 +393,20 @@ onUnmounted(() => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
 
-/* ── Desktop Navigation Island ──────────────────────────────────────────────── */
+/* Header base */
+header {
+  position: relative;
+  z-index: 2000;
+}
+
+/* ─── Desktop Navigation Island ──────────────────────────────────── */
 .nav-island {
-  position: fixed; top: 0; left: 50%; z-index: 1000;
+  position: fixed; top: 0; left: 50%;
+  /*
+    FIX: z-index raised to 10000 so the island always sits above
+    floating badges (z-index 30 desktop / 200 mobile).
+  */
+  z-index: 10000;
   display: flex; align-items: center; justify-content: center;
   transform: translateX(-50%); overflow: hidden; cursor: default;
   backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
@@ -463,7 +446,6 @@ onUnmounted(() => {
     0 0 8px var(--shadow-color-alt);
 }
 
-/* Accent glow on notch speaker */
 .nav-island.is-notch.section-tools   .notch-speaker,
 .nav-island.is-notch.section-home    .notch-speaker { box-shadow: inset 0 1px 3px rgba(0,0,0,.9), 0 0 6px var(--shadow-color); }
 .nav-island.is-notch.section-extensions .notch-speaker { box-shadow: inset 0 1px 3px rgba(0,0,0,.9), 0 0 6px var(--shadow-color-alt); }
@@ -492,7 +474,7 @@ onUnmounted(() => {
 .nav-island.is-expanded.section-tools      { border-color: var(--shadow-color); }
 .nav-island.is-expanded.section-extensions { border-color: var(--shadow-color-alt); }
 
-/* ── Notch internals ─────────────────────────────────────────────────────── */
+/* Notch internals */
 .island-notch {
   display: flex; align-items: center; gap: 10px;
   pointer-events: none;
@@ -519,7 +501,7 @@ onUnmounted(() => {
 }
 .nav-island.is-notch:hover .notch-hint { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ── Nav buttons ─────────────────────────────────────────────────────────── */
+/* Nav buttons */
 .island-nav {
   display: flex; align-items: center; gap: 2px;
   transition: opacity .35s, transform .5s cubic-bezier(0.34, 1.4, 0.64, 1);
@@ -527,10 +509,6 @@ onUnmounted(() => {
 .is-notch    .island-nav { opacity: 0; transform: scale(.85) translateY(10px); pointer-events: none; position: absolute; }
 .is-expanded .island-nav { opacity: 1; transform: scale(1) translateY(0);      pointer-events: auto; position: relative; }
 
-/*
-  FIX: Replaced CSS :has() selector (limited browser support) with
-  a JS-bound .pip-active class. See template binding for logic.
-*/
 .island-pip {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--text-muted);
@@ -607,9 +585,14 @@ onUnmounted(() => {
 }
 .btn-icon svg { width: 100%; height: 100%; }
 
-/* ── Theme Toggle ────────────────────────────────────────────────────────── */
+/* ─── Theme Toggle ────────────────────────────────────────────────── */
 .theme-toggle {
-  position: fixed; top: 22px; right: 24px; z-index: 1001;
+  position: fixed; top: 22px; right: 24px;
+  /*
+    FIX: z-index raised to 10001 — above nav-island (10000) and
+    all floating badges (desktop 30 / mobile 200).
+  */
+  z-index: 10001;
   display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%;
   border: 1px solid var(--border-color);
   background: var(--nav-bg);
@@ -644,9 +627,14 @@ onUnmounted(() => {
   100% { opacity: 0;   transform: scale(2.4); }
 }
 
-/* ── Mobile — Backdrop ───────────────────────────────────────────────────── */
+/* ─── Mobile — Backdrop ───────────────────────────────────────────── */
 .m-backdrop {
-  position: fixed; inset: 0; z-index: 1005;
+  position: fixed; inset: 0;
+  /*
+    FIX: z-index raised to 10005 — sits between the bubbles (10006)
+    and the rest of the page content, while still below the trigger (10010).
+  */
+  z-index: 10005;
   background: var(--backdrop-bg);
   backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 }
@@ -655,10 +643,15 @@ onUnmounted(() => {
 .backdrop-fade-enter-from,
 .backdrop-fade-leave-to { opacity: 0; }
 
-/* ── Mobile — Trigger pill ───────────────────────────────────────────────── */
+/* ─── Mobile — Trigger pill ───────────────────────────────────────── */
 .m-trigger {
   display: none;
-  position: fixed; top: 16px; right: 64px; z-index: 1010;
+  position: fixed; top: 16px; right: 64px;
+  /*
+    FIX: z-index raised to 10010 — topmost interactive element on mobile,
+    always above badges (200), backdrop (10005) and bubbles (10006).
+  */
+  z-index: 10010;
   height: 40px; padding: 0 14px 0 10px; border-radius: 999px;
   border: 1.5px solid var(--border-color);
   background: var(--nav-bg-mobile);
@@ -673,7 +666,6 @@ onUnmounted(() => {
 .m-trigger:active { transform: scale(0.94); }
 .m-trigger.open   { transform: scale(1.04); }
 
-/* FIX: Added static rgba fallback before color-mix() for older browsers */
 .m-trigger.accent-home,
 .m-trigger.accent-tools {
   border-color: rgba(110, 231, 183, 0.28);
@@ -709,11 +701,6 @@ onUnmounted(() => {
   box-shadow: 0 4px 18px rgba(0,0,0,.15), 0 0 14px -4px var(--shadow-color-alt);
 }
 
-/*
-  FIX: Added .m-trigger-content wrapper with position: relative so that
-  section-swap-leave-active's `position: absolute` is correctly contained.
-  Without this, the leaving element escapes the pill during animation.
-*/
 .m-trigger-content {
   position: relative;
   display: flex; align-items: center; justify-content: center;
@@ -732,7 +719,7 @@ onUnmounted(() => {
 }
 .section-swap-leave-active {
   transition: opacity .16s ease, transform .22s ease;
-  position: absolute; /* now safely contained by .m-trigger-content */
+  position: absolute;
 }
 .section-swap-enter-from { opacity: 0; transform: translateY(9px) scale(0.85); }
 .section-swap-leave-to   { opacity: 0; transform: translateY(-7px) scale(0.9); }
@@ -804,16 +791,20 @@ onUnmounted(() => {
 .m-trigger.accent-extensions .m-trigger-label { color: var(--accent-secondary); }
 [data-theme='light'] .m-trigger .m-trigger-label { color: var(--text-primary); }
 
-/* ── Mobile — Section bubbles ────────────────────────────────────────────── */
+/* ─── Mobile — Section bubbles ────────────────────────────────────── */
 .m-section-bubbles {
   display: none;
   position: fixed; top: 16px;
   right: calc(64px + var(--m-trigger-w, 114px) + 8px);
+  /*
+    FIX: z-index raised to 10006 — above backdrop (10005), below trigger (10010).
+  */
+  z-index: 10006;
   height: 40px;
   align-items: center; gap: 6px;
   pointer-events: none;
 }
-.m-section-bubbles.open { pointer-events: auto; z-index: 1006; }
+.m-section-bubbles.open { pointer-events: auto; }
 
 .m-bubble {
   display: flex; align-items: center; justify-content: center;
@@ -824,7 +815,6 @@ onUnmounted(() => {
   cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   box-shadow: 0 4px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.06);
   opacity: 0; transform: translateX(14px) scale(0.65);
-  /* FIX: added width/padding to transition list so expand animation works */
   transition:
     opacity      .32s ease,
     transform    .42s cubic-bezier(0.34, 1.4, 0.64, 1),
@@ -837,7 +827,6 @@ onUnmounted(() => {
 .m-bubble.visible { opacity: 1; transform: translateX(0) scale(1); }
 .m-bubble:active  { transform: scale(0.88) !important; }
 
-/* Expand to pill on hover (desktop) and focus — touch uses :active */
 .m-bubble.visible:hover,
 .m-bubble.visible:focus-visible {
   width: auto;
@@ -848,7 +837,6 @@ onUnmounted(() => {
   max-width: 60px; opacity: 1; margin-left: 4px;
 }
 
-/* Bubble label */
 .m-bubble-label {
   max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap;
   font-family: 'DM Sans', sans-serif;
@@ -856,7 +844,6 @@ onUnmounted(() => {
   transition: max-width .25s ease, opacity .2s ease, margin-left .25s ease;
 }
 
-/* FIX: Removed duplicate .m-bubble-icon rule that existed in the original */
 .m-bubble-icon {
   display: flex; align-items: center; justify-content: center;
   width: 20px; height: 20px; flex-shrink: 0;
@@ -864,7 +851,6 @@ onUnmounted(() => {
 }
 .m-bubble-icon svg { width: 100%; height: 100%; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Bubble accent colors — FIX: static fallback before color-mix() */
 .m-bubble.accent-home,
 .m-bubble.accent-tools {
   border-color: rgba(110, 231, 183, 0.25);
@@ -899,7 +885,7 @@ onUnmounted(() => {
   color: var(--accent-secondary);
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
+/* ─── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .nav-island        { display: none; }
   .theme-toggle      { top: 16px; right: 16px; width: 40px; height: 40px; }
@@ -918,7 +904,7 @@ onUnmounted(() => {
   .m-bubble-label    { font-size: .55rem; }
 }
 
-/* ── Reduced motion ──────────────────────────────────────────────────────── */
+/* ─── Reduced motion ──────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .nav-island,
   .island-notch,
