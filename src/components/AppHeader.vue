@@ -782,11 +782,11 @@ onUnmounted(() => {
 
 .m-trigger.accent-home .m-trigger-icon,
 .m-trigger.accent-tools .m-trigger-icon {
-  color: var(--shadow-color);
+  color: var(--accent-primary);
   filter: drop-shadow(0 0 4px var(--shadow-color));
 }
 .m-trigger.accent-extensions .m-trigger-icon {
-  color: var(--shadow-color-alt);
+  color: var(--accent-secondary);
   filter: drop-shadow(0 0 4px var(--shadow-color-alt));
 }
 [data-theme='light'] .m-trigger.accent-home .m-trigger-icon,
@@ -800,8 +800,8 @@ onUnmounted(() => {
   text-transform: uppercase; line-height: 1;
 }
 .m-trigger.accent-home       .m-trigger-label,
-.m-trigger.accent-tools      .m-trigger-label { color: var(--shadow-color); }
-.m-trigger.accent-extensions .m-trigger-label { color: var(--shadow-color-alt); }
+.m-trigger.accent-tools      .m-trigger-label { color: var(--accent-primary); }
+.m-trigger.accent-extensions .m-trigger-label { color: var(--accent-secondary); }
 [data-theme='light'] .m-trigger .m-trigger-label { color: var(--text-primary); }
 
 /* ── Mobile — Section bubbles ────────────────────────────────────────────── */

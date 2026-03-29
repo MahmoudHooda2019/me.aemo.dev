@@ -14,8 +14,8 @@
   --shadow-color: rgba(99, 102, 241, 0.2);
   --shadow-color-alt: rgba(34, 211, 238, 0.2);
   --grid-color: rgba(255, 255, 255, 0.03);
-  --nav-bg: rgba(15, 23, 42, 0.95);
-  --nav-bg-scrolled: rgba(30, 41, 59, 0.98);
+  --nav-bg: rgba(30, 41, 59, 0.98);
+  --nav-bg-scrolled: rgba(51, 65, 85, 0.98);
   /* States */
   --success: #34D399;
   --error: #F87171;

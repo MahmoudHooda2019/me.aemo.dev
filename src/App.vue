@@ -64,12 +64,12 @@ const { initTheme } = useTheme()
 
 // Badge data
 const badges = [
-  { id: 'right-top', cssClass: 'badge-home-right-top', icon: '🐹', text: 'Backend', subtext: 'Golang', gradient: 'linear-gradient(135deg, #bb86fc20, #bb86fc40)' },
-  { id: 'right-center', cssClass: 'badge-home-right-center', icon: '💻', text: 'Frontend', subtext: 'Typescript + Vue', gradient: 'linear-gradient(135deg, #03dac620, #03dac640)' },
-  { id: 'right-bottom', cssClass: 'badge-home-right-bottom', icon: '🛠️', text: 'Other Languages', subtext: 'Java, Kotlin, Python', gradient: 'linear-gradient(135deg, #ffd93d20, #ffd93d40)' },
+  { id: 'right-top', cssClass: 'badge-home-right-top', icon: '⚙️', text: 'Backend', subtext: 'Golang', gradient: 'linear-gradient(135deg, #bb86fc20, #bb86fc40)' },
+  { id: 'right-center', cssClass: 'badge-home-right-center', icon: '🎨', text: 'Frontend', subtext: 'Typescript + Vue', gradient: 'linear-gradient(135deg, #03dac620, #03dac640)' },
+  { id: 'right-bottom', cssClass: 'badge-home-right-bottom', icon: '📦', text: 'Other Languages', subtext: 'Java, Kotlin, Python', gradient: 'linear-gradient(135deg, #ffd93d20, #ffd93d40)' },
   { id: 'left-top', cssClass: 'badge-home-left-top', icon: '👤', text: 'Name', subtext: 'Mahmoud Hussien', gradient: 'linear-gradient(135deg, #ff6b6b20, #ff6b6b40)' },
   { id: 'left-center', cssClass: 'badge-home-left-center', icon: '📍', text: 'Location', subtext: 'Egypt', gradient: 'linear-gradient(135deg, #4ecdc420, #4ecdc440)' },
-  { id: 'left-bottom', cssClass: 'badge-home-left-bottom', icon: '🧩', text: 'Job', subtext: 'Extension Developer', gradient: 'linear-gradient(135deg, #6bcf7f20, #6bcf7f40)' },
+  { id: 'left-bottom', cssClass: 'badge-home-left-bottom', icon: '🧑‍💻', text: 'Job', subtext: 'Extension Developer', gradient: 'linear-gradient(135deg, #6bcf7f20, #6bcf7f40)' },
 ]
 
 // Badge expansion state
@@ -344,6 +344,8 @@ main {
   .particle-section {
     min-height: calc(100vh - 80px);
     padding: 1rem;
+    /* Allow badges to peek outside without clipping */
+    overflow: visible;
   }
   
   /* Only show floating badges in home section */
@@ -356,40 +358,71 @@ main {
     z-index: 9999 !important;
     display: flex !important;
     opacity: 1 !important;
+    /* Fixed width so translateX % is predictable */
+    width: 190px !important;
+    /* Kill the float animation on mobile — it fights with our transforms */
+    animation: none !important;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
-  
+
+  /* ─── RIGHT badges ───────────────────────────────────────────────────────── */
+  /* Anchor to right edge; push badge almost fully off-screen.
+     Peek amount = 64px = icon (48px) + inner-left padding (16px)              */
   .badge-home-right-top,
   .badge-home-right-center,
   .badge-home-right-bottom {
-    right: -130px !important;
-    transform: translateX(0) !important;
+    right: 0 !important;
+    left: auto !important;
+    transform: translateX(calc(100% - 64px)) !important;
   }
-  
+
   .badge-home-right-top.expanded,
   .badge-home-right-center.expanded,
   .badge-home-right-bottom.expanded {
-    transform: translateX(-115px) !important;
+    transform: translateX(0%) !important;
   }
-  
+
+  /* ─── LEFT badges ────────────────────────────────────────────────────────── */
   .badge-home-left-top,
   .badge-home-left-center,
   .badge-home-left-bottom {
-    left: -130px !important;
-    transform: translateX(0) !important;
+    left: 0 !important;
+    right: auto !important;
+    transform: translateX(calc(-100% + 64px)) !important;
+    /* Reverse so icon is on the right — the visible peeking side */
+    flex-direction: row-reverse !important;
   }
-  
+
   .badge-home-left-top.expanded,
   .badge-home-left-center.expanded,
   .badge-home-left-bottom.expanded {
-    transform: translateX(115px) !important;
+    transform: translateX(0%) !important;
   }
-  
-  .badge-home-right-top { top: 20% !important; }
-  .badge-home-right-center { top: 50% !important; }
-  .badge-home-right-bottom { top: 80% !important; }
-  .badge-home-left-top { top: 20% !important; }
-  .badge-home-left-center { top: 50% !important; }
-  .badge-home-left-bottom { top: 80% !important; }
+
+  /* ─── Vertical placement (same for both sides) ───────────────────────────── */
+  .badge-home-right-top,
+  .badge-home-left-top    { top: 18% !important; bottom: auto !important; }
+
+  /* Center badges need a combined transform to stay vertically centred */
+  .badge-home-right-center {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateX(calc(100% - 64px)) translateY(-50%) !important;
+  }
+  .badge-home-right-center.expanded {
+    transform: translateX(0%) translateY(-50%) !important;
+  }
+
+  .badge-home-left-center {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateX(calc(-100% + 64px)) translateY(-50%) !important;
+  }
+  .badge-home-left-center.expanded {
+    transform: translateX(0%) translateY(-50%) !important;
+  }
+
+  .badge-home-right-bottom,
+  .badge-home-left-bottom { top: 78% !important; bottom: auto !important; }
 }
 </style>

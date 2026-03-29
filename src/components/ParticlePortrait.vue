@@ -1,5 +1,5 @@
 <template>
-  <div class="portrait-wrapper">
+  <div class="portrait-wrapper" ref="wrapperRef">
     <canvas
       ref="canvasRef"
       class="simulation-container"
@@ -11,8 +11,10 @@
         WebkitUserSelect: 'none',
       }"
       oncontextmenu="return false;"
+      aria-label="Animated portrait"
+      role="img"
     />
-    <div class="typing-text">
+    <div class="typing-text" aria-live="polite">
       <span class="typed-text">{{ displayedText }}</span>
       <span class="cursor" :class="{ 'cursor-blink': isBlinking }"></span>
     </div>
@@ -20,107 +22,247 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+const PHRASES      = ['hi, Aemo here.', 'designer & dev.', "let's build."]
+const TYPE_SPEED   = 90
+const DELETE_SPEED = 45
+const PAUSE_END    = 1800
+const PAUSE_START  = 400
+
+// ─── State ────────────────────────────────────────────────────────────────────
+const canvasRef  = ref<HTMLCanvasElement | null>(null)
+const wrapperRef = ref<HTMLElement | null>(null)
+const size       = ref(400)
+
+const pointer = ref({ x: -1000, y: -1000, active: false })
+
+const shaderTarget  = ref({ blur: 0.5, opacity: 0.12, brightness: 0.5 })
+const shaderCurrent = ref({ blur: 0.5, opacity: 0.12, brightness: 0.5 })
+
+let animationId: number | null = null
+let isVisible = true
+let clickFlashUntil = 0
+
+const displayedText = ref('')
+const isBlinking    = ref(false)
+let typingTimeout: ReturnType<typeof setTimeout> | null = null
+
+// ─── Shape types ─────────────────────────────────────────────────────────────
+type ShapeType = 'line' | 'circle' | 'square' | 'triangle' | 'diamond' | 'star'
 
 interface Line {
-  x: number
-  y: number
-  targetX: number
-  targetY: number
-  vx: number
-  vy: number
-  length: number
-  baseAlpha: number
-  currentAlpha: number
+  x: number; y: number
+  targetX: number; targetY: number
+  vx: number; vy: number
+  length: number; angle: number
+  r: number; g: number; b: number
+  baseAlpha: number; currentAlpha: number
   delay: number
+  shape: ShapeType
+  rotation: number
 }
 
-interface Mouse {
-  x: number
-  y: number
-  active: boolean
-}
+const shapes: ShapeType[] = ['line', 'circle', 'square', 'triangle', 'diamond', 'star']
+const currentShape = ref<ShapeType>('line')
 
-const canvasRef = ref<HTMLCanvasElement | null>(null)
-const mouse = ref<Mouse>({ x: -1000, y: -1000, active: false })
-const lines = ref<Line[]>([])
-const imageLoaded = ref(false)
-const startTime = ref<number | null>(null)
-const size = ref(400)
+const getRandomShape = (): ShapeType => shapes[Math.floor(Math.random() * shapes.length)]
+
+const lines         = ref<Line[]>([])
+const imageLoaded   = ref(false)
+const startTime     = ref<number | null>(null)
 const originalImage = ref<HTMLImageElement | null>(null)
-const imageOffset = ref({ x: 0, y: 0, width: 0, height: 0 })
-const isBlurDisabled = ref(false)
-let animationId: number | null = null
+const imageOffset   = ref({ x: 0, y: 0, width: 0, height: 0 })
+const pixelData     = ref<Uint8ClampedArray | null>(null)
 
+// ─── Sizing ───────────────────────────────────────────────────────────────────
 const updateSize = () => {
-  const width = window.innerWidth
-  if (width <= 480) {
-    size.value = Math.min(220, width - 40)
-  } else if (width <= 768) {
-    size.value = Math.min(280, width - 60)
-  } else {
-    size.value = 400
+  const w = window.innerWidth
+  size.value = w <= 480 ? Math.min(220, w - 40)
+             : w <= 768 ? Math.min(280, w - 60)
+             : 400
+}
+
+// ─── Shader lerp ─────────────────────────────────────────────────────────────
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+
+const updateShaderTarget = () => {
+  const now = performance.now()
+  if (now < clickFlashUntil) {
+    shaderTarget.value = { blur: 0, opacity: 1, brightness: 1.2 }
+    return
+  }
+  if (!pointer.value.active) {
+    shaderTarget.value = { blur: 0.5, opacity: 0.12, brightness: 0.5 }
+    return
+  }
+  const rect = canvasRef.value!.getBoundingClientRect()
+  const nx = Math.max(0, Math.min(1, pointer.value.x / rect.width))
+  const ny = Math.max(0, Math.min(1, pointer.value.y / rect.height))
+  shaderTarget.value = {
+    blur:       nx * 18,
+    opacity:    0.2 + (1 - ny) * 0.6,
+    brightness: 0.75,
   }
 }
 
-const handleResize = () => {
-  updateSize()
-  initCanvas()
-}
-
-const getShaderIntensity = () => {
-  if (isBlurDisabled.value) return { blur: 0, opacity: 1, brightness: 1.2 }
-  if (!mouse.value.active) return { blur: 0.5, opacity: 0.12, brightness: 0.5 }
-  
-  const canvas = canvasRef.value
-  if (!canvas) return { blur: 0.5, opacity: 0.5, brightness: 0.5 }
-  
-  const rect = canvas.getBoundingClientRect()
-  const normalizedX = Math.max(0, Math.min(1, mouse.value.x / rect.width))
-  const normalizedY = Math.max(0, Math.min(1, mouse.value.y / rect.height))
-  
-  return {
-    blur: normalizedX * 20,
-    opacity: 0.2 + (1 - normalizedY) * 0.6,
-    brightness: 0.75
-  }
-}
-
+// ─── Draw ─────────────────────────────────────────────────────────────────────
 const drawBackground = (ctx: CanvasRenderingContext2D) => {
   if (!originalImage.value) return
-  
-  const { blur, opacity, brightness } = getShaderIntensity()
-  
+  const { blur, opacity, brightness } = shaderCurrent.value
   ctx.save()
-  
-  ctx.filter = `blur(${blur}px) brightness(${brightness})`
+  ctx.filter = `blur(${blur.toFixed(2)}px) brightness(${brightness.toFixed(3)})`
   ctx.globalAlpha = opacity
-  
-  ctx.drawImage(
-    originalImage.value,
-    imageOffset.value.x,
-    imageOffset.value.y,
-    imageOffset.value.width,
-    imageOffset.value.height
-  )
-  
+  const { x, y, width, height } = imageOffset.value
+  ctx.drawImage(originalImage.value, x, y, width, height)
   ctx.restore()
 }
 
-const initCanvas = () => {
+const drawShape = (ctx: CanvasRenderingContext2D, p: Line) => {
+  const s = p.length
+  ctx.fillStyle   = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.currentAlpha})`
+  ctx.strokeStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.currentAlpha})`
+
+  switch (p.shape) {
+    case 'line':
+      ctx.lineWidth = size.value <= 280 ? 2.5 : 3.5
+      ctx.beginPath()
+      ctx.moveTo(p.x, p.y)
+      ctx.lineTo(p.x + Math.cos(p.angle) * s, p.y + Math.sin(p.angle) * s)
+      ctx.stroke()
+      break
+
+    case 'circle':
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, s * 0.3, 0, Math.PI * 2)
+      ctx.fill()
+      break
+
+    case 'square':
+      ctx.save()
+      ctx.translate(p.x, p.y)
+      ctx.rotate(p.rotation)
+      ctx.fillRect(-s * 0.3, -s * 0.3, s * 0.6, s * 0.6)
+      ctx.restore()
+      break
+
+    case 'triangle':
+      ctx.save()
+      ctx.translate(p.x, p.y)
+      ctx.rotate(p.rotation)
+      ctx.beginPath()
+      ctx.moveTo(0, -s * 0.3)
+      ctx.lineTo(s * 0.3, s * 0.3)
+      ctx.lineTo(-s * 0.3, s * 0.3)
+      ctx.closePath()
+      ctx.fill()
+      ctx.restore()
+      break
+
+    case 'diamond':
+      ctx.save()
+      ctx.translate(p.x, p.y)
+      ctx.rotate(p.rotation)
+      ctx.beginPath()
+      ctx.moveTo(0, -s * 0.3)
+      ctx.lineTo(s * 0.3, 0)
+      ctx.lineTo(0, s * 0.3)
+      ctx.lineTo(-s * 0.3, 0)
+      ctx.closePath()
+      ctx.fill()
+      ctx.restore()
+      break
+
+    case 'star':
+      ctx.save()
+      ctx.translate(p.x, p.y)
+      ctx.rotate(p.rotation)
+      ctx.beginPath()
+      for (let i = 0; i < 5; i++) {
+        const a = (i * 4 * Math.PI) / 5 - Math.PI / 2
+        const sx = Math.cos(a) * (s / 2)
+        const sy = Math.sin(a) * (s / 2)
+        i === 0 ? ctx.moveTo(sx, sy) : ctx.lineTo(sx, sy)
+      }
+      ctx.closePath()
+      ctx.fill()
+      ctx.restore()
+      break
+  }
+}
+
+const draw = () => {
+  if (!isVisible) { animationId = null; return }
+  animationId = requestAnimationFrame(draw)
+
   const canvas = canvasRef.value
   if (!canvas) return
-
   const ctx = canvas.getContext('2d')
   if (!ctx) return
 
-  canvas.width = size.value
+  ctx.clearRect(0, 0, size.value, size.value)
+  if (!imageLoaded.value || !startTime.value) return
+
+  updateShaderTarget()
+  const t = 0.08
+  shaderCurrent.value.blur       = lerp(shaderCurrent.value.blur,       shaderTarget.value.blur,       t)
+  shaderCurrent.value.opacity    = lerp(shaderCurrent.value.opacity,    shaderTarget.value.opacity,    t)
+  shaderCurrent.value.brightness = lerp(shaderCurrent.value.brightness, shaderTarget.value.brightness, t)
+
+  drawBackground(ctx)
+
+  if (performance.now() < clickFlashUntil) return
+
+  const elapsed = (performance.now() - startTime.value) / 1000
+
+  lines.value.forEach((p) => {
+    const pt = elapsed - p.delay
+    if (pt < 0) return
+
+    const easedFade = 1 - Math.pow(1 - Math.min(pt / 1.5, 1), 2)
+    p.currentAlpha = p.baseAlpha * easedFade
+
+    const easedMove = 1 - Math.pow(1 - Math.min(pt / 2.5, 1), 3)
+    const pull = 0.01 + easedMove * 0.07
+
+    if (pointer.value.active) {
+      const dx = p.x - pointer.value.x
+      const dy = p.y - pointer.value.y
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      if (dist < 60 && dist > 0) {
+        const force = (1 - dist / 60) * 2
+        p.vx += (dx / dist) * force
+        p.vy += (dy / dist) * force
+      }
+    }
+
+    p.vx += (p.targetX - p.x) * pull
+    p.vy += (p.targetY - p.y) * pull
+    p.vx *= 0.92
+    p.vy *= 0.92
+    p.x += p.vx
+    p.y += p.vy
+
+    drawShape(ctx, p)
+  })
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+const initCanvas = () => {
+  const canvas = canvasRef.value
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+
+  canvas.width  = size.value
   canvas.height = size.value
 
-  lines.value = []
-  imageLoaded.value = false
-  startTime.value = null
+  lines.value         = []
+  imageLoaded.value   = false
+  startTime.value     = null
   originalImage.value = null
+  pixelData.value     = null
 
   const img = new Image()
   img.crossOrigin = 'anonymous'
@@ -128,234 +270,199 @@ const initCanvas = () => {
 
   img.onload = () => {
     originalImage.value = img
-    
-    const offscreen = document.createElement('canvas')
-    const offCtx = offscreen.getContext('2d')
+
+    const off    = document.createElement('canvas')
+    off.width    = size.value
+    off.height   = size.value
+    const offCtx = off.getContext('2d')
     if (!offCtx) return
 
-    offscreen.width = size.value
-    offscreen.height = size.value
+    const scale  = 0.95
+    const aspect = img.width / img.height
+    let drawH    = size.value * scale
+    let drawW    = drawH * aspect
+    if (drawW > size.value * scale) { drawW = size.value * scale; drawH = drawW / aspect }
 
-    const scale = 0.95
-    const imgAspect = img.width / img.height
+    const offsetX = (size.value - drawW) / 2
+    const offsetY = (size.value - drawH) / 2
+    imageOffset.value = { x: offsetX, y: offsetY, width: drawW, height: drawH }
 
-    let drawHeight = size.value * scale
-    let drawWidth = drawHeight * imgAspect
+    offCtx.drawImage(img, offsetX, offsetY, drawW, drawH)
+    const imgData = offCtx.getImageData(0, 0, size.value, size.value)
+    pixelData.value = imgData.data
 
-    if (drawWidth > size.value * scale) {
-      drawWidth = size.value * scale
-      drawHeight = drawWidth / imgAspect
-    }
+    const sessionShape = getRandomShape()
+    currentShape.value = sessionShape
 
-    const offsetX = (size.value - drawWidth) / 2
-    const offsetY = (size.value - drawHeight) / 2
-    
-    imageOffset.value = { x: offsetX, y: offsetY, width: drawWidth, height: drawHeight }
-
-    offCtx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
-    const imageData = offCtx.getImageData(0, 0, size.value, size.value)
-    const pixels = imageData.data
-
-    const newLines: Line[] = []
+    const newLines: Line[] = []  // ← restored
     const rowGap = size.value <= 280 ? 5 : 6
 
     for (let y = 0; y < size.value; y += rowGap) {
       let x = 0
       while (x < size.value) {
         const i = (y * size.value + x) * 4
-        const a = pixels[i + 3]
+        const a = imgData.data[i + 3]
 
         if (a > 128) {
-          const r = pixels[i]
-          const g = pixels[i + 1]
-          const b = pixels[i + 2]
+          const r          = imgData.data[i]
+          const g          = imgData.data[i + 1]
+          const b          = imgData.data[i + 2]
           const brightness = (r + g + b) / (3 * 255)
+          const lineLen    = Math.floor(3 + brightness * (size.value <= 280 ? 8 : 15))
 
-          const lineLength = Math.floor(3 + brightness * (size.value <= 280 ? 8 : 15))
+          const mix = 0.55
+          const lr  = Math.round(r * (1 - mix) + 100 * mix)
+          const lg  = Math.round(g * (1 - mix) + 255 * mix)
+          const lb  = Math.round(b * (1 - mix) + 218 * mix)
 
-          const scatterX = (Math.random() - 0.5) * 300
-          const scatterY = (Math.random() - 0.5) * 300
+          const angle    = (Math.random() - 0.5) * (Math.PI / 15)
+          const rotation = Math.random() * Math.PI * 2
 
           newLines.push({
-            x: x + scatterX,
-            y: y + scatterY,
-            targetX: x,
-            targetY: y,
-            vx: 0,
-            vy: 0,
-            length: lineLength,
-            baseAlpha: 0.5 + brightness * 0.5,
+            x:            x + (Math.random() - 0.5) * 300,
+            y:            y + (Math.random() - 0.5) * 300,
+            targetX:      x,
+            targetY:      y,
+            vx: 0, vy: 0,
+            length:       lineLen,
+            angle,
+            r: lr, g: lg, b: lb,
+            baseAlpha:    0.5 + brightness * 0.5,
             currentAlpha: 0,
-            delay: Math.random() * 0.3,
+            delay:        Math.random() * 0.3,
+            shape:        sessionShape,
+            rotation,
           })
 
-          x += lineLength + 3
+          x += lineLen + 3
         } else {
           x += 4
         }
       }
     }
 
-    lines.value = newLines
+    lines.value       = newLines
     imageLoaded.value = true
-    startTime.value = performance.now()
+    startTime.value   = performance.now()
   }
 }
 
-const draw = () => {
-  const canvas = canvasRef.value
-  if (!canvas) return
+// ─── Typing loop ─────────────────────────────────────────────────────────────
+let phraseIndex = 0
+let charIndex   = 0
+let deleting    = false
 
-  const ctx = canvas.getContext('2d')
-  if (!ctx) return
+const tick = () => {
+  const phrase = PHRASES[phraseIndex]
 
-  animationId = requestAnimationFrame(draw)
-
-  ctx.clearRect(0, 0, size.value, size.value)
-
-  if (!imageLoaded.value || !startTime.value) return
-
-  drawBackground(ctx)
-
-  if (isBlurDisabled.value) return
-
-  const elapsed = (performance.now() - startTime.value) / 1000
-
-  lines.value.forEach((p) => {
-    const particleTime = elapsed - p.delay
-
-    if (particleTime < 0) return
-
-    const fadeProgress = Math.min(particleTime / 1.5, 1)
-    const easedFade = 1 - Math.pow(1 - fadeProgress, 2)
-    p.currentAlpha = p.baseAlpha * easedFade
-
-    const moveProgress = Math.min(particleTime / 2.5, 1)
-    const easedMove = 1 - Math.pow(1 - moveProgress, 3)
-
-    if (mouse.value.active) {
-      const dx = p.x - mouse.value.x
-      const dy = p.y - mouse.value.y
-      const dist = Math.sqrt(dx * dx + dy * dy)
-      const maxDist = 60
-
-      if (dist < maxDist && dist > 0) {
-        const force = (1 - dist / maxDist) * 2
-        p.vx += (dx / dist) * force
-        p.vy += (dy / dist) * force
-      }
+  if (!deleting) {
+    displayedText.value = phrase.slice(0, charIndex + 1)
+    charIndex++
+    if (charIndex === phrase.length) {
+      isBlinking.value = true
+      typingTimeout = setTimeout(() => { isBlinking.value = false; deleting = true; tick() }, PAUSE_END)
+      return
     }
-
-    const dx = p.targetX - p.x
-    const dy = p.targetY - p.y
-
-    const pullStrength = 0.01 + easedMove * 0.07
-    p.vx += dx * pullStrength
-    p.vy += dy * pullStrength
-
-    p.vx *= 0.92
-    p.vy *= 0.92
-
-    p.x += p.vx
-    p.y += p.vy
-
-    ctx.strokeStyle = `rgba(100, 255, 218, ${p.currentAlpha})`
-    ctx.lineWidth = size.value <= 280 ? 2.5 : 3.5
-    ctx.beginPath()
-    ctx.moveTo(p.x, p.y)
-    ctx.lineTo(p.x + p.length, p.y)
-    ctx.stroke()
-  })
+    typingTimeout = setTimeout(tick, TYPE_SPEED)
+  } else {
+    displayedText.value = phrase.slice(0, charIndex - 1)
+    charIndex--
+    if (charIndex === 0) {
+      deleting    = false
+      phraseIndex = (phraseIndex + 1) % PHRASES.length
+      typingTimeout = setTimeout(tick, PAUSE_START)
+      return
+    }
+    typingTimeout = setTimeout(tick, DELETE_SPEED)
+  }
 }
-
-const handleMouseMove = (e: MouseEvent) => {
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const rect = canvas.getBoundingClientRect()
-  mouse.value.x = e.clientX - rect.left
-  mouse.value.y = e.clientY - rect.top
-  mouse.value.active = true
-}
-
-const handleTouchMove = (e: TouchEvent) => {
-  const canvas = canvasRef.value
-  if (!canvas) return
-  const rect = canvas.getBoundingClientRect()
-  const touch = e.touches[0]
-  mouse.value.x = touch.clientX - rect.left
-  mouse.value.y = touch.clientY - rect.top
-  mouse.value.active = true
-}
-
-const handleLeave = () => {
-  mouse.value.active = false
-}
-
-const handleClick = () => {
-  isBlurDisabled.value = true
-  setTimeout(() => {
-    isBlurDisabled.value = false
-  }, 1000)
-}
-
-const displayedText = ref('')
-const isBlinking = ref(false)
-const fullText = "hi, Aemo here. "
-let typingInterval: ReturnType<typeof setInterval> | null = null
 
 const startTyping = () => {
+  if (typingTimeout) clearTimeout(typingTimeout)
   displayedText.value = ''
-  isBlinking.value = false
-  let index = 0
-  
-  typingInterval = setInterval(() => {
-    if (index < fullText.length) {
-      displayedText.value += fullText.charAt(index)
-      index++
-    } else {
-      if (typingInterval) clearInterval(typingInterval)
-      isBlinking.value = true
-    }
-  }, 100)
+  isBlinking.value    = false
+  phraseIndex  = 0
+  charIndex    = 0
+  deleting     = false
+  typingTimeout = setTimeout(tick, 600)
 }
+
+// ─── Pointer ──────────────────────────────────────────────────────────────────
+const getCanvasPos = (clientX: number, clientY: number) => {
+  const rect = canvasRef.value?.getBoundingClientRect()
+  if (!rect) return { x: -1000, y: -1000 }
+  return { x: clientX - rect.left, y: clientY - rect.top }
+}
+
+const onPointerMove = (e: MouseEvent | TouchEvent) => {
+  const { clientX, clientY } = 'touches' in e ? e.touches[0] : e
+  pointer.value = { ...getCanvasPos(clientX, clientY), active: true }
+}
+
+const onPointerLeave  = () => { pointer.value.active = false }
+const onPointerClick  = () => { clickFlashUntil = performance.now() + 900 }
+
+// ─── Lifecycle ────────────────────────────────────────────────────────────────
+let resizeObserver: ResizeObserver | null = null
+let intersectionObserver: IntersectionObserver | null = null
 
 onMounted(() => {
   updateSize()
   initCanvas()
-  window.addEventListener('resize', handleResize)
-  
-  // Start typing animation after 2 seconds
-  setTimeout(startTyping, 2000)
+
+  resizeObserver = new ResizeObserver(() => { updateSize(); initCanvas() })
+  if (wrapperRef.value) resizeObserver.observe(wrapperRef.value)
+
+  intersectionObserver = new IntersectionObserver((entries) => {
+    const entry = entries[0]
+    if (entry.isIntersecting) {
+      isVisible = true
+      if (!animationId) draw()
+      startTyping()
+      if (imageLoaded.value) {
+        startTime.value = performance.now()
+        lines.value.forEach(p => {
+          p.x = p.targetX + (Math.random() - 0.5) * 300
+          p.y = p.targetY + (Math.random() - 0.5) * 300
+          p.vx = 0; p.vy = 0
+          p.currentAlpha = 0
+          p.delay = Math.random() * 0.3
+        })
+      }
+    } else {
+      isVisible = false
+      if (typingTimeout) clearTimeout(typingTimeout)
+    }
+  }, { threshold: 0.1 })
+  if (wrapperRef.value) intersectionObserver.observe(wrapperRef.value)
 
   const canvas = canvasRef.value
   if (canvas) {
-    canvas.addEventListener('mousemove', handleMouseMove)
-    canvas.addEventListener('mouseleave', handleLeave)
-    canvas.addEventListener('touchmove', handleTouchMove)
-    canvas.addEventListener('touchend', handleLeave)
-    canvas.addEventListener('click', handleClick)
+    canvas.addEventListener('mousemove',  onPointerMove)
+    canvas.addEventListener('mouseleave', onPointerLeave)
+    canvas.addEventListener('touchmove',  onPointerMove, { passive: true })
+    canvas.addEventListener('touchend',   onPointerLeave)
+    canvas.addEventListener('click',      onPointerClick)
   }
 
+  startTyping()
   draw()
 })
 
 onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
+  resizeObserver?.disconnect()
+  intersectionObserver?.disconnect()
   if (animationId) cancelAnimationFrame(animationId)
-  if (typingInterval) clearInterval(typingInterval)
+  if (typingTimeout) clearTimeout(typingTimeout)
 
   const canvas = canvasRef.value
   if (canvas) {
-    canvas.removeEventListener('mousemove', handleMouseMove)
-    canvas.removeEventListener('mouseleave', handleLeave)
-    canvas.removeEventListener('touchmove', handleTouchMove)
-    canvas.removeEventListener('touchend', handleLeave)
-    canvas.removeEventListener('click', handleClick)
+    canvas.removeEventListener('mousemove',  onPointerMove)
+    canvas.removeEventListener('mouseleave', onPointerLeave)
+    canvas.removeEventListener('touchmove',  onPointerMove)
+    canvas.removeEventListener('touchend',   onPointerLeave)
+    canvas.removeEventListener('click',      onPointerClick)
   }
-})
-
-watch(size, () => {
-  initCanvas()
 })
 </script>
 
@@ -367,11 +474,6 @@ watch(size, () => {
   -webkit-touch-callout: none;
 }
 
-.simulation-container::-webkit-media-controls,
-.simulation-container::-webkit-media-controls-enclosure {
-  display: none !important;
-}
-
 .portrait-wrapper {
   display: flex;
   flex-direction: column;
@@ -379,33 +481,23 @@ watch(size, () => {
   gap: 1.5rem;
 }
 
-.profile-name {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  margin: 0;
-  text-align: center;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .typing-text {
   font-family: 'Syne', sans-serif;
   font-size: clamp(1.8rem, 5vw, 2.8rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
   margin: 0;
   text-align: center;
   min-height: 1.2em;
 }
 
 .typed-text {
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 50%, var(--accent-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--text-primary)     0%,
+    var(--accent-primary)   50%,
+    var(--accent-secondary) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -418,6 +510,7 @@ watch(size, () => {
   background: var(--accent-primary);
   margin-left: 2px;
   vertical-align: middle;
+  opacity: 1;
 }
 
 .cursor-blink {
@@ -426,6 +519,6 @@ watch(size, () => {
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  50%       { opacity: 0; }
 }
 </style>
