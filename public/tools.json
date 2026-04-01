@@ -42,6 +42,7 @@
     "description": "Professional JSON formatting tool with syntax highlighting, validation, and minification capabilities.",
     "icon": "📋",
     "url": "tools/json-formatter/",
+    "comingSoon": true,
     "features": [
       "Syntax highlighting",
       "Error detection",
@@ -60,6 +61,7 @@
     "description": "Pick colors, convert between formats, and generate color palettes for your projects.",
     "icon": "🎨",
     "url": "tools/color-picker/",
+    "comingSoon": true,
     "features": [
       "Multiple formats",
       "Palette generator",
@@ -78,6 +80,7 @@
     "description": "Interactive regex testing with real-time matching, group extraction, and pattern library.",
     "icon": "🔍",
     "url": "tools/regex-tester/",
+    "comingSoon": true,
     "features": [
       "Real-time testing",
       "Group extraction",
@@ -96,6 +99,7 @@
     "description": "Professional URL encoding tool with support for various encoding formats and batch processing.",
     "icon": "🌐",
     "url": "tools/url-encoder/",
+    "comingSoon": true,
     "features": [
       "URL encode/decode",
       "Component parsing",
@@ -114,6 +118,7 @@
     "description": "Create MD5, SHA1, SHA256, and other hash types for data integrity and security.",
     "icon": "🔑",
     "url": "tools/hash-generator/",
+    "comingSoon": true,
     "features": [
       "Multiple hash types",
       "File hashing",
@@ -132,6 +137,7 @@
     "description": "Convert between Unix timestamps, ISO dates, and human-readable formats with timezone support.",
     "icon": "⏰",
     "url": "tools/timestamp-converter/",
+    "comingSoon": true,
     "features": [
       "Unix timestamp",
       "ISO format",

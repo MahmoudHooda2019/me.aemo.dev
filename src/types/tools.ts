@@ -9,6 +9,7 @@ export interface Tool {
   category: ToolCategory
   difficulty: ToolDifficulty
   tags: string[]
+  comingSoon?: boolean
 }
 
 export enum ToolCategory {

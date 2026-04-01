@@ -60,7 +60,6 @@ import ParticlePortrait from '@/components/ParticlePortrait.vue'
 import ExtensionsSection from '@/components/ExtensionsSection.vue'
 import ToolsSection from '@/components/ToolsSection.vue'
 import AppFooter from '@/components/AppFooter.vue'
-import { useIntersectionObserver } from '@/composables/useIntersectionObserver'
 import { useTheme } from '@/composables/useTheme'
 
 const isLoading = ref(true)
@@ -113,10 +112,6 @@ onUnmounted(() => {
 onMounted(() => {
   // Apply saved/preferred theme before first render to avoid flash
   initTheme()
-  
-  // Initialize intersection observer for lazy loading
-  const { observeElements } = useIntersectionObserver()
-  setTimeout(() => { observeElements('.section') }, 100)
   
   // Hide loading screen after a short delay
   setTimeout(() => { isLoading.value = false }, 1500)

@@ -110,11 +110,13 @@ const filteredExtensions = computed(() => {
   // Filter by price filter
   if (currentFilter.value !== 'all') {
     result = result.filter(ext => {
-      const price = ext.price.toLowerCase()
+      const price = ext.price.toLowerCase().trim()
       if (currentFilter.value === 'free') {
-        return price === 'free' || price.includes('free')
+        return price === 'free' || price === '$0' || price === '0'
       } else if (currentFilter.value === 'paid') {
-        return price.includes('$') || price.includes('paid') || !price.includes('free')
+        const hasDollarSign = price.includes('$') && price !== '$0'
+        const isPaidKeyword = price === 'paid'
+        return hasDollarSign || isPaidKeyword
       }
       return false
     })

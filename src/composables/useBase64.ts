@@ -76,11 +76,12 @@ export function useBase64() {
     }
 
     try {
-      const encoded = btoa(unescape(encodeURIComponent(textInput.value)))
-      textOutput.value = encoded
+      const bytes = new TextEncoder().encode(textInput.value)
+      const base64 = btoa(String.fromCharCode(...bytes))
+      textOutput.value = base64
       
       // Add to history
-      addToHistory('encode', 'text', textInput.value, encoded)
+      addToHistory('encode', 'text', textInput.value, base64)
       
       return true
     } catch (error) {
@@ -101,7 +102,9 @@ export function useBase64() {
     }
 
     try {
-      const decoded = decodeURIComponent(escape(atob(textInput.value)))
+      const binaryString = atob(textInput.value)
+      const bytes = Uint8Array.from(binaryString, char => char.charCodeAt(0))
+      const decoded = new TextDecoder().decode(bytes)
       textOutput.value = decoded
       
       // Add to history
@@ -246,15 +249,8 @@ export function useBase64() {
     try {
       await navigator.clipboard.writeText(text)
       return true
-    } catch (error) {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea')
-      textArea.value = text
-      document.body.appendChild(textArea)
-      textArea.select()
-      const success = document.execCommand('copy')
-      document.body.removeChild(textArea)
-      return success
+    } catch {
+      return false
     }
   }
 

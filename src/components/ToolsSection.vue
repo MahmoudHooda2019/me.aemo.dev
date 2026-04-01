@@ -52,10 +52,14 @@
           v-for="tool in filteredTools" 
           :key="tool.id"
           class="card" 
-          @click="navigateToTool(tool.url)"
+          :class="{ 'coming-soon': tool.comingSoon }"
+          @click="!tool.comingSoon && navigateToTool(tool.url)"
           data-aos="fade-up"
           :data-aos-delay="getAosDelay(tool)"
         >
+          <div v-if="tool.comingSoon" class="coming-soon-overlay">
+            <span class="coming-soon-badge">Coming Soon</span>
+          </div>
           <div class="card-header">
             <div class="card-icon">{{ tool.icon }}</div>
             <div class="card-badge" :class="getDifficultyClass(tool.difficulty)">
@@ -93,7 +97,7 @@
           </div>
           
           <div class="card-footer">
-            <span class="card-link">Open Tool →</span>
+            <span class="card-link">{{ tool.comingSoon ? 'Coming Soon' : 'Open Tool →' }}</span>
           </div>
         </div>
       </div>
@@ -133,14 +137,20 @@ const {
 const filteredTools = computed(() => {
   let filtered = tools.value
 
-  // Filter by category
+  // Filter by category first
   if (selectedCategory.value !== 'all') {
-    filtered = getToolsByCategory(selectedCategory.value)
+    filtered = filtered.filter(tool => tool.category === selectedCategory.value)
   }
 
-  // Filter by search query
+  // Then filter by search query on the category-filtered subset
   if (searchQuery.value.trim()) {
-    filtered = searchToolsUtil(searchQuery.value)
+    const query = searchQuery.value.toLowerCase()
+    filtered = filtered.filter(tool =>
+      tool.title.toLowerCase().includes(query) ||
+      tool.subtitle.toLowerCase().includes(query) ||
+      tool.description.toLowerCase().includes(query) ||
+      tool.tags.some(tag => tag.toLowerCase().includes(query))
+    )
   }
 
   return filtered
@@ -525,6 +535,46 @@ onMounted(async () => {
 .reset-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(187, 134, 252, 0.3);
+}
+
+.card.coming-soon {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.card.coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border-color);
+}
+
+.card.coming-soon:hover::before {
+  transform: scaleX(0);
+}
+
+.coming-soon-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 16px;
+}
+
+.coming-soon-badge {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {

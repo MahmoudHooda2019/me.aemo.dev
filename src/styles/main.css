@@ -95,18 +95,6 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Section Base Styles - used by multiple components */
-.section {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   body {

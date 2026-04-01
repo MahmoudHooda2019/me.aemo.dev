@@ -8,19 +8,17 @@ const loadAttempts = ref(0)
 const MAX_RETRY_ATTEMPTS = 3
 const RETRY_DELAY = 1000
 
+let loadingPromise: Promise<Extension[]> | null = null
+
 const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms))
 
 export const useExtensions = () => {
   const loadExtensions = async (): Promise<Extension[]> => {
     if (extensions.value.length > 0) return extensions.value
-    if (isLoading.value) {
-      while (isLoading.value) {
-        await delay(100)
-      }
-      return extensions.value
-    }
-    
-    isLoading.value = true
+    if (loadingPromise) return loadingPromise
+
+    loadingPromise = (async (): Promise<Extension[]> => {
+      isLoading.value = true
     
     for (let attempt = 1; attempt <= MAX_RETRY_ATTEMPTS; attempt++) {
       try {
@@ -43,58 +41,63 @@ export const useExtensions = () => {
         extensions.value = data
         loadAttempts.value = 0
         isLoading.value = false
-        console.log(`Successfully loaded ${extensions.value.length} extensions`)
         return extensions.value
-        
+
       } catch (error) {
         console.warn(`Attempt ${attempt}/${MAX_RETRY_ATTEMPTS} failed:`, (error as Error).message)
-        
+
         if (attempt === MAX_RETRY_ATTEMPTS) {
           isLoading.value = false
           loadAttempts.value = attempt
           console.error('Failed to load extensions after all retry attempts:', error)
-          return []
+          throw error
         }
-        
+
         await delay(RETRY_DELAY * attempt)
       }
     }
-    
-    return []
-  }
+    throw new Error('Failed to load extensions')
+  })()
 
-  const setExtensions = (data: Extension[]): void => {
-    extensions.value = data
+  try {
+    return await loadingPromise
+  } finally {
+    loadingPromise = null
   }
+}
 
-  const getAllExtensions = (): Extension[] => extensions.value
+const setExtensions = (data: Extension[]): void => {
+  extensions.value = data
+}
 
-  const getExtensionsByFilter = (filter: string): Extension[] => {
-    if (filter === 'all') return extensions.value
-    return extensions.value.filter(ext => ext.filters && ext.filters.includes(filter))
+const getAllExtensions = (): Extension[] => extensions.value
+
+const getExtensionsByFilter = (filter: string): Extension[] => {
+  if (filter === 'all') return extensions.value
+  return extensions.value.filter(ext => ext.filters && ext.filters.includes(filter))
+}
+
+const getExtensionById = async (id: string): Promise<Extension | undefined> => {
+  if (extensions.value.length === 0) {
+    await loadExtensions()
   }
+  return extensions.value.find(ext => ext.id === id)
+}
 
-  const getExtensionById = async (id: string): Promise<Extension | undefined> => {
-    if (extensions.value.length === 0) {
-      await loadExtensions()
-    }
-    return extensions.value.find(ext => ext.id === id)
-  }
+const isNewExtension = (lastUpdated: string): boolean => {
+  const lastUpdatedDate = new Date(lastUpdated)
+  const today = new Date()
+  const diffDays = (today.getTime() - lastUpdatedDate.getTime()) / (1000 * 60 * 60 * 24)
+  return diffDays <= 10
+}
 
-  const isNewExtension = (lastUpdated: string): boolean => {
-    const lastUpdatedDate = new Date(lastUpdated)
-    const today = new Date()
-    const diffDays = (today.getTime() - lastUpdatedDate.getTime()) / (1000 * 60 * 60 * 24)
-    return diffDays <= 10
+const getExtensionTags = (extension: Extension): string[] => {
+  const tags = [...(extension.tags || extension.filters || [])]
+  if (isNewExtension(extension.lastUpdated)) {
+    tags.push('NEW')
   }
-
-  const getExtensionTags = (extension: Extension): string[] => {
-    const tags = [...(extension.tags || extension.filters || [])]
-    if (isNewExtension(extension.lastUpdated)) {
-      tags.push('NEW')
-    }
-    return tags
-  }
+  return tags
+}
 
   return {
     extensions: computed(() => extensions.value),
