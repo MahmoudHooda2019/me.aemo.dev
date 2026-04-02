@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "id": "number_checker",
         "title": "Number Checker",
@@ -33,7 +33,7 @@
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a>"
             }
         ]
     },
@@ -61,7 +61,7 @@
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a>"
             }
         ]
     },
@@ -69,7 +69,7 @@
         "id": "device_year",
         "title": "Device Year",
         "subtitle": "Analyze device specs and estimate its high-end release year.",
-        "description": "This extension analyzes your Android device's hardware specifications—such as CPU cores, memory, and maximum CPU frequency—and estimates the year in which the device would have been considered high-end. Useful for benchmarking, device classification, and performance-aware app features.",
+        "description": "This extension analyzes your Android device's hardware specifications�such as CPU cores, memory, and maximum CPU frequency�and estimates the year in which the device would have been considered high-end. Useful for benchmarking, device classification, and performance-aware app features.",
         "price": "Free",
         "filters": [
             "all",
@@ -92,7 +92,7 @@
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a>"
             }
         ]
     },
@@ -136,7 +136,7 @@
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a>"
             }
         ]
     },
@@ -168,7 +168,7 @@
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a>"
             }
         ]
     },
@@ -196,7 +196,7 @@
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a>"
             }
         ]
     },
@@ -230,7 +230,7 @@
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;font-weight:bold;\">Donate via PayPal</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a>"
             }
         ]
     },
@@ -264,7 +264,7 @@
             },
             {
                 "title": "Jelly Block",
-                "content": "<ul><li>jelly = Look for that 👇<details><summary>All block of jelly</summary><img src=\"https://cdn.community.kodular.io/original/3X/f/8/f8d73b5b9c3525a2379ee7a692f519807a88ec42.png\" alt=\"blocks (2)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></details></li></ul>"
+                "content": "<ul><li>jelly = Look for that ??<details><summary>All block of jelly</summary><img src=\"https://cdn.community.kodular.io/original/3X/f/8/f8d73b5b9c3525a2379ee7a692f519807a88ec42.png\" alt=\"blocks (2)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></details></li></ul>"
             },
             {
                 "title": "Jelly Effects",
@@ -272,7 +272,7 @@
             },
             {
                 "title": "Effect Movement Type",
-                "content": "<ul><li>effectMovementType = Look for that 👇<details><summary>All block of EMT</summary><img src=\"https://cdn.community.kodular.io/original/3X/7/4/74bf5ca55a83f289802047cee3603e675fa878ff.png\" alt=\"blocks (3)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></details></li></ul>"
+                "content": "<ul><li>effectMovementType = Look for that ??<details><summary>All block of EMT</summary><img src=\"https://cdn.community.kodular.io/original/3X/7/4/74bf5ca55a83f289802047cee3603e675fa878ff.png\" alt=\"blocks (3)\" style=\"max-width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;\"></details></li></ul>"
             },
             {
                 "title": "Movement Effects",
@@ -304,14 +304,14 @@
             },
             {
                 "title": "Support the Developer",
-                "content": "<h3 style=\"color:#4CAF50;\">Show Your Support</h3><p>If you find this extension helpful, consider supporting the developer:</p><a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;margin:5px;padding:10px 15px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;font-weight:bold;\">Donate via PayPal</a><br><a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;margin:5px;padding:10px 15px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;font-weight:bold;\">Support on Ko-fi</a>"
+                "content": "<h3 style=\"color:#4CAF50;\">Show Your Support</h3><p>If you find this extension helpful, consider supporting the developer:</p><a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;margin:5px;padding:10px 15px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Donate via PayPal</a><br><a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;margin:5px;padding:10px 15px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Support on Ko-fi</a>"
             }
         ]
     },
     {
         "id": "view_charging",
         "title": "ViewCharging",
-        "subtitle": "A simple charging view ♥",
+        "subtitle": "A simple charging view ?",
         "description": "This extension provides a simple and stylish charging view animation for your app, offering visual feedback when the device is charging.",
         "price": "Free",
         "filters": [
@@ -386,15 +386,15 @@
             },
             {
                 "title": "Library Used",
-                "content": "<a href=\"https://github.com/samlss/CubeLoadingView\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">CubeLoadingView by samlss</a>"
+                "content": "<a href=\"https://github.com/samlss/CubeLoadingView\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">CubeLoadingView by samlss</a>"
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">PayPal</a> | <a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Ko-fi</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">PayPal</a> | <a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Ko-fi</a>"
             },
             {
                 "title": "Telegram",
-                "content": "<a href=\"https://t.me/+rc4zQLhKg_Y0MmE0\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Join the Telegram channel</a>"
+                "content": "<a href=\"https://t.me/+rc4zQLhKg_Y0MmE0\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Join the Telegram channel</a>"
             }
         ]
     },
@@ -430,19 +430,19 @@
             },
             {
                 "title": "AIA Download",
-                "content": "<a href=\"https://community.kodular.io/uploads/short-url/b62eKoBDPhsx6i7lE3VxbkutlG5.aia\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Download validate.aia</a>"
+                "content": "<a href=\"https://community.kodular.io/uploads/short-url/b62eKoBDPhsx6i7lE3VxbkutlG5.aia\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Download validate.aia</a>"
             },
             {
                 "title": "Source Code",
-                "content": "<a href=\"https://github.com/MahmoudHooda2019/StringValidation-MIT-App-Inventor-extension\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">GitHub - StringValidation Extension</a>"
+                "content": "<a href=\"https://github.com/MahmoudHooda2019/StringValidation-MIT-App-Inventor-extension\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">GitHub - StringValidation Extension</a>"
             },
             {
                 "title": "Library Used",
-                "content": "<a href=\"https://github.com/nisrulz/validatetor\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">ValidateTor by nisrulz</a>"
+                "content": "<a href=\"https://github.com/nisrulz/validatetor\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">ValidateTor by nisrulz</a>"
             },
             {
                 "title": "To Donate",
-                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">PayPal</a> | <a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" style=\"color:#4CAF50;font-weight:bold;\">Ko-fi</a>"
+                "content": "<a href=\"https://www.paypal.com/paypalme/AemoDev\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">PayPal</a> | <a href=\"https://ko-fi.com/mhooda\" target=\"_blank\" style=\"color:#4CAF50;title="Donate via PayPal" style="color:#4CAF50;font-size:20px;transition:0.3s;\">Ko-fi</a>"
             }
         ]
     },
