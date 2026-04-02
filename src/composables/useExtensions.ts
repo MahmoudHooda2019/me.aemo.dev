@@ -22,7 +22,7 @@ export const useExtensions = () => {
     
     for (let attempt = 1; attempt <= MAX_RETRY_ATTEMPTS; attempt++) {
       try {
-        const response = await fetch('/extensions/extensions.json', {
+        const response = await fetch('/scripts/extensions.json', {
           headers: {
             'Cache-Control': 'no-cache'
           }

@@ -18,7 +18,7 @@ export function useTools() {
     error.value = null
     
     try {
-      const response = await fetch('/tools.json', {
+      const response = await fetch('/scripts/tools.json', {
         headers: {
           'Cache-Control': 'no-cache'
         }

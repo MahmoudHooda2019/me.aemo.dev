@@ -12,7 +12,8 @@
   "dependencies": {
     "aos": "^2.3.4",
     "pace-js": "^1.2.4",
-    "vue": "^3.4.0"
+    "vue": "^3.4.0",
+    "vue-router": "^4.2.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260317.1",

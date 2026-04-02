@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import 'pace-js'
@@ -14,7 +15,9 @@ AOS.init({
   delay: 100
 })
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
 
 // Register service worker from the module bundle (avoids inline script / CSP issues)
 if ('serviceWorker' in navigator) {
