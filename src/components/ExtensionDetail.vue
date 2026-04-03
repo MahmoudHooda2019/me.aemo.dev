@@ -21,7 +21,7 @@
           <div class="header-right">
             <div class="action-buttons">
               <a 
-                :href="hasUrl ? extension.url : '#" 
+                :href="hasUrl ? extension.url : '#'" 
                 :class="['action-button', isFree ? 'download-button' : 'buy-button']"
                 :disabled="!hasUrl"
                 target="_blank" 

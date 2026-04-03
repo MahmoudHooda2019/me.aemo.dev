@@ -127,8 +127,8 @@ const {
   isLoading,
   error,
   loadTools,
-  getToolsByCategory,
-  searchTools: searchToolsUtil,
+  getToolsByCategory: _getToolsByCategory,
+  searchTools: _searchTools,
   getCategories,
   getCategoryLabel: getCategoryLabelFromComposable,
   getDifficultyClass: getDifficultyClassFromComposable
