@@ -77,8 +77,8 @@ export default {
           );
         }
 
-        const data: ExtensionsData = await assetResponse.json();
-        const extensions: Extension[] = Array.isArray(data.extensions) ? data.extensions : [];
+        const data: ExtensionsData | Extension[] = await assetResponse.json();
+        const extensions: Extension[] = Array.isArray(data) ? data : (Array.isArray(data.extensions) ? data.extensions : []);
 
         // Parse ?data=id,title,price — validate each field name
         const dataParam = url.searchParams.get("data");
