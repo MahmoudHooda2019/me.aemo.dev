@@ -62,13 +62,9 @@ export default {
 
       // Only handle /api/extensions endpoints
       if (url.pathname.startsWith("/api/extensions")) {
-        // Fetch all extensions from the static JSON (internal fetch — no user input in URL)
-        // NOTE: /scripts/extensions.json is also served directly via _headers with CORS headers.
-        // This provides two access patterns:
-        //   1. /scripts/extensions.json — direct static file (for internal use, service worker caching)
-        //   2. /api/extensions/* — API with filtering, field selection, and extension lookup
-        const assetUrl = new URL("/scripts/extensions.json", url.origin).toString();
-        const assetResponse = await env.ASSETS.fetch(new Request(assetUrl));
+        // Fetch all extensions from the static JSON via public URL
+        const extensionsUrl = new URL("/scripts/extensions.json", url.origin).toString();
+        const assetResponse = await fetch(extensionsUrl);
 
         if (!assetResponse || assetResponse.status !== 200) {
           return new Response(
