@@ -63,8 +63,7 @@ export default {
       // Only handle /api/extensions endpoints
       if (url.pathname.startsWith("/api/extensions")) {
         // Fetch all extensions from the static JSON via asset binding
-        const extensionsUrl = new URL("/scripts/extensions.json", url.origin).toString();
-        const assetResponse = await env.ASSETS.fetch(new Request(extensionsUrl));
+        const assetResponse = await env.ASSETS.fetch(new Request("https://assets.local/scripts/extensions.json"));
 
         if (!assetResponse || assetResponse.status !== 200) {
           return new Response(
