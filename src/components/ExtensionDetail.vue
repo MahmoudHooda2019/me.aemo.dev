@@ -127,7 +127,7 @@ async function loadExtension() {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`)
     }
     
-    const data = await response.json()
+    const data = await response.json() as Extension[]
     const found = data.find((e: Extension) => e.id === extensionId)
     
     if (!found) {
