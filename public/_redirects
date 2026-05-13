@@ -1,1 +1,7 @@
+/_worker.js /_worker.js 200
+/assets/* /assets/:splat 200
+/scripts/* /scripts/:splat 200
+/extensions/* /extensions/:splat 200
+/manifest.json /manifest.json 200
+/service-worker.js /service-worker.js 200
 /* /index.html 200
