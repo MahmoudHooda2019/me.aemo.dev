@@ -52,6 +52,10 @@ function isNavigationRequest(request: Request): boolean {
   return request.mode === "navigate" || accept.includes("text/html");
 }
 
+function assetRequest(url: URL, pathname: string): Request {
+  return new Request(new URL(pathname, url.origin).toString());
+}
+
 export default {
   async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     try {
@@ -73,7 +77,7 @@ export default {
       // Only handle /api/extensions endpoints
       if (url.pathname.startsWith("/api/extensions")) {
         // Fetch all extensions from the static JSON via asset binding
-        const assetResponse = await env.ASSETS.fetch(new Request("https://assets.local/scripts/extensions.json"));
+        const assetResponse = await env.ASSETS.fetch(assetRequest(url, "/scripts/extensions.json"));
 
         if (!assetResponse || assetResponse.status !== 200) {
           return new Response(
@@ -82,7 +86,16 @@ export default {
           );
         }
 
-        const data: ExtensionsData | Extension[] = await assetResponse.json();
+        let data: ExtensionsData | Extension[];
+        try {
+          data = await assetResponse.json();
+        } catch {
+          return new Response(
+            JSON.stringify({ error: "Extensions registry is invalid" }),
+            { status: 502, headers: JSON_HEADERS }
+          );
+        }
+
         const extensions: Extension[] = Array.isArray(data) ? data : (Array.isArray(data.extensions) ? data.extensions : []);
         // Parse ?data=id,title,price - validate each field name
         const dataParam = url.searchParams.get("data");
