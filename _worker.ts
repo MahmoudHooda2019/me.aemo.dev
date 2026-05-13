@@ -29,6 +29,87 @@ export interface ExtensionsData {
   version?: string;
 }
 
+const FALLBACK_EXTENSIONS: Extension[] = [
+  {
+    id: "number_checker",
+    title: "Number Checker",
+    subtitle: "Check if a number is prime, even, or odd",
+    description: "A powerful extension that helps you check various properties of numbers. Features include prime number checking, even/odd detection, and more mathematical utilities.",
+    price: "Free",
+    filters: ["all", "free"],
+    tags: ["free", "math", "number", "checker", "utility", "prime", "even", "odd"],
+    version: "2.0",
+    lastUpdated: "2024-03-15",
+    url: "https://community.kodular.io/uploads/short-url/gyQ2Kh0OmG6zbybK5VbXzDnvF8c.aix",
+    doc: "number_checker.md",
+  },
+  {
+    id: "device_year",
+    title: "Device Year",
+    subtitle: "Estimate the performance year of an Android device",
+    description: "A simple extension that analyzes an Android device's specifications and estimates the year in which the device would be considered high-end. Useful for performance benchmarking and device classification.",
+    price: "Free",
+    filters: ["all", "free"],
+    tags: ["free", "device", "android", "utility", "performance", "year", "analysis", "hardware"],
+    version: "0.2",
+    lastUpdated: "2022-04-10",
+    url: "https://community.kodular.io/uploads/short-url/8v0RM7FPns68mmVb6mROSpnK4up.aix",
+    doc: "device_year.md",
+  },
+  {
+    id: "similarity",
+    title: "Similarity",
+    subtitle: "Calculate similarity score between two strings",
+    description: "An extension component for calculating similarity scores between two strings. A score of 0.0 means completely different strings, while 1.0 means identical strings. Supports multiple algorithms for flexible comparison.",
+    price: "Free",
+    filters: ["all", "free"],
+    tags: ["free", "string", "similarity", "text", "algorithm", "utility", "comparison", "analysis"],
+    version: "0.1",
+    lastUpdated: "2022-01-01",
+    url: "https://community.kodular.io/uploads/short-url/v5Q34TK6nbVtUlEFyNSp1RFTObx.aix",
+    doc: "similarity.md",
+  },
+  {
+    id: "morse_code",
+    title: "Morse Code",
+    subtitle: "Encode and decode Morse code",
+    description: "A simple extension that allows you to encode text into Morse code and decode Morse code back into readable text. Useful for learning, communication, and fun experiments.",
+    price: "Free",
+    filters: ["all", "free"],
+    tags: ["free", "morse", "code", "encode", "decode", "text", "utility", "communication"],
+    version: "1.0",
+    lastUpdated: "2022-06-11",
+    url: "https://community.kodular.io/uploads/short-url/7NMEXyLfFGUBaUIEM20x2IaiiSs.aix",
+    doc: "morse_code.md",
+  },
+  {
+    id: "ruler_picker",
+    title: "Ruler Picker",
+    subtitle: "Pick numbers using an interactive ruler UI",
+    description: "An Android custom view extension that allows users to pick numbers from a given range using an interactive ruler interface. Highly customizable with multiple properties like indicator size, spacing, colors, and value range.",
+    price: "Free",
+    filters: ["all", "free"],
+    tags: ["free", "ui", "picker", "ruler", "input", "design", "android", "component"],
+    version: "2.0",
+    lastUpdated: "2022-01-01",
+    url: "https://community.kodular.io/uploads/short-url/yvVzsXfhrjQZr8gDsdq5VmN6B9B.aix",
+    doc: "ruler_picker.md",
+  },
+  {
+    id: "speech_recognition_view",
+    title: "SpeechRecognitionView",
+    subtitle: "View-style animation for speech recording",
+    description: "An extension that enables voice input functionality using microphone recording. Requires internet for processing voice data. Useful for speech-based applications and voice recognition workflows.",
+    price: "Free",
+    filters: ["all", "free"],
+    tags: ["free", "voice", "speech", "audio", "recording", "microphone", "ui", "animation", "input"],
+    version: "1.0",
+    lastUpdated: "2022-07-24",
+    url: "https://drive.google.com/uc?id=19atykVGrdsx3tMObKNFbqzxNby62KZBq&export=download",
+    doc: "speech_recognition_view.md",
+  },
+];
+
 /** Shared response headers for JSON API responses */
 const JSON_HEADERS: HeadersInit = {
   "Content-Type": "application/json",
@@ -56,6 +137,21 @@ function assetRequest(url: URL, pathname: string): Request {
   return new Request(new URL(pathname, url.origin).toString());
 }
 
+async function loadExtensionsFromAssets(env: Env, url: URL): Promise<Extension[]> {
+  const assetResponse = await env.ASSETS.fetch(assetRequest(url, "/scripts/extensions.json"));
+  if (!assetResponse || assetResponse.status !== 200) return FALLBACK_EXTENSIONS;
+
+  const contentType = assetResponse.headers.get("Content-Type") ?? "";
+  if (contentType.includes("text/html")) return FALLBACK_EXTENSIONS;
+
+  try {
+    const data: ExtensionsData | Extension[] = await assetResponse.json();
+    return Array.isArray(data) ? data : (Array.isArray(data.extensions) ? data.extensions : FALLBACK_EXTENSIONS);
+  } catch {
+    return FALLBACK_EXTENSIONS;
+  }
+}
+
 export default {
   async fetch(request: Request, env: Env, _ctx: ExecutionContext): Promise<Response> {
     try {
@@ -76,27 +172,7 @@ export default {
 
       // Only handle /api/extensions endpoints
       if (url.pathname.startsWith("/api/extensions")) {
-        // Fetch all extensions from the static JSON via asset binding
-        const assetResponse = await env.ASSETS.fetch(assetRequest(url, "/scripts/extensions.json"));
-
-        if (!assetResponse || assetResponse.status !== 200) {
-          return new Response(
-            JSON.stringify({ error: "Resource not found" }),
-            { status: 404, headers: JSON_HEADERS }
-          );
-        }
-
-        let data: ExtensionsData | Extension[];
-        try {
-          data = await assetResponse.json();
-        } catch {
-          return new Response(
-            JSON.stringify({ error: "Extensions registry is invalid" }),
-            { status: 502, headers: JSON_HEADERS }
-          );
-        }
-
-        const extensions: Extension[] = Array.isArray(data) ? data : (Array.isArray(data.extensions) ? data.extensions : []);
+        const extensions = await loadExtensionsFromAssets(env, url);
         // Parse ?data=id,title,price - validate each field name
         const dataParam = url.searchParams.get("data");
         const dataFields = (dataParam ?? "")
