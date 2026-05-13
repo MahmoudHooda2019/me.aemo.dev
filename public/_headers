@@ -121,20 +121,3 @@
   Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
 
-# ---------------------------------------------------------------------------
-# Public API — intentionally public CORS
-# ---------------------------------------------------------------------------
-/api/extensions*
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, OPTIONS
-  Access-Control-Allow-Headers: Content-Type
-  Cache-Control: public, max-age=300
-
-# ---------------------------------------------------------------------------
-# Public extensions registry
-# ---------------------------------------------------------------------------
-/extensions/extensions.json
-  Content-Type: application/json
-  Access-Control-Allow-Origin: *
-  Access-Control-Allow-Methods: GET, OPTIONS
-  Cache-Control: public, max-age=300

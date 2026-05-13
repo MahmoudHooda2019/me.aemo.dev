@@ -1,10 +1,12 @@
 import { ref, computed } from 'vue'
 import type { Tool, ToolDifficulty } from '@/types/tools'
 import { ToolCategory } from '@/types/tools'
+import toolsData from '@/data/tools.json'
 
 const tools = ref<Tool[]>([])
 const isLoading = ref(false)
 const error = ref<string | null>(null)
+const bundledTools = toolsData as Tool[]
 
 export function useTools() {
   const loadTools = async (): Promise<Tool[]> => {
@@ -18,27 +20,14 @@ export function useTools() {
     error.value = null
     
     try {
-      const response = await fetch('/scripts/tools.json', {
-        headers: {
-          'Cache-Control': 'no-cache'
-        }
-      })
-      
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-      }
-      
-      const data = await response.json()
-      
-      if (!Array.isArray(data)) {
+      if (!Array.isArray(bundledTools)) {
         throw new Error('Tools data must be an array')
       }
       
-      // Convert JSON data to Tool interface
-      const convertedTools: Tool[] = data.map(item => ({
+      const convertedTools: Tool[] = bundledTools.map(item => ({
         ...item,
-        category: item.category as ToolCategory,
-        difficulty: item.difficulty as ToolDifficulty
+        category: item.category.toLowerCase() as ToolCategory,
+        difficulty: item.difficulty.toLowerCase() as ToolDifficulty
       }))
       
       tools.value = convertedTools

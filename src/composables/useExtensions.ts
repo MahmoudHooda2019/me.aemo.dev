@@ -1,16 +1,14 @@
 import { ref, computed } from 'vue'
 import type { Extension } from '@/types/extension'
+import extensionsData from '@/data/extensions.json'
 
 // Store extensions data
 const extensions = ref<Extension[]>([])
 const isLoading = ref(false)
-const loadAttempts = ref(0)
-const MAX_RETRY_ATTEMPTS = 3
-const RETRY_DELAY = 1000
 
 let loadingPromise: Promise<Extension[]> | null = null
 
-const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms))
+const bundledExtensions = extensionsData as Extension[]
 
 export const useExtensions = () => {
   const loadExtensions = async (): Promise<Extension[]> => {
@@ -19,44 +17,21 @@ export const useExtensions = () => {
 
     loadingPromise = (async (): Promise<Extension[]> => {
       isLoading.value = true
-    
-    for (let attempt = 1; attempt <= MAX_RETRY_ATTEMPTS; attempt++) {
+
       try {
-        const response = await fetch('/scripts/extensions.json', {
-          headers: {
-            'Cache-Control': 'no-cache'
-          }
-        })
-        
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-        }
-        
-        const data = await response.json()
-        
-        if (!Array.isArray(data)) {
+        if (!Array.isArray(bundledExtensions)) {
           throw new Error('Extensions data must be an array')
         }
         
-        extensions.value = data
-        loadAttempts.value = 0
+        extensions.value = bundledExtensions
         isLoading.value = false
         return extensions.value
 
       } catch (error) {
-        console.warn(`Attempt ${attempt}/${MAX_RETRY_ATTEMPTS} failed:`, (error as Error).message)
-
-        if (attempt === MAX_RETRY_ATTEMPTS) {
-          isLoading.value = false
-          loadAttempts.value = attempt
-          console.error('Failed to load extensions after all retry attempts:', error)
-          throw error
-        }
-
-        await delay(RETRY_DELAY * attempt)
+        isLoading.value = false
+        console.error('Failed to load bundled extensions:', error)
+        throw error
       }
-    }
-    throw new Error('Failed to load extensions')
   })()
 
   try {

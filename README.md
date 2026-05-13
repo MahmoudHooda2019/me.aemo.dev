@@ -12,7 +12,7 @@ Aemo Developer provides a curated collection of MIT App Inventor extensions and 
 - Markdown documentation for each extension under `public/extensions/`.
 - Developer tools such as Base64 encoding and deep-link generation.
 - Vue Router detail pages at `/extension/:id`.
-- Cloudflare Pages worker API for public extension data.
+- Extension and tool metadata bundled at build time instead of exposed as public JSON files.
 - PWA-ready shell with a service worker.
 
 ## Quick Start
@@ -50,7 +50,7 @@ npm run type-check
 
 ## Extension Docs
 
-Extension metadata lives in `public/scripts/extensions.json`.
+Extension metadata lives in `src/data/extensions.json`.
 
 Each extension detail page first uses the explicit `doc` field when present:
 
@@ -63,16 +63,9 @@ Each extension detail page first uses the explicit `doc` field when present:
 
 If `doc` is missing, the app falls back to `id + ".md"`, so `number_checker` loads `/extensions/number_checker.md`.
 
-## API
-
-- `GET /api/extensions` lists all extensions.
-- `GET /api/extensions?filter=free` filters extensions by tag/filter.
-- `GET /api/extensions?data=id,title,price` returns selected fields.
-- `GET /api/extensions/{id}` returns one extension.
-
 ## Deployment Notes
 
-The project includes Cloudflare Pages support through `_worker.ts`, `public/_headers`, and `public/_redirects`. The redirects file keeps direct visits to Vue Router URLs, such as `/extension/number_checker`, working in static deployments.
+The project uses Cloudflare Pages static deployment support through `public/_headers` and `public/_redirects`. The redirects file keeps direct visits to Vue Router URLs, such as `/extension/number_checker`, working while blocking direct access to the old `/scripts/*.json` paths.
 
 ## License
 

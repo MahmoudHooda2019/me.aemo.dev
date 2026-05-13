@@ -56,9 +56,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  const isFreshContent =
-    url.pathname === '/scripts/extensions.json' ||
-    url.pathname.startsWith('/extensions/');
+  const isFreshContent = url.pathname.startsWith('/extensions/');
 
   if (isFreshContent) {
     event.respondWith(
