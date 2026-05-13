@@ -21,9 +21,10 @@
           <div class="header-right">
             <div class="action-buttons">
               <a 
-                :href="hasUrl ? extension.url : '#'" 
-                :class="['action-button', isFree ? 'download-button' : 'buy-button']"
-                :disabled="!hasUrl"
+                :href="downloadUrl || '#'" 
+                :class="['action-button', isFree ? 'download-button' : 'buy-button', { disabled: !hasUrl }]"
+                :aria-disabled="!hasUrl"
+                @click="handleDownloadClick"
                 target="_blank" 
                 rel="noopener"
               >
@@ -69,22 +70,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useExtensions } from '@/composables/useExtensions'
+import type { Extension } from '@/types/extension'
 
-interface Extension {
-  id: string
-  title: string
-  subtitle: string
-  description: string
-  price: string
-  version?: string
-  lastUpdated?: string
-  url?: string
-  doc?: string
-}
+const SAFE_DOC_NAME = /^[a-zA-Z0-9_-]+\.md$/
 
 const route = useRoute()
+const { getExtensionById } = useExtensions()
 const extension = ref<Extension | null>(null)
 const documentation = ref('')
 const loading = ref(true)
@@ -92,7 +86,7 @@ const errorTitle = ref('Error')
 const errorMessage = ref('Something went wrong.')
 
 const priceText = computed(() => {
-  return (extension.value?.price || 'Free').toString().trim()
+  return (extension.value?.price || 'Free').trim()
 })
 
 const isFree = computed(() => {
@@ -101,7 +95,11 @@ const isFree = computed(() => {
 })
 
 const priceClass = computed(() => isFree.value ? 'free' : 'paid')
-const hasUrl = computed(() => extension.value?.url && extension.value.url !== '#')
+const downloadUrl = computed(() => {
+  const url = extension.value?.url?.trim()
+  return url && url !== '#' ? url : ''
+})
+const hasUrl = computed(() => Boolean(downloadUrl.value))
 
 const formattedDocumentation = computed(() => {
   if (!documentation.value) return ''
@@ -109,7 +107,10 @@ const formattedDocumentation = computed(() => {
 })
 
 async function loadExtension() {
-  const extensionId = route.params.id as string
+  const extensionId = getRouteExtensionId()
+  loading.value = true
+  extension.value = null
+  documentation.value = ''
   
   if (!extensionId) {
     errorTitle.value = 'No Extension ID'
@@ -119,36 +120,14 @@ async function loadExtension() {
   }
 
   try {
-    const response = await fetch('/scripts/extensions.json', {
-      headers: { 'Cache-Control': 'no-cache' }
-    })
-    
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-    }
-    
-    const data = await response.json() as Extension[]
-    const found = data.find((e: Extension) => e.id === extensionId)
+    const found = await getExtensionById(extensionId)
     
     if (!found) {
       throw new Error('Extension not found')
     }
     
     extension.value = found
-    
-    // Load markdown documentation if doc field exists
-    if (found.doc) {
-      try {
-        const docResponse = await fetch(`/extensions/${found.doc}`)
-        if (docResponse.ok) {
-          documentation.value = await docResponse.text()
-        }
-      } catch (e) {
-        console.warn('Failed to load documentation:', e)
-      }
-    }
-    
-    // Update page title
+    documentation.value = await loadDocumentation(found)
     document.title = `${found.title} - Extension Details`
     
   } catch (error) {
@@ -160,17 +139,46 @@ async function loadExtension() {
   }
 }
 
-function formatContent(content: string): string {
-  // If content contains HTML tags (and no markdown patterns), render as-is
-  if (content.includes('<') && !content.match(/[\[*#`]|\[.*\]\(|^\s*[-\d]\.|^\s*>|\|/)) {
-    return content
+function handleDownloadClick(event: MouseEvent) {
+  if (!hasUrl.value) {
+    event.preventDefault()
   }
-  
-  let html = content
+}
+
+async function loadDocumentation(found: Extension): Promise<string> {
+  const docName = getDocumentationFileName(found)
+  if (!docName) return ''
+
+  try {
+    const docResponse = await fetch(`/extensions/${encodeURIComponent(docName)}`, {
+      headers: { 'Cache-Control': 'no-cache' }
+    })
+
+    if (!docResponse.ok) return ''
+    return await docResponse.text()
+  } catch (e) {
+    console.warn('Failed to load documentation:', e)
+    return ''
+  }
+}
+
+function getDocumentationFileName(found: Extension): string {
+  const explicitDoc = found.doc?.trim()
+  const docName = explicitDoc || `${found.id}.md`
+  return SAFE_DOC_NAME.test(docName) ? docName : ''
+}
+
+function getRouteExtensionId(): string {
+  const rawId = route.params.id
+  return Array.isArray(rawId) ? rawId[0] || '' : rawId || ''
+}
+
+function formatContent(content: string): string {
+  let html = escapeHtml(content)
   
   // Code blocks (```language...```)
   html = html.replace(/```(\w+)?\n?([\s\S]*?)```/g, (_match, lang, code) => {
-    return `<pre><code${lang ? ` class="language-${lang}"` : ''}>${escapeHtml(code.trim())}</code></pre>`
+    return `<pre><code${lang ? ` class="language-${escapeAttribute(lang)}"` : ''}>${code.trim()}</code></pre>`
   })
   
   // Inline code (`code`) - process after code blocks
@@ -203,11 +211,7 @@ function formatContent(content: string): string {
     return `<blockquote class="quote-level-${depth}">${text}</blockquote>`
   })
   
-  // Images (![alt](url))
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">')
-  
-  // Links ([text](url))
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+  html = replaceMarkdownLinksAndImages(html)
   
   // Tables (| A | B |)
   html = html.replace(/((?:^\|[^\n]+\|\n?)+)/gm, (match) => {
@@ -290,6 +294,32 @@ function formatContent(content: string): string {
   return html
 }
 
+function replaceMarkdownLinksAndImages(html: string): string {
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_match, alt, url) => {
+    const safeUrl = sanitizeUrl(url)
+    if (!safeUrl) return ''
+    return `<img src="${safeUrl}" alt="${escapeAttribute(alt)}" loading="lazy">`
+  })
+  
+  return html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, url) => {
+    const safeUrl = sanitizeUrl(url)
+    if (!safeUrl) return text
+    return `<a href="${safeUrl}" target="_blank" rel="noopener">${text}</a>`
+  })
+}
+
+function sanitizeUrl(url: string): string {
+  const trimmed = url.trim()
+  if (/^(https?:|mailto:|\/|#)/i.test(trimmed)) {
+    return escapeAttribute(trimmed)
+  }
+  return ''
+}
+
+function escapeAttribute(text: string): string {
+  return text.replace(/"/g, '&quot;')
+}
+
 function escapeHtml(text: string): string {
   const div = document.createElement('div')
   div.textContent = text
@@ -297,6 +327,10 @@ function escapeHtml(text: string): string {
 }
 
 onMounted(() => {
+  loadExtension()
+})
+
+watch(() => route.params.id, () => {
   loadExtension()
 })
 </script>
@@ -418,7 +452,7 @@ onMounted(() => {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.action-button[disabled] {
+.action-button.disabled {
   opacity: 0.5;
   pointer-events: none;
 }

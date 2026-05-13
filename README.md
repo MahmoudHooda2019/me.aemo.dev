@@ -1,135 +1,81 @@
-# 🚀 Aemo Developer
+# Aemo Developer
 
-> **MIT App Inventor Extensions & Developer Tools - Vue 3 + TypeScript**
+MIT App Inventor extensions and developer tools built with Vue 3 and TypeScript.
 
-Welcome to Aemo Developer - your one-stop destination for high-quality MIT App Inventor extensions and developer tools. Now built with modern Vue 3 + TypeScript for better performance and developer experience.
+## About
 
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Faemo.pages.dev)](https://aemo.pages.dev)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Vue](https://img.shields.io/badge/Vue-3.4+-4FC08D?style=flat&logo=vue.js&logoColor=white)](https://vuejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+Aemo Developer provides a curated collection of MIT App Inventor extensions and small developer utilities for mobile app development workflows.
 
-## 📋 Table of Contents
+## Features
 
-- [About](#about)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Quick Start](#quick-start)
-- [Development](#development)
-- [API Documentation](#api-documentation)
-- [License](#license)
+- Extensions library with searchable extension cards and detail pages.
+- Markdown documentation for each extension under `public/extensions/`.
+- Developer tools such as Base64 encoding and deep-link generation.
+- Vue Router detail pages at `/extension/:id`.
+- Cloudflare Pages worker API for public extension data.
+- PWA-ready shell with a service worker.
 
-## 🎯 About
-
-Aemo Developer provides a curated collection of MIT App Inventor extensions and developer tools designed to enhance your mobile app development experience. This modern implementation uses Vue 3 + TypeScript for better maintainability and performance.
-
-## ✨ Features
-
-- **Extensions Library**: Pre-built components to add powerful features to your App Inventor projects
-- **Developer Tools**: Utilities like Base64 encoder/decoder and deep link generator
-- **Easy Integration**: Simple import process for all extensions
-- **Regular Updates**: New extensions and features added regularly
-- **Modern Architecture**: Built with Vue 3 + TypeScript for better performance
-- **Responsive Design**: Mobile-first responsive layout
-- **PWA Ready**: Install as a desktop/mobile app
-
-## 🛠 Technology Stack
-
-- **Frontend**: Vue 3 with Composition API
-- **Language**: TypeScript
-- **Build Tool**: Vite
-- **Styling**: Scoped CSS with modern features
-- **Animations**: AOS (Animate On Scroll)
-- **Icons**: Custom SVG and image assets
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
-- npm or yarn
+- npm
 
-### Installation
+### Install
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd me.aemo.dev
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Start development server**:
-   ```bash
-   npm run dev
-   ```
-   
-   Or simply run:
-   ```bash
-   run.bat
-   ```
-
-4. **Open your browser**:
-   Navigate to `http://localhost:3000`
-
-## 🛠 Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-- `npm run type-check` - Run TypeScript type checking
-
-### Project Structure
-
-```
-src/
-├── components/           # Vue components
-├── composables/          # Reusable composition functions
-├── types/               # TypeScript type definitions
-├── styles/              # Global styles
-├── App.vue             # Root component
-└── main.ts            # Application entry point
+```bash
+npm install
 ```
 
-## 📚 API Documentation
+### Develop
 
-Our API provides programmatic access to our extension library.
+```bash
+npm run dev
+```
 
-### Endpoints
+The local dev server uses `http://localhost:3000` by default.
 
-- `GET /api/extensions` - List all available extensions
-  - Supports optional `?filter=<filter_name>` query parameter
-  - Supports optional `?data=id,title,price` query parameter to select specific fields
-- `GET /api/extensions/{id}` - Get details for a specific extension
+### Build
 
-### Usage
+```bash
+npm run build
+```
 
-No authentication required for public endpoints. Rate limits apply.
+### Type Check
 
-## 📄 License
+```bash
+npm run type-check
+```
+
+## Extension Docs
+
+Extension metadata lives in `public/scripts/extensions.json`.
+
+Each extension detail page first uses the explicit `doc` field when present:
+
+```json
+{
+  "id": "number_checker",
+  "doc": "number_checker.md"
+}
+```
+
+If `doc` is missing, the app falls back to `id + ".md"`, so `number_checker` loads `/extensions/number_checker.md`.
+
+## API
+
+- `GET /api/extensions` lists all extensions.
+- `GET /api/extensions?filter=free` filters extensions by tag/filter.
+- `GET /api/extensions?data=id,title,price` returns selected fields.
+- `GET /api/extensions/{id}` returns one extension.
+
+## Deployment Notes
+
+The project includes Cloudflare Pages support through `_worker.ts`, `public/_headers`, and `public/_redirects`. The redirects file keeps direct visits to Vue Router URLs, such as `/extension/number_checker`, working in static deployments.
+
+## License
 
 MIT License
 
 Copyright (c) 2023 Aemo Developer
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

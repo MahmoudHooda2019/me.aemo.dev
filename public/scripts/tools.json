@@ -4,7 +4,7 @@
     "title": "Deep Link Generator",
     "subtitle": "Create powerful deep links for your apps",
     "description": "Generate and parse deep links with custom schemes, parameters, and validation. Perfect for mobile app deep linking.",
-    "icon": "🔗",
+    "icon": "Link",
     "url": "tools/deeplink/",
     "features": [
       "Custom scheme support",
@@ -22,7 +22,7 @@
     "title": "Base64 Encode & Decode",
     "subtitle": "Convert text and files to Base64 format",
     "description": "Encode and decode text or files to Base64 with support for large files and batch processing.",
-    "icon": "🔐",
+    "icon": "B64",
     "url": "tools/base64/",
     "features": [
       "Text encoding/decoding",
@@ -40,7 +40,7 @@
     "title": "JSON Formatter & Validator",
     "subtitle": "Format, validate, and beautify JSON data",
     "description": "Professional JSON formatting tool with syntax highlighting, validation, and minification capabilities.",
-    "icon": "📋",
+    "icon": "JSON",
     "url": "tools/json-formatter/",
     "comingSoon": true,
     "features": [
@@ -59,7 +59,7 @@
     "title": "Advanced Color Picker",
     "subtitle": "Professional color selection and conversion",
     "description": "Pick colors, convert between formats, and generate color palettes for your projects.",
-    "icon": "🎨",
+    "icon": "Color",
     "url": "tools/color-picker/",
     "comingSoon": true,
     "features": [
@@ -78,7 +78,7 @@
     "title": "Regex Tester & Builder",
     "subtitle": "Test and build regular expressions",
     "description": "Interactive regex testing with real-time matching, group extraction, and pattern library.",
-    "icon": "🔍",
+    "icon": "Regex",
     "url": "tools/regex-tester/",
     "comingSoon": true,
     "features": [
@@ -97,7 +97,7 @@
     "title": "URL Encoder & Decoder",
     "subtitle": "Encode and decode URLs safely",
     "description": "Professional URL encoding tool with support for various encoding formats and batch processing.",
-    "icon": "🌐",
+    "icon": "URL",
     "url": "tools/url-encoder/",
     "comingSoon": true,
     "features": [
@@ -116,7 +116,7 @@
     "title": "Hash Generator",
     "subtitle": "Generate various hash types",
     "description": "Create MD5, SHA1, SHA256, and other hash types for data integrity and security.",
-    "icon": "🔑",
+    "icon": "Hash",
     "url": "tools/hash-generator/",
     "comingSoon": true,
     "features": [
@@ -135,7 +135,7 @@
     "title": "Timestamp Converter",
     "subtitle": "Convert between timestamp formats",
     "description": "Convert between Unix timestamps, ISO dates, and human-readable formats with timezone support.",
-    "icon": "⏰",
+    "icon": "Time",
     "url": "tools/timestamp-converter/",
     "comingSoon": true,
     "features": [

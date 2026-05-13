@@ -85,7 +85,11 @@ const getExtensionById = async (id: string): Promise<Extension | undefined> => {
 }
 
 const isNewExtension = (lastUpdated: string): boolean => {
+  if (!lastUpdated) return false
+
   const lastUpdatedDate = new Date(lastUpdated)
+  if (Number.isNaN(lastUpdatedDate.getTime())) return false
+
   const today = new Date()
   const diffDays = (today.getTime() - lastUpdatedDate.getTime()) / (1000 * 60 * 60 * 24)
   return diffDays <= 10

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aemo-dev-v2.1.0';
+const CACHE_NAME = 'aemo-dev-v2.2.0';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -56,6 +56,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  const isFreshContent =
+    url.pathname === '/scripts/extensions.json' ||
+    url.pathname.startsWith('/extensions/');
+
+  if (isFreshContent) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .catch(() => caches.match(request).then(cached => {
+          return cached || new Response('Offline', { status: 503 });
+        }))
+    );
+    return;
+  }
+
   // Cache strategy: Stale While Revalidate for assets, Network First for HTML
   if (request.mode === 'navigate' || url.pathname.endsWith('.html')) {
     // Network First for HTML
@@ -72,7 +86,7 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           return caches.match(request).then(cached => {
-            return cached || new Response('Offline', { status: 503 });
+            return cached || caches.match('/index.html') || new Response('Offline', { status: 503 });
           });
         })
     );

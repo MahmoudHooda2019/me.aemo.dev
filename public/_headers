@@ -15,38 +15,51 @@
   # Referrer policy — don't leak full URL to third parties
   Referrer-Policy: strict-origin-when-cross-origin
 
-  # Permissions policy — disable features the site doesn't use
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  # Disable browser features the site does not use
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
 
-  # Force HTTPS for 1 year, include sub-domains
+  # Force HTTPS for 1 year
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-  # Content Security Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
+  # Strong Content Security Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;
 
-  # Cache HTML pages — allow revalidation
+  # Prevent caching of HTML entry pages
   Cache-Control: no-cache, must-revalidate
 
 # ---------------------------------------------------------------------------
-# Static assets — long-lived cache (content-hashed by Vite)
+# Static assets — Vite hashed files
 # ---------------------------------------------------------------------------
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
 # ---------------------------------------------------------------------------
-# Scripts & Styles
+# JavaScript
 # ---------------------------------------------------------------------------
 /*.js
-  Content-Type: text/javascript
+  Content-Type: text/javascript; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
 
+# ---------------------------------------------------------------------------
+# CSS
+# ---------------------------------------------------------------------------
 /*.css
-  Content-Type: text/css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
 
 # ---------------------------------------------------------------------------
 # Images
 # ---------------------------------------------------------------------------
 /*.png
   Content-Type: image/png
+  Cache-Control: public, max-age=86400
+
+/*.jpg
+  Content-Type: image/jpeg
+  Cache-Control: public, max-age=86400
+
+/*.jpeg
+  Content-Type: image/jpeg
   Cache-Control: public, max-age=86400
 
 /*.webp
@@ -57,25 +70,59 @@
   Content-Type: image/svg+xml
   Cache-Control: public, max-age=86400
 
+/*.gif
+  Content-Type: image/gif
+  Cache-Control: public, max-age=86400
+
+/*.ico
+  Content-Type: image/x-icon
+  Cache-Control: public, max-age=86400
+
 # ---------------------------------------------------------------------------
-# Manifest & Service Worker — short cache so updates propagate quickly
+# Fonts
+# ---------------------------------------------------------------------------
+/*.woff
+  Content-Type: font/woff
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Content-Type: font/woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# ---------------------------------------------------------------------------
+# JSON / Manifest
 # ---------------------------------------------------------------------------
 /manifest.json
   Content-Type: application/json
   Cache-Control: public, max-age=86400
 
+/*.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=300
+
+# ---------------------------------------------------------------------------
+# Service Worker
+# ---------------------------------------------------------------------------
 /service-worker.js
   Content-Type: application/javascript
   Cache-Control: no-cache, must-revalidate
 
 # ---------------------------------------------------------------------------
-# HTML pages
+# HTML
 # ---------------------------------------------------------------------------
 /*.html
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache, must-revalidate
 
 # ---------------------------------------------------------------------------
-# API — CORS only on the public extensions API
+# XML
+# ---------------------------------------------------------------------------
+/*.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+# ---------------------------------------------------------------------------
+# Public API — intentionally public CORS
 # ---------------------------------------------------------------------------
 /api/extensions*
   Access-Control-Allow-Origin: *
@@ -83,6 +130,9 @@
   Access-Control-Allow-Headers: Content-Type
   Cache-Control: public, max-age=300
 
+# ---------------------------------------------------------------------------
+# Public extensions registry
+# ---------------------------------------------------------------------------
 /extensions/extensions.json
   Content-Type: application/json
   Access-Control-Allow-Origin: *

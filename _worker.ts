@@ -13,7 +13,12 @@ export interface Extension {
   downloads?: number;
   rating?: number;
   filters?: string[];
+  tags?: string[];
+  subtitle?: string;
   version?: string;
+  lastUpdated?: string;
+  url?: string;
+  doc?: string;
   author?: string;
   [key: string]: unknown;
 }
@@ -40,6 +45,11 @@ function isValidId(id: string): boolean {
 /** Validate that a field name only contains safe characters */
 function isValidFieldName(name: string): boolean {
   return /^[a-zA-Z0-9_]+$/.test(name);
+}
+
+function isNavigationRequest(request: Request): boolean {
+  const accept = request.headers.get("Accept") ?? "";
+  return request.mode === "navigate" || accept.includes("text/html");
 }
 
 export default {
@@ -74,8 +84,7 @@ export default {
 
         const data: ExtensionsData | Extension[] = await assetResponse.json();
         const extensions: Extension[] = Array.isArray(data) ? data : (Array.isArray(data.extensions) ? data.extensions : []);
-
-        // Parse ?data=id,title,price — validate each field name
+        // Parse ?data=id,title,price - validate each field name
         const dataParam = url.searchParams.get("data");
         const dataFields = (dataParam ?? "")
           .split(",")
@@ -137,11 +146,15 @@ export default {
         );
       }
 
-      // Fallback to static assets
-      return env.ASSETS.fetch(request);
+      const assetResponse = await env.ASSETS.fetch(request);
+      if (assetResponse.status !== 404 || !isNavigationRequest(request)) {
+        return assetResponse;
+      }
+
+      return env.ASSETS.fetch(new Request(new URL("/index.html", url).toString(), request));
 
     } catch (err: unknown) {
-      // Log the real error server-side only — never expose internals to the client
+      // Log the real error server-side only - never expose internals to the client
       console.error("[worker] unhandled error:", err instanceof Error ? err.message : String(err));
       return new Response(
         JSON.stringify({ error: "Internal server error" }),

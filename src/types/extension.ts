@@ -2,10 +2,19 @@ export interface Extension {
   id: string
   title: string
   subtitle: string
+  description?: string
   price: string
   filters?: string[]
   tags?: string[]
   lastUpdated: string
+  version?: string
+  url?: string
+  doc?: string
+  icon?: string
+  downloads?: number
+  rating?: number
+  author?: string
+  [key: string]: unknown
 }
 
 export interface ExtensionsAPI {

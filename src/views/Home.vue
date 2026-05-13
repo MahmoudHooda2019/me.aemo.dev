@@ -67,12 +67,12 @@ const { initTheme } = useTheme()
 
 // Badge data
 const badges = [
-  { id: 'right-top',    cssClass: 'badge-home-right-top',    icon: '⚙️', text: 'Backend',        subtext: 'Golang',                  gradient: 'linear-gradient(135deg, #bb86fc20, #bb86fc40)' },
-  { id: 'right-center', cssClass: 'badge-home-right-center', icon: '🎨', text: 'Frontend',       subtext: 'Typescript + Vue',        gradient: 'linear-gradient(135deg, #03dac620, #03dac640)' },
-  { id: 'right-bottom', cssClass: 'badge-home-right-bottom', icon: '📦', text: 'Other Languages', subtext: 'Java, Kotlin, Python',   gradient: 'linear-gradient(135deg, #ffd93d20, #ffd93d40)' },
-  { id: 'left-top',     cssClass: 'badge-home-left-top',     icon: '👤', text: 'Name',           subtext: 'Mahmoud Hussien',         gradient: 'linear-gradient(135deg, #ff6b6b20, #ff6b6b40)' },
-  { id: 'left-center',  cssClass: 'badge-home-left-center',  icon: '📍', text: 'Location',       subtext: 'Egypt',                   gradient: 'linear-gradient(135deg, #4ecdc420, #4ecdc440)' },
-  { id: 'left-bottom',  cssClass: 'badge-home-left-bottom',  icon: '🧑‍💻', text: 'Job',            subtext: 'Extension Developer',     gradient: 'linear-gradient(135deg, #6bcf7f20, #6bcf7f40)' },
+  { id: 'right-top',    cssClass: 'badge-home-right-top',    icon: 'BE',  text: 'Backend',         subtext: 'Golang',                  gradient: 'linear-gradient(135deg, #bb86fc20, #bb86fc40)' },
+  { id: 'right-center', cssClass: 'badge-home-right-center', icon: 'FE',  text: 'Frontend',        subtext: 'Typescript + Vue',        gradient: 'linear-gradient(135deg, #03dac620, #03dac640)' },
+  { id: 'right-bottom', cssClass: 'badge-home-right-bottom', icon: 'DEV', text: 'Other Languages',  subtext: 'Java, Kotlin, Python',   gradient: 'linear-gradient(135deg, #ffd93d20, #ffd93d40)' },
+  { id: 'left-top',     cssClass: 'badge-home-left-top',     icon: 'ME',  text: 'Name',            subtext: 'Mahmoud Hussien',         gradient: 'linear-gradient(135deg, #ff6b6b20, #ff6b6b40)' },
+  { id: 'left-center',  cssClass: 'badge-home-left-center',  icon: 'EG',  text: 'Location',        subtext: 'Egypt',                   gradient: 'linear-gradient(135deg, #4ecdc420, #4ecdc440)' },
+  { id: 'left-bottom',  cssClass: 'badge-home-left-bottom',  icon: 'AI2', text: 'Job',             subtext: 'Extension Developer',     gradient: 'linear-gradient(135deg, #6bcf7f20, #6bcf7f40)' },
 ]
 
 // Badge expansion state

@@ -75,9 +75,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { useExtensions } from '@/composables/useExtensions'
 import ExtensionCard from './ExtensionCard.vue'
 
+const router = useRouter()
 const { 
   extensions, 
   loadExtensions
@@ -144,7 +146,7 @@ const loadMore = () => {
 }
 
 const navigateToExtension = (id: string) => {
-  window.location.href = `extensions/template.html?id=${id}`
+  router.push(`/extension/${id}`)
 }
 
 const retryLoading = async () => {

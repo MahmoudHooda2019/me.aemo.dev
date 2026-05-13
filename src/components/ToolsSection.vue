@@ -12,7 +12,7 @@
 
     <!-- Error State -->
     <div v-else-if="error" class="error-state">
-      <div class="error-icon">⚠️</div>
+      <div class="error-icon">!</div>
       <h3>Failed to load tools</h3>
       <p>{{ error }}</p>
       <button class="retry-btn" @click="loadTools">Retry</button>
@@ -42,7 +42,7 @@
             placeholder="Search tools..."
             class="search-input"
           >
-          <span class="search-icon">🔍</span>
+          <span class="search-icon">Search</span>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
                 :key="feature"
                 class="feature-tag"
               >
-                ✓ {{ feature }}
+                OK {{ feature }}
               </span>
               <span v-if="tool.features.length > 3" class="feature-more">
                 +{{ tool.features.length - 3 }} more
@@ -97,14 +97,14 @@
           </div>
           
           <div class="card-footer">
-            <span class="card-link">{{ tool.comingSoon ? 'Coming Soon' : 'Open Tool →' }}</span>
+            <span class="card-link">{{ tool.comingSoon ? 'Coming Soon' : 'Open Tool ->' }}</span>
           </div>
         </div>
       </div>
 
       <!-- No Results -->
       <div v-if="filteredTools.length === 0" class="no-results">
-        <div class="no-results-icon">🔍</div>
+        <div class="no-results-icon">Search</div>
         <h3>No tools found</h3>
         <p>Try adjusting your search or filter criteria</p>
         <button class="reset-btn" @click="resetFilters">Reset Filters</button>
