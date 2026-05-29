@@ -56,9 +56,7 @@ async function proxyFile(
   options: { cacheControl: string; contentDisposition?: string }
 ): Promise<Response> {
   try {
-    const upstream = await fetch(targetUrl, {
-      redirect: 'manual'
-    })
+    const upstream = await fetch(targetUrl)
 
     // Handle redirects manually
     if ([301, 302, 303, 307, 308].includes(upstream.status)) {
@@ -73,22 +71,21 @@ async function proxyFile(
       return new Response('Extension file is temporarily unavailable.', { status: 502 })
     }
 
+    // Buffer the entire response body
+    const buffer = await upstream.arrayBuffer()
+
     const headers = new Headers({
       'Cache-Control': options.cacheControl,
       'Content-Type': upstream.headers.get('Content-Type') || 'application/octet-stream',
-      'X-Content-Type-Options': 'nosniff'
+      'X-Content-Type-Options': 'nosniff',
+      'Content-Length': buffer.byteLength.toString()
     })
-    const contentLength = upstream.headers.get('Content-Length')
-
-    if (contentLength) {
-      headers.set('Content-Length', contentLength)
-    }
 
     if (options.contentDisposition) {
       headers.set('Content-Disposition', options.contentDisposition)
     }
 
-    return new Response(upstream.body, {
+    return new Response(buffer, {
       status: 200,
       headers
     })
