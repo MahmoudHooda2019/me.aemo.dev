@@ -26,7 +26,7 @@
                 :aria-disabled="!hasUrl"
                 @click="handleDownloadClick"
                 target="_blank" 
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <template v-if="isFree">
@@ -103,7 +103,7 @@ const hasUrl = computed(() => Boolean(downloadUrl.value))
 
 const formattedDocumentation = computed(() => {
   if (!documentation.value) return ''
-  return formatContent(documentation.value)
+  return sanitizeDocumentationHtml(formatContent(documentation.value))
 })
 
 async function loadExtension() {
@@ -298,26 +298,148 @@ function replaceMarkdownLinksAndImages(html: string): string {
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_match, alt, url) => {
     const safeUrl = sanitizeUrl(url)
     if (!safeUrl) return ''
-    return `<img src="${safeUrl}" alt="${escapeAttribute(alt)}" loading="lazy">`
+    return `<img src="${escapeAttribute(safeUrl)}" alt="${escapeAttribute(decodeHtmlEntities(alt))}" loading="lazy">`
   })
   
   return html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, text, url) => {
-    const safeUrl = sanitizeUrl(url)
+    const safeUrl = sanitizeUrl(url, { allowMailto: true })
     if (!safeUrl) return text
-    return `<a href="${safeUrl}" target="_blank" rel="noopener">${text}</a>`
+    return `<a href="${escapeAttribute(safeUrl)}" target="_blank" rel="noopener noreferrer">${text}</a>`
   })
 }
 
-function sanitizeUrl(url: string): string {
-  const trimmed = url.trim()
-  if (/^(https?:|mailto:|\/|#)/i.test(trimmed)) {
-    return escapeAttribute(trimmed)
+function sanitizeDocumentationHtml(html: string): string {
+  const template = document.createElement('template')
+  template.innerHTML = html
+  sanitizeChildNodes(template.content)
+  return template.innerHTML
+}
+
+function sanitizeChildNodes(parent: ParentNode): void {
+  Array.from(parent.childNodes).forEach(child => {
+    if (child.nodeType === Node.TEXT_NODE) return
+
+    if (child.nodeType !== Node.ELEMENT_NODE) {
+      child.remove()
+      return
+    }
+
+    sanitizeElement(child as HTMLElement)
+  })
+}
+
+function sanitizeElement(element: HTMLElement): void {
+  const tag = element.tagName.toLowerCase()
+
+  if (!ALLOWED_DOC_TAGS.has(tag)) {
+    element.replaceWith(document.createTextNode(element.textContent || ''))
+    return
   }
+
+  Array.from(element.attributes).forEach(attribute => {
+    if (!isAllowedAttribute(tag, attribute.name, attribute.value)) {
+      element.removeAttribute(attribute.name)
+    }
+  })
+
+  if (tag === 'a') {
+    const safeHref = sanitizeUrl(element.getAttribute('href') || '', { allowMailto: true })
+    if (!safeHref) {
+      element.replaceWith(document.createTextNode(element.textContent || ''))
+      return
+    }
+
+    element.setAttribute('href', safeHref)
+    element.setAttribute('target', '_blank')
+    element.setAttribute('rel', 'noopener noreferrer')
+  }
+
+  if (tag === 'img') {
+    const safeSrc = sanitizeUrl(element.getAttribute('src') || '')
+    if (!safeSrc) {
+      element.remove()
+      return
+    }
+
+    element.setAttribute('src', safeSrc)
+    element.setAttribute('loading', 'lazy')
+  }
+
+  sanitizeChildNodes(element)
+}
+
+function isAllowedAttribute(tag: string, name: string, value: string): boolean {
+  const normalizedName = name.toLowerCase()
+  const allowedAttributes = ALLOWED_DOC_ATTRIBUTES[tag]
+  if (!allowedAttributes?.has(normalizedName)) return false
+
+  if (normalizedName === 'class') {
+    return isAllowedClass(tag, value)
+  }
+
+  if (tag === 'div' && normalizedName === 'dir') {
+    return /^(ltr|rtl|auto)$/i.test(value)
+  }
+
+  if (tag === 'ol' && normalizedName === 'start') {
+    return /^\d+$/.test(value)
+  }
+
+  return true
+}
+
+function isAllowedClass(tag: string, value: string): boolean {
+  const classes = value.split(/\s+/).filter(Boolean)
+  if (classes.length === 0) return false
+
+  if (tag === 'code') {
+    return classes.every(className => /^language-[a-z0-9_-]+$/i.test(className))
+  }
+
+  if (tag === 'blockquote') {
+    return classes.every(className => /^quote-level-\d+$/i.test(className))
+  }
+
+  if (tag === 'span') {
+    return classes.every(className => ALLOWED_SPAN_CLASSES.has(className))
+  }
+
+  return false
+}
+
+function sanitizeUrl(url: string, options: { allowMailto?: boolean } = {}): string {
+  const trimmed = decodeHtmlEntities(url).trim()
+  if (!trimmed || /[\u0000-\u001F\u007F]/.test(trimmed)) return ''
+
+  if (trimmed.startsWith('#')) {
+    return trimmed
+  }
+
+  if (trimmed.startsWith('/')) {
+    if (trimmed.startsWith('//')) return ''
+    return trimmed
+  }
+
+  try {
+    const parsed = new URL(trimmed, window.location.origin)
+    const allowedProtocols = options.allowMailto ? ['http:', 'https:', 'mailto:'] : ['http:', 'https:']
+    if (allowedProtocols.includes(parsed.protocol)) {
+      return parsed.href
+    }
+  } catch {
+    return ''
+  }
+
   return ''
 }
 
 function escapeAttribute(text: string): string {
-  return text.replace(/"/g, '&quot;')
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
 }
 
 function escapeHtml(text: string): string {
@@ -325,6 +447,53 @@ function escapeHtml(text: string): string {
   div.textContent = text
   return div.innerHTML
 }
+
+function decodeHtmlEntities(text: string): string {
+  const textarea = document.createElement('textarea')
+  textarea.innerHTML = text
+  return textarea.value
+}
+
+const ALLOWED_DOC_TAGS = new Set([
+  'a',
+  'blockquote',
+  'code',
+  'del',
+  'details',
+  'div',
+  'em',
+  'h1',
+  'h2',
+  'h3',
+  'hr',
+  'img',
+  'li',
+  'ol',
+  'p',
+  'pre',
+  'span',
+  'strong',
+  'summary',
+  'table',
+  'tbody',
+  'td',
+  'th',
+  'thead',
+  'tr',
+  'ul'
+])
+
+const ALLOWED_DOC_ATTRIBUTES: Record<string, Set<string>> = {
+  a: new Set(['href', 'target', 'rel']),
+  blockquote: new Set(['class']),
+  code: new Set(['class']),
+  div: new Set(['dir']),
+  img: new Set(['src', 'alt', 'loading']),
+  ol: new Set(['start']),
+  span: new Set(['class'])
+}
+
+const ALLOWED_SPAN_CLASSES = new Set(['hashtag', 'mention', 'spoiler'])
 
 onMounted(() => {
   loadExtension()
