@@ -57,14 +57,19 @@ async function proxyFile(
 ): Promise<Response> {
   try {
     const upstream = await fetch(targetUrl, {
-      redirect: 'follow',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      }
+      redirect: 'manual'
     })
 
-    if (!upstream.ok || !upstream.body) {
-      console.error(`Upstream fetch failed: status=${upstream.status}, body=${!!upstream.body}`)
+    // Handle redirects manually
+    if ([301, 302, 303, 307, 308].includes(upstream.status)) {
+      const location = upstream.headers.get('Location')
+      if (location) {
+        return proxyFile(location, options)
+      }
+    }
+
+    if (!upstream.ok) {
+      console.error(`Upstream fetch failed: status=${upstream.status}, url=${targetUrl}`)
       return new Response('Extension file is temporarily unavailable.', { status: 502 })
     }
 
@@ -87,7 +92,8 @@ async function proxyFile(
       status: 200,
       headers
     })
-  } catch {
+  } catch (error) {
+    console.error(`Proxy error: ${error instanceof Error ? error.message : String(error)}`)
     return new Response('Extension file is temporarily unavailable.', { status: 502 })
   }
 }
