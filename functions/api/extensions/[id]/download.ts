@@ -59,11 +59,12 @@ async function proxyFile(
     const upstream = await fetch(targetUrl, {
       redirect: 'follow',
       headers: {
-        'User-Agent': 'AemoDeveloper/1.0'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
       }
     })
 
     if (!upstream.ok || !upstream.body) {
+      console.error(`Upstream fetch failed: status=${upstream.status}, body=${!!upstream.body}`)
       return new Response('Extension file is temporarily unavailable.', { status: 502 })
     }
 
