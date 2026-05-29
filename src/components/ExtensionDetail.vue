@@ -17,6 +17,9 @@
               <span>Version {{ extension.version || '1.0.0' }}</span>
               <span>Updated {{ extension.lastUpdated || 'Recently' }}</span>
             </div>
+            <div class="extension-description">
+              {{ extension.description || extension.subtitle || 'No description available.' }}
+            </div>
           </div>
           <div class="header-right">
             <div class="action-buttons">
@@ -86,10 +89,6 @@
               </div>
             </div>
           </div>
-        </div>
-        
-        <div class="extension-description">
-          {{ extension.description || extension.subtitle || 'No description available.' }}
         </div>
       </div>
 
@@ -180,7 +179,7 @@ const resourceLinks = computed<HeaderActionLink[]>(() => {
 
   if (libUsedUrl) {
     links.push({
-      label: 'Lib Used',
+      label: 'Library Used',
       url: libUsedUrl,
       className: 'library',
       ariaLabel: 'View library used'
@@ -639,7 +638,7 @@ watch(() => route.params.id, () => {
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
 .extension-header-main {
@@ -821,6 +820,8 @@ watch(() => route.params.id, () => {
   color: var(--text-secondary);
   line-height: 1.7;
   font-size: 1rem;
+  max-width: 720px;
+  margin-top: 1.25rem;
 }
 
 .documentation-card {

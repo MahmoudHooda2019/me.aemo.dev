@@ -2,8 +2,8 @@
 
 ## All Blocks
 
-![All Blocks](https://cdn.community.kodular.io/original/3X/e/d/edb57cbc207551ec87002df96eeebb2c96d353b8.png)
+![All Blocks](/api/extensions/device_year/assets/all_blocks)
 
 ## Demo
 
-![Demo](https://cdn.community.kodular.io/original/3X/5/2/52e4538c1508611cf8ceadceeb6b27146945767e.png)
+![Demo](/api/extensions/device_year/assets/demo)

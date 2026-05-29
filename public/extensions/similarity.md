@@ -1,6 +1,6 @@
 ## All Blocks
 
-![All Blocks](https://cdn.community.kodular.io/original/3X/1/9/19a5c8011fe78cddbcfcd05da9581b51d62d8811.png)
+![All Blocks](/api/extensions/similarity/assets/all_blocks)
 
 ## Algorithms
 
@@ -11,4 +11,4 @@
 
 ## Demo Blocks
 
-![Demo Blocks](https://cdn.community.kodular.io/original/3X/1/6/16dc7e028fbb8975009324583bd2b7c624904df4.png)
+![Demo Blocks](/api/extensions/similarity/assets/demo_blocks)

@@ -1,6 +1,6 @@
 ## All Blocks
 
-![All Blocks](https://kodular-community.s3.dualstack.eu-west-1.amazonaws.com/original/3X/4/9/496d29b1667f26709176f649640a9371b723980f.png)
+![All Blocks](/api/extensions/number_checker/assets/all_blocks)
 
 ## Available Blocks
 

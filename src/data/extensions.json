@@ -21,7 +21,7 @@
         ],
         "version": "2.0",
         "lastUpdated": "2024-03-15",
-        "url": "https://community.kodular.io/uploads/short-url/gyQ2Kh0OmG6zbybK5VbXzDnvF8c.aix",
+        "url": "/api/extensions/number_checker/download",
         "doc": "number_checker.md"
     },
     {
@@ -46,7 +46,7 @@
         ],
         "version": "0.2",
         "lastUpdated": "2022-04-10",
-        "url": "https://community.kodular.io/uploads/short-url/8v0RM7FPns68mmVb6mROSpnK4up.aix",
+        "url": "/api/extensions/device_year/download",
         "source_code_url": "https://github.com/MahmoudHooda2019/DeviceYear-MIT-App-Inventor-extension",
         "lib_used_url": "https://github.com/facebookarchive/device-year-class",
         "doc": "device_year.md"
@@ -73,7 +73,7 @@
         ],
         "version": "0.1",
         "lastUpdated": "2022-01-01",
-        "url": "https://community.kodular.io/uploads/short-url/v5Q34TK6nbVtUlEFyNSp1RFTObx.aix",
+        "url": "/api/extensions/similarity/download",
         "doc": "similarity.md"
     },
     {
@@ -98,7 +98,7 @@
         ],
         "version": "1.0",
         "lastUpdated": "2022-06-11",
-        "url": "https://community.kodular.io/uploads/short-url/7NMEXyLfFGUBaUIEM20x2IaiiSs.aix",
+        "url": "/api/extensions/morse_code/download",
         "source_code_url": "https://github.com/MahmoudHooda2019/MorseCode---MIT-Appinventor",
         "lib_used_url": "https://github.com/TakWolf/Java-MorseCoder",
         "doc": "morse_code.md"
@@ -125,7 +125,7 @@
         ],
         "version": "2.0",
         "lastUpdated": "2022-01-01",
-        "url": "https://community.kodular.io/uploads/short-url/yvVzsXfhrjQZr8gDsdq5VmN6B9B.aix",
+        "url": "/api/extensions/ruler_picker/download",
         "doc": "ruler_picker.md"
     },
     {
@@ -151,7 +151,7 @@
         ],
         "version": "1.0",
         "lastUpdated": "2022-07-24",
-        "url": "https://drive.google.com/uc?id=19atykVGrdsx3tMObKNFbqzxNby62KZBq&export=download",
+        "url": "/api/extensions/speech_recognition_view/download",
         "doc": "speech_recognition_view.md"
     }
 ]
