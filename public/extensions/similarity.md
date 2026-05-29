@@ -12,7 +12,3 @@
 ## Demo Blocks
 
 ![Demo Blocks](https://cdn.community.kodular.io/original/3X/1/6/16dc7e028fbb8975009324583bd2b7c624904df4.png)
-
-## Support the Developer
-
-[Donate via PayPal](https://www.paypal.com/paypalme/AemoDev) | [Support on Ko-fi](https://ko-fi.com/mhooda)

@@ -13,15 +13,3 @@
 ## Learn More
 
 [Morse Code Info](https://en.wikipedia.org/wiki/Morse_code)
-
-## Open Source
-
-[View Source Code](https://github.com/MahmoudHooda2019/MorseCode---MIT-Appinventor)
-
-## Library Used
-
-[View Library](https://github.com/TakWolf/Java-MorseCoder)
-
-## Support the Developer
-
-[Donate via PayPal](https://www.paypal.com/paypalme/AemoDev) | [Support on Ko-fi](https://ko-fi.com/mhooda)

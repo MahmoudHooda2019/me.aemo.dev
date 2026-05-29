@@ -9,6 +9,8 @@ export interface Extension {
   lastUpdated: string
   version?: string
   url?: string
+  source_code_url?: string
+  lib_used_url?: string
   doc?: string
   icon?: string
   downloads?: number

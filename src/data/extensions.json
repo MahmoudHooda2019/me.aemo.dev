@@ -47,6 +47,8 @@
         "version": "0.2",
         "lastUpdated": "2022-04-10",
         "url": "https://community.kodular.io/uploads/short-url/8v0RM7FPns68mmVb6mROSpnK4up.aix",
+        "source_code_url": "https://github.com/MahmoudHooda2019/DeviceYear-MIT-App-Inventor-extension",
+        "lib_used_url": "https://github.com/facebookarchive/device-year-class",
         "doc": "device_year.md"
     },
     {
@@ -97,6 +99,8 @@
         "version": "1.0",
         "lastUpdated": "2022-06-11",
         "url": "https://community.kodular.io/uploads/short-url/7NMEXyLfFGUBaUIEM20x2IaiiSs.aix",
+        "source_code_url": "https://github.com/MahmoudHooda2019/MorseCode---MIT-Appinventor",
+        "lib_used_url": "https://github.com/TakWolf/Java-MorseCoder",
         "doc": "morse_code.md"
     },
     {

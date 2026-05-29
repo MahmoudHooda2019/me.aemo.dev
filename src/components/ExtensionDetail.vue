@@ -41,6 +41,49 @@
                 </svg>
                 {{ isFree ? 'Download' : 'Buy Now' }}
               </a>
+              <div v-if="isFree" class="donation-buttons" aria-label="Donation links">
+                <a
+                  v-for="link in donationLinks"
+                  :key="link.url"
+                  :href="link.url"
+                  :class="['donation-button', link.className]"
+                  :aria-label="link.ariaLabel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg v-if="link.className === 'paypal'" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M8 20.5h3.3l.9-5.7h2.5c3.6 0 6.2-2.2 6.8-5.7.3-1.8-.1-3.2-1.1-4.2C19.2 3.6 17.3 3 14.7 3H7.2L4 20.5h3.1l1.5-8.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.6 12.1h3.6c2.7 0 4.6-1.5 5-4.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 8h11v6a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  {{ link.label }}
+                </a>
+              </div>
+              <div v-if="resourceLinks.length" class="resource-buttons" aria-label="Extension resource links">
+                <a
+                  v-for="link in resourceLinks"
+                  :key="link.url"
+                  :href="link.url"
+                  :class="['resource-button', link.className]"
+                  :aria-label="link.ariaLabel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg v-if="link.className === 'source'" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <polyline points="16 18 22 12 16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <polyline points="8 6 2 12 8 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+                  {{ link.label }}
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -85,6 +128,13 @@ const loading = ref(true)
 const errorTitle = ref('Error')
 const errorMessage = ref('Something went wrong.')
 
+interface HeaderActionLink {
+  label: string
+  url: string
+  className: string
+  ariaLabel: string
+}
+
 const priceText = computed(() => {
   return (extension.value?.price || 'Free').trim()
 })
@@ -100,6 +150,45 @@ const downloadUrl = computed(() => {
   return url && url !== '#' ? url : ''
 })
 const hasUrl = computed(() => Boolean(downloadUrl.value))
+const donationLinks: HeaderActionLink[] = [
+  {
+    label: 'PayPal',
+    url: 'https://www.paypal.com/paypalme/AemoDev',
+    className: 'paypal',
+    ariaLabel: 'Donate via PayPal'
+  },
+  {
+    label: 'Ko-fi',
+    url: 'https://ko-fi.com/mhooda',
+    className: 'kofi',
+    ariaLabel: 'Support on Ko-fi'
+  }
+]
+const resourceLinks = computed<HeaderActionLink[]>(() => {
+  const links: HeaderActionLink[] = []
+  const sourceCodeUrl = getExtensionMetadataUrl('source_code_url')
+  const libUsedUrl = getExtensionMetadataUrl('lib_used_url')
+
+  if (sourceCodeUrl) {
+    links.push({
+      label: 'Source Code',
+      url: sourceCodeUrl,
+      className: 'source',
+      ariaLabel: 'View source code'
+    })
+  }
+
+  if (libUsedUrl) {
+    links.push({
+      label: 'Lib Used',
+      url: libUsedUrl,
+      className: 'library',
+      ariaLabel: 'View library used'
+    })
+  }
+
+  return links
+})
 
 const formattedDocumentation = computed(() => {
   if (!documentation.value) return ''
@@ -171,6 +260,11 @@ function getDocumentationFileName(found: Extension): string {
 function getRouteExtensionId(): string {
   const rawId = route.params.id
   return Array.isArray(rawId) ? rawId[0] || '' : rawId || ''
+}
+
+function getExtensionMetadataUrl(field: 'source_code_url' | 'lib_used_url'): string {
+  const url = extension.value?.[field]
+  return typeof url === 'string' ? sanitizeUrl(url) : ''
 }
 
 function formatContent(content: string): string {
@@ -592,7 +686,9 @@ watch(() => route.params.id, () => {
 
 .action-buttons {
   display: flex;
+  flex-direction: column;
   gap: 0.75rem;
+  min-width: 190px;
 }
 
 .action-button {
@@ -624,6 +720,101 @@ watch(() => route.params.id, () => {
 .action-button.disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.donation-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.resource-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.donation-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 42px;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.resource-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 42px;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  border-radius: 10px;
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.resource-button.source {
+  border-color: rgba(99, 102, 241, 0.38);
+  color: #a5b4fc;
+}
+
+.resource-button.library {
+  border-color: rgba(34, 211, 238, 0.38);
+  color: #67e8f9;
+}
+
+.donation-button.paypal {
+  background: rgba(0, 112, 186, 0.14);
+  border-color: rgba(0, 112, 186, 0.35);
+  color: #7cc5ff;
+}
+
+.donation-button.kofi {
+  background: rgba(255, 94, 91, 0.14);
+  border-color: rgba(255, 94, 91, 0.35);
+  color: #ff9d9b;
+}
+
+.donation-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.resource-button:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+:global([data-theme='light']) .donation-button.paypal {
+  color: #005ea8;
+}
+
+:global([data-theme='light']) .donation-button.kofi {
+  color: #d93633;
+}
+
+:global([data-theme='light']) .resource-button.source {
+  color: #4f46e5;
+}
+
+:global([data-theme='light']) .resource-button.library {
+  color: #0891b2;
 }
 
 .extension-description {
@@ -791,6 +982,18 @@ watch(() => route.params.id, () => {
   .action-button {
     width: 100%;
     justify-content: center;
+  }
+
+  .action-buttons {
+    width: 100%;
+  }
+
+  .donation-buttons {
+    width: 100%;
+  }
+
+  .resource-buttons {
+    width: 100%;
   }
 }
 </style>

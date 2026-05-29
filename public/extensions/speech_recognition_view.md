@@ -15,7 +15,3 @@
 **RECORD_AUDIO** permission is required for microphone access
 
 > Internet is required for the extension to function properly, although no explicit internet permission is declared
-
-## Support the Developer
-
-[Donate via PayPal](https://www.paypal.com/paypalme/AemoDev)

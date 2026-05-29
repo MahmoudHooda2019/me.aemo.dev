@@ -27,7 +27,3 @@
 ## Demo Video
 
 [Watch on YouTube](https://www.youtube.com/watch?v=33xGnUBylDo)
-
-## Support the Developer
-
-[Donate via PayPal](https://www.paypal.com/paypalme/AemoDev) | [Support on Ko-fi](https://ko-fi.com/mhooda)

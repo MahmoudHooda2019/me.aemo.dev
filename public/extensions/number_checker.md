@@ -7,7 +7,3 @@
 1. **IsPrime**(number) - Returns true if the number is prime
 2. **IsEven**(number) - Returns true if the number is even
 3. **IsOdd**(number) - Returns true if the number is odd
-
-## To Donate
-
-[Donate via PayPal](https://www.paypal.com/paypalme/AemoDev)
