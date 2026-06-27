@@ -1,6 +1,6 @@
 ## All Blocks
 
-![All Blocks](/api/extensions/ruler_picker/assets/all_blocks)
+![All Blocks](https://cdn.community.kodular.io/optimized/3X/b/0/b03c9516ae4b1581acf6cbb8e6e6bc5df0693a5e_2_202x500.png)
 
 ## Key Features
 
@@ -22,7 +22,7 @@
 
 ## Preview
 
-![Preview](/api/extensions/ruler_picker/assets/preview)
+![Preview](https://cdn.community.kodular.io/original/3X/a/1/a1b6ba7ab28972f0adb04c400e7b2197f5a1111e.gif)
 
 ## Demo Video
 
