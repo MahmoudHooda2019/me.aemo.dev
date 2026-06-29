@@ -1,29 +1,43 @@
+# Ruler Picker
+
+Ruler Picker is an Android custom view that uses a ruler for picking numbers from a given range.  
+You can embed it in a layout (such as a Horizontal Arrangement) and customize its appearance and behavior.
+
+---
+
 ## All Blocks
 
-![All Blocks](https://cdn.community.kodular.io/optimized/3X/b/0/b03c9516ae4b1581acf6cbb8e6e6bc5df0693a5e_2_202x500.png)
+![All Blocks](https://cdn.community.kodular.io/original/3X/b/0/b03c9516ae4b1581acf6cbb8e6e6bc5df0693a5e.png)
 
-## Key Features
+---
 
-- **Real-time** value detection
-- **Final value** after selection
-- Custom indicator #color#
-- Adjustable #spacing# between indicators
-- Configurable indicator #thickness#
-- Custom text #size# and #color#
-- **Min/Max** value control
+## Block Notes (V2.0)
 
-## Important Notes
+Some of the key properties and events described in the topic:
 
-> **Warning:** Long indicator height must be greater than or equal to short indicator height
+- Return the **selected value** of the ruler momentarily (live change).
+- Return the value **after selection** is finished.
+- Set the **component** in which the Ruler Picker will be shown (e.g., Horizontal Arrangement).
+- Change the **color** of the indicator.
+- Set the **distance between indicators** on the ruler.
+- Set the **thickness** of the indicator.
+- Configure the **notch** at the top of the ruler.
+- Set the **text size** for values displayed on the ruler.
+- Set the **text color** for values displayed on the ruler.
+- Set the **height of the long indicator** (value between 0 and 1, where 1 is full ruler height).
+- Set the **height of the short indicator** (value between 0 and 1).
+- Set the **maximum value** to display on the ruler.
+- Set the **minimum value** to display on the ruler.
 
-> **Note:** Values must be between 0 and 1 for indicator heights
+### Notes
 
-> **Tip:** Maximum value must be greater than minimum value
+- Long indicator height must be **greater than or equal to** short indicator height.
+- Maximum value must be **greater than** minimum value.
 
-## Preview
+---
 
-![Preview](https://cdn.community.kodular.io/original/3X/a/1/a1b6ba7ab28972f0adb04c400e7b2197f5a1111e.gif)
+## Demo
 
-## Demo Video
+Watch the Ruler Picker in action:
 
-[Watch on YouTube](https://www.youtube.com/watch?v=33xGnUBylDo)
+[![RulerPicker Demo](https://img.youtube.com/vi/33xGnUBylDo/hqdefault.jpg)](https://www.youtube.com/watch?v=33xGnUBylDo)

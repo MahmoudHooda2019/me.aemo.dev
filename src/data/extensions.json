@@ -3,7 +3,7 @@
         "id": "number_checker",
         "title": "Number Checker",
         "subtitle": "Check if a number is prime, even, or odd",
-        "description": "A powerful extension that helps you check various properties of numbers. Features include prime number checking, even/odd detection, and more mathematical utilities.",
+        "description": "A simple extension that checks whether a given number is prime, even, or odd. Useful for math-related apps, input validation, and educational tools.",
         "price": "Free",
         "filters": [
             "all",
@@ -13,22 +13,83 @@
             "free",
             "math",
             "number",
-            "checker",
-            "utility",
             "prime",
             "even",
-            "odd"
+            "odd",
+            "utility",
+            "checker"
         ],
-        "version": "2.0",
-        "lastUpdated": "2024-03-15",
+        "version": "2",
+        "lastUpdated": "2021-12-04",
         "url": "https://community.kodular.io/uploads/short-url/gyQ2Kh0OmG6zbybK5VbXzDnvF8c.aix",
-        "doc": "number_checker.md"
+        "source_code_url": "https://github.com/MahmoudHooda2019/MIT-App-Inventor-NumberChecker-Extension",
+        "doc": "number_checker.md",
+        "status": "discontinued"
+    },
+    {
+        "id": "hijri_date",
+        "title": "Hijri Date for Muslim",
+        "subtitle": "Convert Gregorian date to Hijri (Islamic) date",
+        "description": "A simple open-source extension that converts a given Gregorian date (year, month, day) to the corresponding Hijri (Islamic) date. Useful for Islamic apps, prayer time utilities, and calendar tools.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free"
+        ],
+        "tags": [
+            "free",
+            "hijri",
+            "islamic",
+            "date",
+            "calendar",
+            "muslim",
+            "utility"
+        ],
+        "version": "1.0",
+        "lastUpdated": "2022-03-01",
+        "url": "https://community.kodular.io/uploads/short-url/l8TxWt1mfGfJ8Jfyq3gj1xpRwH3.aix",
+        "aia_url": null,
+        "source_code_url": "https://github.com/MahmoudHooda2019/Hijri-date-java-extension-MIT-App-Inventor",
+        "lib_used_url": null,
+        "doc": "hijri_date.md",
+        "status": "active"
+    },
+    {
+        "id": "easy_device_info",
+        "title": "EasyDeviceInfo",
+        "subtitle": "Easy extension to get device information",
+        "description": "A free, open-source beta extension that provides blocks to read various information about the Android device (system, hardware, battery, etc.). Version 0.3 adds more blocks, requires initialization, and introduces a NotFoundVal property for handling missing or invalid values.",
+        "price": "Free",
+        "filters": [
+            "all",
+            "free",
+            "device-info",
+            "beta"
+        ],
+        "tags": [
+            "free",
+            "device",
+            "info",
+            "system",
+            "hardware",
+            "battery",
+            "extension",
+            "kodular",
+            "ai2",
+            "beta"
+        ],
+        "version": "0.3",
+        "lastUpdated": "2023-07-01",
+        "url": "https://community.kodular.io/uploads/short-url/s7jQdUX26w7FA9PTTvrIsMuZqny.aix",
+        "lib_used_url": "https://github.com/nisrulz/easydeviceinfo",
+        "doc": "easy_device_info.md",
+        "status": "active"
     },
     {
         "id": "device_year",
         "title": "Device Year",
         "subtitle": "Estimate the performance year of an Android device",
-        "description": "A simple extension that analyzes an Android device’s specifications and estimates the year in which the device would be considered high-end. Useful for performance benchmarking and device classification.",
+        "description": "A simple extension that analyzes an Android device’s specifications and calculates which year the device would be considered high-end. Useful for performance benchmarking and device classification.",
         "price": "Free",
         "filters": [
             "all",
@@ -55,7 +116,7 @@
         "id": "similarity",
         "title": "Similarity",
         "subtitle": "Calculate similarity score between two strings",
-        "description": "An extension component for calculating similarity scores between two strings. A score of 0.0 means completely different strings, while 1.0 means identical strings. Supports multiple algorithms for flexible comparison.",
+        "description": "An extension component that calculates a similarity score between two strings. A score of 0.0 means the strings are absolutely dissimilar, and 1.0 means they are exactly similar or equal. Values in between indicate how similar the two strings are.",
         "price": "Free",
         "filters": [
             "all",
@@ -66,21 +127,25 @@
             "string",
             "similarity",
             "text",
-            "algorithm",
             "utility",
-            "comparison",
-            "analysis"
+            "jaro",
+            "jaro-winkler",
+            "levenshtein",
+            "dice-coefficient"
         ],
         "version": "0.1",
-        "lastUpdated": "2022-01-01",
+        "lastUpdated": "2022-05-02",
         "url": "https://community.kodular.io/uploads/short-url/v5Q34TK6nbVtUlEFyNSp1RFTObx.aix",
-        "doc": "similarity.md"
+        "aia_url": "https://community.kodular.io/uploads/short-url/ihM0Y1QW8CLyD73qdaxlQAvaxtq.aia",
+        "lib_used_url": "https://github.com/rrice/java-string-similarity",
+        "doc": "similarity.md",
+        "status": "discontinued"
     },
     {
         "id": "morse_code",
         "title": "Morse Code",
         "subtitle": "Encode and decode Morse code",
-        "description": "A simple extension that allows you to encode text into Morse code and decode Morse code back into readable text. Useful for learning, communication, and fun experiments.",
+        "description": "A simple extension that encodes text to Morse code and decodes Morse code back to text. Useful for learning Morse code, messaging experiments, and fun utilities.",
         "price": "Free",
         "filters": [
             "all",
@@ -93,21 +158,22 @@
             "encode",
             "decode",
             "text",
-            "utility",
-            "communication"
+            "utility"
         ],
         "version": "1.0",
         "lastUpdated": "2022-06-11",
         "url": "https://community.kodular.io/uploads/short-url/7NMEXyLfFGUBaUIEM20x2IaiiSs.aix",
+        "aia_url": "https://community.kodular.io/uploads/short-url/rj7IhuDvW5dq6vrV5vrwCj3NVoE.aia",
         "source_code_url": "https://github.com/MahmoudHooda2019/MorseCode---MIT-Appinventor",
-        "lib_used_url": "https://github.com/TakWolf/Java-MorseCoder",
-        "doc": "morse_code.md"
+        "lib_used_url": "https://github.com/TakWolf-Deprecated/Java-MorseCoder",
+        "doc": "morse_code.md",
+        "status": "discontinued"
     },
     {
         "id": "ruler_picker",
         "title": "Ruler Picker",
-        "subtitle": "Pick numbers using an interactive ruler UI",
-        "description": "An Android custom view extension that allows users to pick numbers from a given range using an interactive ruler interface. Highly customizable with multiple properties like indicator size, spacing, colors, and value range.",
+        "subtitle": "Android custom view ruler for picking numbers",
+        "description": "An Android custom view that uses a ruler for picking numbers from a given range. This extension lets you display a ruler inside a component (like a horizontal arrangement) and customize indicators, text size, colors, and min/max values.",
         "price": "Free",
         "filters": [
             "all",
@@ -116,23 +182,24 @@
         "tags": [
             "free",
             "ui",
-            "picker",
             "ruler",
-            "input",
-            "design",
-            "android",
-            "component"
+            "picker",
+            "number",
+            "custom-view",
+            "slider",
+            "extension"
         ],
         "version": "2.0",
-        "lastUpdated": "2022-01-01",
+        "lastUpdated": "2022-07-01",
         "url": "https://community.kodular.io/uploads/short-url/yvVzsXfhrjQZr8gDsdq5VmN6B9B.aix",
-        "doc": "ruler_picker.md"
+        "doc": "ruler_picker.md",
+        "status": "active"
     },
     {
         "id": "speech_recognition_view",
         "title": "SpeechRecognitionView",
-        "subtitle": "View-style animation for speech recording",
-        "description": "An extension that enables voice input functionality using microphone recording. Requires internet for processing voice data. Useful for speech-based applications and voice recognition workflows.",
+        "subtitle": "Animated speech recording visualizer",
+        "description": "A view component that shows a Google-Now style animation during speech recording. Designed to be used alongside the built-in speech recognizer to display a live, responsive waveform-style animation.",
         "price": "Free",
         "filters": [
             "all",
@@ -140,18 +207,22 @@
         ],
         "tags": [
             "free",
-            "voice",
             "speech",
-            "audio",
-            "recording",
-            "microphone",
-            "ui",
+            "recognition",
+            "view",
             "animation",
-            "input"
+            "ui",
+            "google",
+            "tools",
+            "speechrecognizer"
         ],
         "version": "1.0",
         "lastUpdated": "2022-07-24",
         "url": "https://drive.google.com/uc?id=19atykVGrdsx3tMObKNFbqzxNby62KZBq&export=download",
-        "doc": "speech_recognition_view.md"
-    }
+        "aia_url": null,
+        "source_code_url": null,
+        "lib_used_url": "https://github.com/zagum/SpeechRecognitionView",
+        "doc": "speech_recognition_view.md",
+        "status": "active"
+    },
 ]
